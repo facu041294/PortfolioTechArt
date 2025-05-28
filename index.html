@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facundo Villarreal - Aspiring Technical Artist</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/script.js"></script>
+</head>
+<body class="mode-light mode-artist"> <header class="site-header sticky-header"> <div class="header-container container"> <div class="header-logo">
+                <a href="#">Facundo Villarreal</a> </div>
+            <div class="header-toggles">
+                <button id="theme-toggle" class="mode-toggle" aria-label="Cambiar modo claro/oscuro">
+                    <span class="icon-light">[ICONO SOL]</span>
+                    <span class="icon-dark">[ICONO LUNA]</span>
+                </button>
+                <button id="profile-toggle" class="mode-toggle" aria-label="Cambiar modo artista/técnico">
+                    <span class="icon-artist">[ICONO PINCEL]</span>
+                    <span class="icon-technical">[ICONO ENGRANAJE]</span>
+                </button>
+                </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero-section container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Del Plano al Píxel: Un Viaje Técnico y Artístico</h2>
+                    <p>Fusionando 7 años de diseño arquitectónico con desarrollo de software para crear mundos y experiencias inmersivas como Artista Técnico en Unreal Engine.</p>
+                </div>
+                <div class="hero-visual">
+                    <div class="vimeo-container">
+                        <iframe src="https://player.vimeo.com/video/983405007?h=9c4d70c300" 
+                                frameborder="0" 
+                                allow="autoplay; fullscreen" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-highlights container">
+            <h2>Destellos del Proceso</h2>
+
+            <article class="process-item">
+                <div class="process-visual">
+                    <div class="image-slider" data-slider-id="shader-nieve">
+                        <div class="slider-images">
+                            <img src="nieve-render.jpg" alt="Render final shader nieve" class="slider-image active" data-layer="Render Final">
+                            <img src="nieve-graph.jpg" alt="Gráfico de nodos shader nieve" class="slider-image" data-layer="Material Graph">
+                            <img src="nieve-mask.jpg" alt="Máscara de interacción nieve" class="slider-image" data-layer="Interaction Mask">
+                        </div>
+                        <div class="slider-controls">
+                            <button class="slider-control-item active" data-target-layer="Render Final">Render</button>
+                            <button class="slider-control-item" data-target-layer="Material Graph">Graph</button>
+                            <button class="slider-control-item" data-target-layer="Interaction Mask">Mask</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-text">
+                    <h3>Shader Nieve Interactiva</h3>
+                    <p>Desarrollo de un material avanzado en Unreal Engine que simula nieve acumulada y permite interacción dinámica (huellas, deformación) utilizando Blueprints y texturas complejas.</p>
+                    <div class="technical-snippet">
+                        <h4>Blueprint Logic Snippet:</h4>
+                        <img src="nieve-blueprint.png" alt="Captura de Blueprint para interacción de nieve">
+                        </div>
+                    <a href="[Enlace a ArtStation/Proyecto]" class="cta-link" target="_blank">Ver más detalles</a>
+                </div>
+            </article>
+
+            <article class="process-item layout-reversed">
+                <div class="process-text">
+                    <h3>Herramienta de Layout Procedural</h3>
+                    <p>Creación de una herramienta en Python para [Software 3D o UE] que automatiza la colocación de assets (ej: vegetación, rocas) siguiendo reglas definidas, optimizando el workflow de creación de entornos.</p>
+                     <div class="technical-snippet">
+                        <h4>Python Snippet:</h4>
+                        <pre><code class="language-python">
+                            import maya.cmds as cmds # O el API correspondiente
+
+                            def procedural_placement(assets, area, rules):
+                                for asset in assets:
+                                    # Logic for placing assets based on rules
+                                    position = calculate_position(area, rules)
+                                    if position:
+                                        cmds.instance(asset, position=position)
+                        </code></pre>
+                    </div>
+                    <a href="[Enlace a GitHub/Proyecto]" class="cta-link" target="_blank">Ver código en GitHub</a>
+                </div>
+                <div class="process-visual">
+                     <div class="image-slider" data-slider-id="procedural-tool">
+                        <div class="slider-images">
+                            <img src="tool-result.jpg" alt="Resultado entorno con herramienta procedural" class="slider-image active" data-layer="Resultado Final">
+                            <img src="tool-ui.jpg" alt="Interfaz de la herramienta procedural" class="slider-image" data-layer="UI Herramienta">
+                            <img src="tool-heatmap.jpg" alt="Visualización de reglas de placement" class="slider-image" data-layer="Reglas Placement">
+                        </div>
+                        <div class="slider-controls">
+                             <button class="slider-control-item active" data-target-layer="Resultado Final">Resultado</button>
+                             <button class="slider-control-item" data-target-layer="UI Herramienta">UI</button>
+                             <button class="slider-control-item" data-target-layer="Reglas Placement">Reglas</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            </section>
+
+        <section class="cta-section container">
+            <h2>Explora Más y Conecta</h2>
+            <div class="cta-buttons">
+                <a href="https://www.artstation.com/facu041294" class="cta-button" target="_blank">Ver Proyectos Visuales (ArtStation)</a>
+                <a href="https://github.com/facu041294" class="cta-button" target="_blank">Explorar Repositorios (GitHub)</a>
+                <a href="https://www.linkedin.com/in/facundovillarreal/" class="cta-button" target="_blank">Conectar Profesionalmente (LinkedIn)</a>
+                <a href="mailto:facu.villarreal.94@gmail.com" class="cta-button">Contactar</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
+            </div>
+    </footer>
+
+    
+    </body>
+</html>
