@@ -3,7 +3,7 @@
 // Espera a que todo el contenido HTML esté cargado antes de ejecutar el script
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== MANEJO DEL FOOTER =====
+    // ===== MANEJO DEL FOOTER (Actualizar año) =====
     const updateFooterYear = () => {
         const yearSpan = document.getElementById('current-year');
         if (yearSpan) {
@@ -15,31 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const initThemeToggle = () => {
         const themeToggleButton = document.getElementById('theme-toggle');
         const body = document.body;
-        const currentTheme = localStorage.getItem('theme'); // Revisa si hay tema guardado
+        // Usar 'themePreference' para evitar colisión con otros 'theme' de localStorage
+        const storageKey = 'themePreference';
+        const currentTheme = localStorage.getItem(storageKey);
 
-        // Función para aplicar el tema
         const applyTheme = (theme) => {
             if (theme === 'dark') {
                 body.classList.remove('mode-light');
                 body.classList.add('mode-dark');
-                localStorage.setItem('theme', 'dark');
+                themeToggleButton.classList.add('is-active');
+                themeToggleButton.setAttribute('aria-checked', 'true');
+                localStorage.setItem(storageKey, 'dark');
             } else {
                 body.classList.remove('mode-dark');
                 body.classList.add('mode-light');
-                localStorage.setItem('theme', 'light');
+                themeToggleButton.classList.remove('is-active');
+                themeToggleButton.setAttribute('aria-checked', 'false');
+                localStorage.setItem(storageKey, 'light');
             }
         };
 
-        // Aplicar tema inicial: Guardado > Preferencia OS > Default (Light)
         if (currentTheme) {
             applyTheme(currentTheme);
         } else {
-            // Comprobar preferencia del sistema operativo
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
         }
 
-        // Listener para el botón
         if (themeToggleButton) {
             themeToggleButton.addEventListener('click', () => {
                 if (body.classList.contains('mode-dark')) {
@@ -50,10 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Escuchar cambios en la preferencia del OS (opcional pero bueno)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-           // Solo cambia si no hay preferencia guardada explícitamente
-           if (!localStorage.getItem('theme')) {
+           if (!localStorage.getItem(storageKey)) { // Solo si el usuario no ha elegido explícitamente
                applyTheme(e.matches ? 'dark' : 'light');
            }
         });
@@ -63,25 +63,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const initProfileToggle = () => {
         const profileToggleButton = document.getElementById('profile-toggle');
         const body = document.body;
-        const currentProfileMode = localStorage.getItem('profileMode'); // Revisa si hay modo guardado
+        const storageKey = 'profileModePreference';
+        const currentProfileMode = localStorage.getItem(storageKey);
 
-        // Función para aplicar el modo de perfil
         const applyProfileMode = (mode) => {
              if (mode === 'technical') {
                 body.classList.remove('mode-artist');
                 body.classList.add('mode-technical');
-                localStorage.setItem('profileMode', 'technical');
+                profileToggleButton.classList.add('is-active');
+                profileToggleButton.setAttribute('aria-checked', 'true');
+                localStorage.setItem(storageKey, 'technical');
             } else { // Default a artist
                 body.classList.remove('mode-technical');
                 body.classList.add('mode-artist');
-                localStorage.setItem('profileMode', 'artist');
+                profileToggleButton.classList.remove('is-active');
+                profileToggleButton.setAttribute('aria-checked', 'false');
+                localStorage.setItem(storageKey, 'artist');
             }
         };
 
-        // Aplicar modo inicial guardado o default (Artist)
-        applyProfileMode(currentProfileMode || 'artist'); // Default 'artist' si no hay nada guardado
+        applyProfileMode(currentProfileMode || 'artist'); // Default 'artist'
 
-        // Listener para el botón
         if (profileToggleButton) {
             profileToggleButton.addEventListener('click', () => {
                 if (body.classList.contains('mode-technical')) {
@@ -101,22 +103,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const images = slider.querySelectorAll('.slider-image');
             const controls = slider.querySelectorAll('.slider-control-item');
 
-            if (images.length === 0 || controls.length === 0) return; // No hacer nada si no hay imágenes o controles
+            if (images.length === 0 || controls.length === 0) return;
+
+            // Activar la primera imagen y control por defecto
+            if (images.length > 0 && controls.length > 0) {
+                images[0].classList.add('active');
+                controls[0].classList.add('active');
+            }
+
 
             controls.forEach(control => {
                 control.addEventListener('click', () => {
                     const targetLayer = control.getAttribute('data-target-layer');
 
-                    // Desactivar control y imagen activos actuales DENTRO de este slider
-                    const currentActiveControl = slider.querySelector('.slider-control-item.active');
-                    const currentActiveImage = slider.querySelector('.slider-image.active');
-                    if (currentActiveControl) currentActiveControl.classList.remove('active');
-                    if (currentActiveImage) currentActiveImage.classList.remove('active');
+                    slider.querySelector('.slider-control-item.active')?.classList.remove('active');
+                    slider.querySelector('.slider-image.active')?.classList.remove('active');
 
-                    // Activar el nuevo control
                     control.classList.add('active');
-
-                    // Encontrar y activar la nueva imagen DENTRO de este slider
                     const newActiveImage = slider.querySelector(`.slider-image[data-layer="${targetLayer}"]`);
                     if (newActiveImage) {
                         newActiveImage.classList.add('active');
@@ -126,11 +129,89 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // ===== MANEJO DEL FORMULARIO DE CONTACTO DESPLEGABLE =====
+    const initContactFormToggle = () => {
+        const checkbox = document.getElementById('contact-toggle-checkbox');
+        const toggleButtonLabel = document.querySelector('label[for="contact-toggle-checkbox"]');
+        const formContainer = document.getElementById('contact-form-container');
+        const form = formContainer?.querySelector('.actual-form');
+        const thankYouMessage = formContainer?.querySelector('.thank-you-message');
+
+        if (!checkbox || !toggleButtonLabel || !formContainer || !form || !thankYouMessage) {
+            console.warn('Elementos del formulario de contacto no encontrados.');
+            return;
+        }
+
+        checkbox.addEventListener('change', () => {
+            const isChecked = checkbox.checked;
+            toggleButtonLabel.setAttribute('aria-expanded', isChecked.toString());
+            formContainer.setAttribute('aria-hidden', (!isChecked).toString());
+
+            if (isChecked) {
+                // Cuando se abre, asegurar que el formulario esté visible y el "gracias" oculto
+                form.style.display = 'block';
+                thankYouMessage.style.display = 'none';
+                // Opcional: enfocar el primer campo
+                form.querySelector('input, textarea')?.focus();
+            }
+        });
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevenir envío tradicional
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Éxito
+                    form.style.display = 'none'; // Ocultar formulario
+                    thankYouMessage.style.display = 'block'; // Mostrar mensaje de gracias
+                    form.reset(); // Limpiar el formulario
+
+                    // Opcional: cerrar el desplegable después de un tiempo
+                    setTimeout(() => {
+                        checkbox.checked = false;
+                        // Disparar manualmente el evento change para actualizar aria y estilos
+                        const changeEvent = new Event('change');
+                        checkbox.dispatchEvent(changeEvent);
+                    }, 4000); // Cerrar después de 4 segundos
+
+                } else {
+                    // Error de Formspree o red
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        alert(data["errors"].map(error => error["message"]).join(", "));
+                    } else {
+                        alert('Oops! Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.');
+                    }
+                }
+            } catch (error) {
+                // Error de red
+                alert('Error de red. Por favor, verifica tu conexión e inténtalo de nuevo.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
+        });
+    };
+
 
     // --- Inicializar todas las funcionalidades ---
     updateFooterYear();
     initThemeToggle();
     initProfileToggle();
     initImageSliders();
+    initContactFormToggle(); // Asegúrate de llamar a esta nueva función
 
 }); // Fin del DOMContentLoaded
