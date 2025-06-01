@@ -1,6 +1,8 @@
 /* style.css */
 
-/* ===== RESET BÁSICO Y CONFIGURACIÓN GLOBAL ===== */
+/*------------------------------------*\
+  #RESET-BASICO-Y-CONFIGURACION-GLOBAL
+\*------------------------------------*/
 *,
 *::before,
 *::after {
@@ -9,36 +11,40 @@
   padding: 0;
 }
 
-/* ===== VARIABLES CSS ===== */
+/*------------------------------------*\
+  #VARIABLES-CSS (CUSTOM PROPERTIES)
+\*------------------------------------*/
 :root {
   /* Fuentes */
   --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-secondary: 'Roboto Slab', serif; /* Ejemplo para títulos si quieres contraste */
-  --font-code: 'Fira Code', 'Courier New', monospace;
+  --font-secondary: 'Roboto Slab', serif; /* Para títulos, si se desea contraste visual */
+  --font-code: 'Fira Code', 'Courier New', monospace; /* Para bloques de código */
 
   /* Colores Modo Claro (Default) */
-  --color-background-light: #f8f9fa; /* Blanco ligeramente grisáceo */
-  --color-text-light: #212529;       /* Negro suave */
-  --color-primary-light: #007bff;    /* Azul primario */
-  --color-secondary-light: #6c757d;  /* Gris secundario */
-  --color-border-light: #dee2e6;     /* Gris claro para bordes */
-  --color-card-bg-light: #ffffff;    /* Fondo de tarjetas/secciones */
-  --color-code-bg-light: #e9ecef;    /* Fondo de bloques de código */
+  --color-background-light: #f8f9fa;
+  --color-text-light: #212529;
+  --color-primary-light: #007bff;
+  --color-secondary-light: #6c757d;
+  --color-border-light: #dee2e6;
+  --color-card-bg-light: #ffffff;
+  --color-code-bg-light: #e9ecef;
 
   /* Colores Modo Oscuro */
-  --color-background-dark: #1a1a1a; /* Negro/Gris muy oscuro */
-  --color-text-dark: #e9ecef;       /* Blanco/Gris muy claro */
-  --color-primary-dark: #4dabf7;    /* Azul más brillante para modo oscuro */
-  --color-secondary-dark: #adb5bd;  /* Gris claro */
-  --color-border-dark: #495057;     /* Gris oscuro para bordes */
-  --color-card-bg-dark: #2c2c2c;    /* Fondo de tarjetas/secciones oscuro */
-  --color-code-bg-dark: #343a40;    /* Fondo de bloques de código oscuro */
+  --color-background-dark: #121212; /* Un negro más profundo para mejor contraste */
+  --color-text-dark: #e0e0e0;       /* Blanco ligeramente menos brillante */
+  --color-primary-dark: #4dabf7;
+  --color-secondary-dark: #adb5bd;
+  --color-border-dark: #3a3a3a;     /* Borde un poco más visible en oscuro */
+  --color-card-bg-dark: #1e1e1e;    /* Fondo de tarjeta sutilmente diferente del bg */
+  --color-code-bg-dark: #2a2a2a;
 
-  /* Sombras (sutiles) */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 5px 10px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 20px rgba(0,0,0, 0.07); /* Para elementos más destacados */
 
-  /* Espaciado */
+
+  /* Espaciado (Consistente con el proyecto anterior) */
   --spacing-xs: 0.5rem;  /* 8px */
   --spacing-sm: 1rem;    /* 16px */
   --spacing-md: 1.5rem;  /* 24px */
@@ -46,37 +52,44 @@
   --spacing-xl: 4rem;    /* 64px */
 
   /* Transiciones */
-  --transition-speed: 0.2s;
+  --transition-speed: 0.25s; /* Ligeramente más suave */
   --transition-ease: ease-in-out;
 }
 
-/* ===== ESTILOS BASE BODY ===== */
+/*------------------------------------*\
+  #ESTILOS-BASE-DEL-BODY
+\*------------------------------------*/
 body {
   font-family: var(--font-primary);
-  line-height: 1.6;
+  line-height: 1.7; /* Un poco más de espaciado para legibilidad */
   background-color: var(--color-background-light);
   color: var(--color-text-light);
   transition: background-color var(--transition-speed) var(--transition-ease),
               color var(--transition-speed) var(--transition-ease);
+  font-size: 16px; /* Base para rem, aunque 100% es también válido */
 }
 
-/* ===== ESTILOS MODO OSCURO (Aplicados cuando body tiene la clase .mode-dark) ===== */
+/* Estilos para el modo oscuro aplicados al body */
 body.mode-dark {
   background-color: var(--color-background-dark);
   color: var(--color-text-dark);
 }
 
-/* ===== CONTENEDOR PRINCIPAL ===== */
+/*------------------------------------*\
+  #CONTENEDOR-PRINCIPAL-LAYOUT
+\*------------------------------------*/
 .container {
   width: 90%;
-  max-width: 1540px; /* Ancho máximo del contenido */
+  max-width: 1280px; /* Ajustado para un portfolio con más contenido visual */
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacing-sm);
-  padding-right: var(--spacing-sm);
+  padding-left: var(--spacing-md); /* Más padding lateral para pantallas grandes */
+  padding-right: var(--spacing-md);
 }
 
-/* ===== HEADER ===== */
+/*------------------------------------*\
+  #CABECERA-DEL-SITIO (HEADER)
+\*------------------------------------*/
 .site-header {
   background-color: var(--color-card-bg-light);
   padding-top: var(--spacing-sm);
@@ -86,9 +99,17 @@ body.mode-dark {
   transition: background-color var(--transition-speed) var(--transition-ease),
               border-color var(--transition-speed) var(--transition-ease);
 }
+/* Estilos específicos para header en modo oscuro */
 body.mode-dark .site-header {
   background-color: var(--color-card-bg-dark);
   border-bottom-color: var(--color-border-dark);
+}
+
+/* Funcionalidad de header pegajoso */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Asegura que esté por encima de otro contenido */
 }
 
 .header-container {
@@ -98,8 +119,9 @@ body.mode-dark .site-header {
 }
 
 .header-logo a {
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.6rem; /* Ligeramente más grande */
   font-weight: 700;
+  /* font-family: var(--font-secondary); /* Opcional: Usar fuente secundaria para el logo */
   color: var(--color-text-light);
   text-decoration: none;
   transition: color var(--transition-speed) var(--transition-ease);
@@ -114,83 +136,148 @@ body.mode-dark .header-logo a:hover {
   color: var(--color-primary-dark);
 }
 
-
 .header-toggles {
   display: flex;
   gap: var(--spacing-sm);
 }
 
-.mode-toggle {
-  background: none;
+/*------------------------------------*\
+  #TOGGLES-ESTILO-SWITCH
+\*------------------------------------*/
+.switch-toggle {
+  background-color: #ccc; /* Color base del track desactivado */
   border: none;
+  border-radius: 30px; /* Hace el track redondeado */
   cursor: pointer;
-  font-size: 1.25rem; /* Tamaño de los iconos */
-  color: var(--color-secondary-light);
-  padding: 0; /* Asegurar que no haya padding extra */
-  line-height: 1; /* Alinear iconos verticalmente */
-  transition: color var(--transition-speed) var(--transition-ease);
-}
-body.mode-dark .mode-toggle {
-  color: var(--color-secondary-dark);
-}
-.mode-toggle:hover {
-  color: var(--color-primary-light);
-}
-body.mode-dark .mode-toggle:hover {
-  color: var(--color-primary-dark);
+  display: inline-block; /* O flex si necesitas alinear SVGs internos */
+  height: 30px;        /* Altura del track */
+  position: relative;
+  width: 60px;         /* Ancho del track */
+  transition: background-color var(--transition-speed) var(--transition-ease);
+  -webkit-tap-highlight-color: transparent; /* Quita highlight azul en móviles */
+  padding: 0; /* Resetear padding */
+  overflow: hidden; /* Para que el círculo no se salga si es un poco más grande */
 }
 
-/* Ocultar/Mostrar iconos de modo según el tema */
-body.mode-light .icon-dark,
-body.mode-dark .icon-light {
-  display: none;
-}
-body.mode-artist .icon-technical,
-body.mode-technical .icon-artist {
-  display: none;
+.switch-toggle::after { /* Este es el círculo (thumb) que se mueve */
+  content: "";
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: 26px;        /* Ligeramente más pequeño que el track */
+  width: 26px;         /* Ligeramente más pequeño que el track */
+  position: absolute;
+  top: 2px;            /* Centrado verticalmente (30 - 26) / 2 */
+  left: 2px;           /* Posición inicial (desactivado) */
+  transition: transform var(--transition-speed) var(--transition-ease),
+              background-color var(--transition-speed) var(--transition-ease);
 }
 
-/* ===== HERO SECTION ===== */
+/* Estado Activo del Switch (manejado por JS añadiendo una clase, ej: .is-active) */
+/*.switch-toggle.is-active {
+  /* Color del track cuando está activo se definirá por modo 
+}
+*/
+.switch-toggle.is-active::after {
+  transform: translateX(30px); /* Mueve el círculo a la derecha (60 - 26 - 2 - 2) */
+}
+
+/* Colores específicos para el Theme Toggle */
+#theme-toggle.is-active { /* Cuando está en modo oscuro */
+  background-color: var(--color-primary-dark); /* O un color específico para "noche" */
+}
+#theme-toggle.is-active::after {
+  /* Podrías cambiar el color del círculo si quieres, ej. un amarillo para el sol */
+    background-color: #ffe600;
+}
+body.mode-light #theme-toggle { /* Estilo del track en modo claro (sol) */
+    background-color: #ffaa00; /* Un color tipo sol */
+}
+body.mode-dark #theme-toggle { /* Estilo del track en modo oscuro (luna) */
+    background-color: #ffffff; /* Un color tipo noche */
+}
+body.mode-dark #theme-toggle.is-active::after { /* Círculo en modo oscuro (luna activa) */
+    background-color: #222222; /* Color de la luna */
+}
+
+
+/* Colores específicos para el Profile Toggle */
+#profile-toggle.is-active { /* Cuando está en modo técnico */
+  background-color: var(--color-primary-light); /* O un color técnico */
+}
+body.mode-dark #profile-toggle.is-active {
+    background-color: var(--color-primary-dark);
+}
+
+/* Aquí irían los estilos para los SVGs si los superpones/colocas dentro */
+
+.switch-toggle .icon-svg-sol,
+.switch-toggle .icon-svg-luna {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px; height: 18px;
+    transition: opacity var(--transition-speed);
+}
+.switch-toggle .icon-svg-sol { left: 5px; }
+.switch-toggle .icon-svg-luna { right: 5px; opacity: 0.5; }
+
+.switch-toggle.is-active .icon-svg-sol { opacity: 0.5; }
+.switch-toggle.is-active .icon-svg-luna { opacity: 1; }
+
+
+
+/*------------------------------------*\
+  #SECCION-HERO
+\*------------------------------------*/
 .hero-section {
     padding-top: var(--spacing-xl);
     padding-bottom: var(--spacing-xl);
+    /* background-color: var(--color-card-bg-light); /* Opcional: un fondo sutil para la sección hero */
+    /* body.mode-dark & { background-color: var(--color-card-bg-dark); } */
 }
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-}
-
-.hero-text {
-  flex: 1; /* Ocupa el espacio disponible */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+    gap: var(--spacing-lg); /* Espacio entre texto y visual */
+    align-items: center; /* Alinear verticalmente */
 }
 
 .hero-text h2 {
-  font-size: 2.5rem; /* 40px */
+  font-family: var(--font-secondary); /* Usar fuente secundaria para el título principal */
+  font-size: clamp(2rem, 5vw, 3rem); /* Tamaño de fuente fluido */
   font-weight: 700;
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
-  /* Podrías usar --font-secondary aquí si lo defines */
+  color: var(--color-primary-light); /* Destacar el título */
+}
+body.mode-dark .hero-text h2 {
+  color: var(--color-primary-dark);
 }
 
 .hero-text p {
-  font-size: 1.125rem; /* 18px */
+  font-size: clamp(1rem, 2.5vw, 1.125rem); /* Tamaño de fuente fluido */
   color: var(--color-secondary-light);
+  max-width: 60ch; /* Mejorar legibilidad del párrafo */
 }
 body.mode-dark .hero-text p {
   color: var(--color-secondary-dark);
 }
 
 .hero-visual {
-  flex: 1; /* Ocupa el espacio disponible */
-  max-width: 100%; /* Limita el ancho del visual */
+  /* flex: 1; No necesario con grid */
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden; /* Para que el iframe respete el borde redondeado */
+  box-shadow: var(--shadow-lg); /* Sombra más prominente para el visual principal */
 }
 
 .vimeo-container {
     position: relative;
-    padding-bottom: 56.25%; /* Relación 16:9 */
+    padding-bottom: 56.25%; /* Relación 16:9 para el video */
     height: 0;
+    background-color: #000; /* Fondo negro mientras carga el video */
 }
 
 .vimeo-container iframe {
@@ -199,73 +286,98 @@ body.mode-dark .hero-text p {
     left: 0;
     width: 100%;
     height: 100%;
+    border: 0; /* Quitar borde del iframe */
 }
 
-.hero-visual img,
-.hero-visual video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px; /* Bordes redondeados sutiles */
-  box-shadow: var(--shadow-md);
-}
-
-/* ===== PROCESS HIGHLIGHTS SECTION ===== */
+/*------------------------------------*\
+  #SECCION-DESTACADOS-DEL-PROCESO
+\*------------------------------------*/
 .process-highlights {
   padding-top: var(--spacing-xl);
   padding-bottom: var(--spacing-xl);
 }
 
 .process-highlights h2 {
-    font-size: 2rem; /* 32px */
+    font-family: var(--font-secondary);
+    font-size: clamp(1.75rem, 4vw, 2.25rem); /* Tamaño de fuente fluido */
     text-align: center;
     margin-bottom: var(--spacing-lg);
 }
 
 .process-item {
-  display: flex;
+  display: grid; /* Usar grid para más control */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsivo */
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
   background-color: var(--color-card-bg-light);
   padding: var(--spacing-lg);
-  border-radius: 8px;
+  border-radius: 12px; /* Bordes más redondeados */
   box-shadow: var(--shadow-md);
-  transition: background-color var(--transition-speed) var(--transition-ease);
+  transition: background-color var(--transition-speed) var(--transition-ease),
+              transform var(--transition-speed) var(--transition-ease);
+}
+.process-item:hover {
+    transform: translateY(-5px); /* Sutil efecto de elevación al pasar el mouse */
+    box-shadow: var(--shadow-lg);
 }
 body.mode-dark .process-item {
   background-color: var(--color-card-bg-dark);
 }
 
 /* Layout invertido para el segundo, cuarto, etc. item */
-.process-item.layout-reversed {
-  flex-direction: row-reverse;
+/* Con Grid, podemos cambiar el orden de las áreas o usar order en los hijos */
+.process-item.layout-reversed .process-visual {
+  order: 1; /* Visual a la derecha (en LTR) si grid es de 2 columnas */
 }
+.process-item.layout-reversed .process-text {
+  order: 0; /* Texto a la izquierda */
+}
+/* Asegurar que en pantallas pequeñas vuelvan al orden natural si se apilan */
+@media (max-width: 767.98px) {
+    .process-item,
+    .process-item.layout-reversed {
+        grid-template-columns: 1fr; /* Una columna */
+    }
+    .process-item.layout-reversed .process-visual,
+    .process-item.layout-reversed .process-text {
+        order: initial; /* Resetear orden */
+    }
+}
+
 
 .process-visual {
-  flex: 1; /* Ajusta la proporción si quieres */
-  min-width: 0; /* Necesario para que flexbox no desborde */
-}
-
-.process-text {
-  flex: 1; /* Ajusta la proporción si quieres */
+  /* flex: 1; No necesario con grid */
+  min-width: 0;
+  border-radius: 8px; /* Redondear el contenedor del slider */
+  overflow: hidden; /* Para que el slider respete el borde */
 }
 
 .process-text h3 {
-  font-size: 1.5rem; /* 24px */
+  font-family: var(--font-secondary);
+  font-size: clamp(1.25rem, 3vw, 1.6rem); /* Tamaño de fuente fluido */
   margin-bottom: var(--spacing-sm);
   font-weight: 600;
+  color: var(--color-primary-light);
+}
+body.mode-dark .process-text h3 {
+  color: var(--color-primary-dark);
 }
 
 .process-text p {
   margin-bottom: var(--spacing-md);
+  font-size: 0.95rem; /* Ligeramente más pequeño para descripciones */
 }
 
-/* Estilos del Slider de Imágenes */
+/* Estilos del Slider de Imágenes (sin cambios significativos, ya estaban bien) */
 .image-slider {
-  position: relative; /* Contenedor para imágenes absolutas */
-  overflow: hidden; /* Oculta partes de imágenes que salgan */
-  border-radius: 6px;
-  aspect-ratio: 16 / 9; /* Mantiene la proporción, ajusta según tus imágenes */
+  position: relative;
+  overflow: hidden;
+  /* border-radius: 6px; Ya aplicado en .process-visual */
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-code-bg-light); /* Fondo mientras cargan imágenes */
+}
+body.mode-dark .image-slider {
+    background-color: var(--color-code-bg-dark);
 }
 
 .slider-images {
@@ -280,16 +392,16 @@ body.mode-dark .process-item {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cubre el área sin deformar */
+  object-fit: cover;
   opacity: 0;
-  transition: opacity 0.4s var(--transition-ease); /* Transición suave */
-  visibility: hidden; /* Oculta para accesibilidad */
+  transition: opacity 0.4s var(--transition-ease);
+  visibility: hidden;
 }
 
 .slider-image.active {
   opacity: 1;
   visibility: visible;
-  z-index: 1; /* Asegura que la activa esté por encima */
+  z-index: 1;
 }
 
 .slider-controls {
@@ -299,41 +411,45 @@ body.mode-dark .process-item {
   transform: translateX(-50%);
   display: flex;
   gap: var(--spacing-xs);
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(20, 20, 20, 0.6); /* Un poco más oscuro y menos transparente */
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 20px;
-  z-index: 2; /* Por encima de las imágenes */
+  z-index: 2;
+  backdrop-filter: blur(4px); /* Efecto de desenfoque para el fondo de los controles */
 }
 
 .slider-control-item {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(220, 220, 220, 0.8); /* Más opaco */
   border: none;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: calc(var(--spacing-xs) * 0.8) var(--spacing-sm); /* Ajustar padding */
   border-radius: 15px;
   cursor: pointer;
-  font-size: 0.875rem; /* 14px */
-  transition: background-color var(--transition-speed) var(--transition-ease);
-  color: #333;
+  font-size: 0.8rem; /* Más pequeño */
+  font-weight: 500;
+  transition: background-color var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease);
+  color: #212121; /* Texto oscuro para contraste */
 }
 
 .slider-control-item:hover {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .slider-control-item.active {
   background-color: var(--color-primary-light);
   color: white;
+  font-weight: 600;
 }
 body.mode-dark .slider-control-item.active {
   background-color: var(--color-primary-dark);
+  color: var(--color-card-bg-dark); /* Texto oscuro para contraste */
 }
 
 /* Estilos del Snippet Técnico */
 .technical-snippet {
   background-color: var(--color-code-bg-light);
   border: 1px solid var(--color-border-light);
-  border-radius: 6px;
-  padding: var(--spacing-sm);
+  border-radius: 8px; /* Más redondeado */
+  padding: var(--spacing-md); /* Más padding */
   margin-top: var(--spacing-md);
   margin-bottom: var(--spacing-md);
   transition: background-color var(--transition-speed) var(--transition-ease),
@@ -345,11 +461,12 @@ body.mode-dark .technical-snippet {
 }
 
 .technical-snippet h4 {
-    font-size: 0.875rem; /* 14px */
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.8rem;
+    margin-bottom: var(--spacing-sm); /* Más espacio */
     font-weight: 600;
     color: var(--color-secondary-light);
     text-transform: uppercase;
+    letter-spacing: 0.5px; /* Pequeño espaciado de letras */
 }
 body.mode-dark .technical-snippet h4 {
     color: var(--color-secondary-dark);
@@ -357,17 +474,20 @@ body.mode-dark .technical-snippet h4 {
 
 
 .technical-snippet pre {
-  white-space: pre-wrap; /* Envuelve el código si es muy largo */
-  word-wrap: break-word; /* Rompe palabras largas */
-  margin: 0; /* Quita margen por defecto del pre */
-  max-height: 250px; /* Limita altura y permite scroll si es mucho código */
-  overflow-y: auto; /* Añade scroll vertical si es necesario */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  max-height: 300px; /* Un poco más de altura */
+  overflow-y: auto;
+  border-radius: 4px; /* Redondear el contenedor del código */
 }
 
 .technical-snippet code {
   font-family: var(--font-code);
-  font-size: 0.875rem; /* 14px */
-  color: var(--color-text-light); /* Ajusta si usas resaltado de sintaxis */
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  display: block; /* Para que el padding funcione bien */
+  padding: var(--spacing-xs);
 }
 body.mode-dark .technical-snippet code {
   color: var(--color-text-dark);
@@ -378,86 +498,209 @@ body.mode-dark .technical-snippet code {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
+    border: 1px solid var(--color-border-light); /* Borde sutil para la imagen */
 }
-
+body.mode-dark .technical-snippet img {
+    border-color: var(--color-border-dark);
+}
 
 /* Lógica para mostrar/ocultar snippet según modo Artist/Technical */
 body.mode-artist .technical-snippet {
-  display: none; /* Oculto en modo artista */
+  display: none;
 }
 body.mode-technical .technical-snippet {
-  display: block; /* Visible en modo técnico */
+  display: block; /* o 'grid'/'flex' si se necesita layout interno */
 }
 
-/* Enlace dentro del Process Item */
+/* Enlace "Ver más" dentro del Process Item */
 .cta-link {
   display: inline-block;
   text-decoration: none;
   color: var(--color-primary-light);
   font-weight: 600;
-  transition: color var(--transition-speed) var(--transition-ease);
+  margin-top: var(--spacing-sm); /* Espacio arriba del enlace */
+  transition: color var(--transition-speed) var(--transition-ease), transform 0.1s ease-out;
+  position: relative; /* Para el pseudo-elemento de subrayado */
+  padding-bottom: 2px; /* Espacio para el subrayado */
+}
+.cta-link::after { /* Subrayado animado */
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-primary-light);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.cta-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 body.mode-dark .cta-link {
   color: var(--color-primary-dark);
 }
+body.mode-dark .cta-link::after {
+    background-color: var(--color-primary-dark);
+}
+/* Quitar text-decoration por defecto si usamos el custom */
 .cta-link:hover {
-  text-decoration: underline;
-}
-
-
-/* ===== CALL TO ACTION SECTION ===== */
-.cta-section {
-  padding-top: var(--spacing-lg);
-  padding-bottom: var(--spacing-xl);
-  text-align: center;
-}
-
-.cta-section h2 {
-    font-size: 1.75rem; /* 28px */
-    margin-bottom: var(--spacing-lg);
-}
-
-
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; /* Permite que los botones bajen en pantallas pequeñas */
-  gap: var(--spacing-md);
-}
-
-.cta-button {
-  display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--color-primary-light);
-  color: white;
-  border: 1px solid var(--color-primary-light);
-  border-radius: 6px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background-color var(--transition-speed) var(--transition-ease),
-              color var(--transition-speed) var(--transition-ease),
-              border-color var(--transition-speed) var(--transition-ease);
-}
-body.mode-dark .cta-button {
-  background-color: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-  color: var(--color-background-dark); /* Texto oscuro para contraste */
 }
 
-.cta-button:hover {
-  background-color: #0056b3; /* Azul un poco más oscuro */
-  border-color: #0056b3;
-  color: white;
+/*------------------------------------*\
+  #ENLACES-SOCIALES
+\*------------------------------------*/
+.social-links {
+    margin-top: var(--base-spacing);
+    display: flex; /* Para alinear los iconos horizontalmente */
+    justify-content: center; /* Centra los iconos */
+    gap: calc(var(--base-spacing) * 1); /* Espacio entre iconos */
 }
-body.mode-dark .cta-button:hover {
-  background-color: #74c0fc; /* Azul un poco más claro */
-  border-color: #74c0fc;
-  color: var(--color-background-dark);
+
+.social-links a {
+    display: inline-block; /* Para aplicar transformaciones */
+    color: var(--icon-color); /* Color inicial del icono */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icon {
+    width: calc(var(--base-spacing) * 1.5); /* 24px */
+    height: calc(var(--base-spacing) * 1.5); /* 24px */
+    fill: currentColor; /* Hereda el color del enlace 'a' padre, permite transición */
+    vertical-align: middle; /* Mejor alineación vertical */
+}
+
+.social-links a:hover {
+    color: var(--icon-hover-color); /* Cambia el color del SVG a través del 'a' */
+    transform: translateY(-2px); /* Efecto de elevación como los otros botones */
+}
+
+/*------------------------------------*\
+  #FORMULARIO-CONTACTO-DESPLEGABLE
+\*------------------------------------*/
+.contact-form-toggle-wrapper {
+  position: relative; /* Para el posicionamiento del formulario */
+  width: 100%; /* Ocupa el ancho si está en columna */
+  max-width: 300px; /* Limita el ancho del botón/label */
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) { /* En desktop, puede ser uno más de los botones en línea */
+    .contact-form-toggle-wrapper {
+        width: auto;
+        max-width: none;
+    }
 }
 
 
-/* ===== FOOTER ===== */
+.contact-toggle-checkbox { /* Ocultar el checkbox real */
+  display: none;
+}
+
+.contact-toggle-button {
+  display: block; /* Para que ocupe el ancho del wrapper si es necesario */
+  width: 100%;
+  text-align: center; /* Centrar texto e icono */
+}
+
+.contact-form-container {
+  background-color: var(--color-card-bg-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
+  max-height: 0; /* Inicialmente oculto y sin altura */
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.5s var(--transition-ease),
+              opacity 0.3s var(--transition-ease) 0.1s,
+              visibility 0s linear 0.5s, /* Ocultar después de la transición */
+              margin-top 0.5s var(--transition-ease),
+              padding 0.5s var(--transition-ease);
+  will-change: max-height, opacity; /* Optimización para la animación */
+}
+body.mode-dark .contact-form-container {
+  background-color: var(--color-card-bg-dark);
+  border-color: var(--color-border-dark);
+}
+
+/* Cuando el checkbox está activo, se muestra el formulario */
+.contact-toggle-checkbox:checked ~ .contact-form-container {
+  max-height: 1000px; /* Altura suficiente para el contenido del form */
+  opacity: 1;
+  visibility: visible;
+  transition: max-height 0.5s var(--transition-ease),
+              opacity 0.3s var(--transition-ease),
+              visibility 0s linear 0s, /* Mostrar inmediatamente */
+              margin-top 0.5s var(--transition-ease),
+              padding 0.5s var(--transition-ease);
+}
+
+.contact-form.actual-form h4 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+}
+
+.contact-form .form-group {
+  margin-bottom: var(--spacing-sm);
+  text-align: left;
+}
+.contact-form .form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+.contact-form .form-group input[type="text"],
+.contact-form .form-group input[type="email"],
+.contact-form .form-group textarea {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--color-border-light);
+  border-radius: 4px;
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+  font-family: var(--font-primary);
+}
+body.mode-dark .contact-form .form-group input[type="text"],
+body.mode-dark .contact-form .form-group input[type="email"],
+body.mode-dark .contact-form .form-group textarea {
+    background-color: var(--color-code-bg-dark); /* Un fondo ligeramente diferente */
+    border-color: var(--color-border-dark);
+    color: var(--color-text-dark);
+}
+.contact-form .form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.contact-form .submit-form-button {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+}
+
+.thank-you-message {
+    padding: var(--spacing-md);
+    text-align: center;
+    border: 1px dashed var(--color-primary-light);
+    border-radius: 6px;
+    color: var(--color-primary-light);
+}
+body.mode-dark .thank-you-message {
+    border-color: var(--color-primary-dark);
+    color: var(--color-primary-dark);
+}
+
+
+/*------------------------------------*\
+  #PIE-DE-PAGINA (FOOTER)
+\*------------------------------------*/
 .site-footer {
   padding-top: var(--spacing-lg);
   padding-bottom: var(--spacing-lg);
@@ -465,71 +708,97 @@ body.mode-dark .cta-button:hover {
   background-color: var(--color-card-bg-light);
   border-top: 1px solid var(--color-border-light);
   text-align: center;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.9rem;
   color: var(--color-secondary-light);
   transition: background-color var(--transition-speed) var(--transition-ease),
               border-color var(--transition-speed) var(--transition-ease),
               color var(--transition-speed) var(--transition-ease);
 }
 body.mode-dark .site-footer {
-  background-color: var(--color-card-bg-dark);
+  background-color: var(--color-background-dark); /* Que coincida con el fondo general */
   border-top-color: var(--color-border-dark);
   color: var(--color-secondary-dark);
 }
 
 
-/* ===== RESPONSIVE DESIGN ===== */
+/*------------------------------------*\
+  #DISEÑO-RESPONSIVO (MEDIA QUERIES)
+\*------------------------------------*/
 
-/* Tablets (ej: < 992px) */
+/* Tablets y pantallas medianas (ej: < 992px) */
 @media (max-width: 991.98px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
+  .container {
+      padding-left: var(--spacing-sm);
+      padding-right: var(--spacing-sm);
   }
-  .hero-text {
-    flex-basis: auto; /* Resetea la base de flex */
+  .hero-content {
+    /* grid-template-columns: 1fr; Se maneja con auto-fit ahora */
+    text-align: center; /* Centrar texto si el visual va abajo */
+  }
+  .hero-text p {
+      margin-left: auto;
+      margin-right: auto; /* Centrar el párrafo si el texto está centrado */
   }
   .hero-visual {
-    max-width: 70%; /* Ajusta el tamaño del visual */
+    /* max-width: 80%; Ya no es necesario con grid, o ajustar si se ve muy grande */
     margin-top: var(--spacing-lg);
   }
 
-  .process-item,
-  .process-item.layout-reversed {
-    flex-direction: column;
-  }
-  .process-visual {
-    order: 1; /* Visual primero */
-  }
-  .process-text {
-    order: 2; /* Texto después */
-  }
+  /* El .process-item ya se vuelve de una columna por el minmax(320px, 1fr) en su grid */
 }
 
 /* Móviles (ej: < 768px) */
 @media (max-width: 767.98px) {
-  :root {
-    /* Reduce un poco los tamaños de fuente en móvil */
-    font-size: 14px; /* Ajusta el tamaño base si es necesario */
+  /* Reducir un poco los tamaños de fuente base en móvil si es necesario,
+     aunque los clamp() ya ayudan mucho */
+  body {
+      font-size: 15px; /* O mantener 16px y ajustar clamps */
   }
   .header-logo a {
-      font-size: 1.25rem; /* Más pequeño en móvil */
+      font-size: 1.35rem;
   }
-  .hero-text h2 {
-    font-size: 2rem; /* Ajusta tamaño de títulos */
+  .mode-toggle {
+      font-size: 1.2rem;
+      width: 36px;
+      height: 36px;
   }
+
   .hero-visual {
-    max-width: 100%;
+    margin-top: var(--spacing-md);
   }
+
   .process-item {
-      padding: var(--spacing-md); /* Menos padding en móvil */
+      padding: var(--spacing-md);
   }
+
   .cta-buttons {
-    flex-direction: column; /* Botones uno debajo del otro */
-    align-items: stretch; /* Ocupan todo el ancho */
-    gap: var(--spacing-sm);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md); /* Un poco más de espacio */
   }
   .cta-button {
-      width: 100%; /* Ocupan todo el ancho */
+      width: 100%;
+      padding: var(--spacing-sm) var(--spacing-md); /* Ajustar padding para botones full-width */
   }
+}
+
+/* Móviles muy pequeños (ej: < 480px) */
+@media (max-width: 479.98px) {
+    .container {
+        padding-left: var(--spacing-xs);
+        padding-right: var(--spacing-xs);
+    }
+    .header-toggles {
+        gap: var(--spacing-xs); /* Menos espacio entre toggles */
+    }
+    .process-highlights h2, .cta-section h2 {
+        margin-bottom: var(--spacing-md);
+    }
+    .slider-controls {
+        padding: calc(var(--spacing-xs)*0.8) var(--spacing-sm);
+    }
+    .slider-control-item {
+        font-size: 0.75rem;
+        padding: var(--spacing-xs) calc(var(--spacing-sm)*0.8);
+    }
 }
