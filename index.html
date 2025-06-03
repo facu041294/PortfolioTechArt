@@ -183,22 +183,23 @@ def procedural_placement(assets_to_place, target_actor, rules):
 <div class="contact-form-toggle-wrapper">
     <input type="checkbox" id="contact-toggle-checkbox" class="contact-toggle-checkbox" aria-controls="contact-form-container">
     <label for="contact-toggle-checkbox" class="cta-button contact-toggle-button" role="button" aria-expanded="false">
-        <svg><!-- Tu SVG de email/contacto aquí --></svg> Contactar
+         <img src="assets/img/arrow-up-down-svgrepo-com.svg" alt="Show Logo" class="mail-icon-arrow">
+         <img src="assets/img/mail-heart-svgrepo-com.svg" alt="Mail Logo" class="mail-icon-letter"> 
     </label>
     <div id="contact-form-container" class="contact-form-container" aria-hidden="true">
         <!-- Aquí irá el formulario de Formspree, inicialmente oculto -->
-        <form action="https://formspree.io/f/TU_ID_FORMSPREE" method="POST" class="contact-form actual-form">
+        <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form actual-form">
             <h4>Envíame un mensaje directo:</h4>
             <div class="form-group">
-                <label for="form-name">Nombre:</label>
+                <label for="form-name">Nombre*:</label>
                 <input type="text" id="form-name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="form-email">Email:</label>
+                <label for="form-email">Email*:</label>
                 <input type="email" id="form-email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="form-message">Mensaje:</label>
+                <label for="form-message">Mensaje*:</label>
                 <textarea id="form-message" name="message" rows="5" required></textarea>
             </div>
             <button type="submit" class="cta-button submit-form-button">Enviar Mensaje</button>

@@ -37,6 +37,7 @@
   --color-border-dark: #3a3a3a;     /* Borde un poco más visible en oscuro */
   --color-card-bg-dark: #1e1e1e;    /* Fondo de tarjeta sutilmente diferente del bg */
   --color-code-bg-dark: #2a2a2a;
+  --icon-color: #515151;
 
   /* Sombras */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -567,8 +568,8 @@ body.mode-dark .cta-link::after {
 }
 
 .social-icon {
-    width: calc(var(--base-spacing) * 1.5); /* 24px */
-    height: calc(var(--base-spacing) * 1.5); /* 24px */
+    width: 100px;
+    height: 50px;
     fill: currentColor; /* Hereda el color del enlace 'a' padre, permite transición */
     vertical-align: middle; /* Mejor alineación vertical */
 }
@@ -587,6 +588,7 @@ body.mode-dark .cta-link::after {
   max-width: 300px; /* Limita el ancho del botón/label */
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
 }
 @media (min-width: 768px) { /* En desktop, puede ser uno más de los botones en línea */
     .contact-form-toggle-wrapper {
@@ -595,6 +597,33 @@ body.mode-dark .cta-link::after {
     }
 }
 
+.mail-label {
+  margin-top: var(--base-spacing);
+  display: flex;
+  justify-content: center;
+  gap: calc(var(--base-spacing) * 1);
+}
+
+.mail-label a {
+  display: inline-block; /* Para aplicar transformaciones */
+    color: var(--icon-color); /* Color inicial del icono */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.mail-icon-arrow {
+  width: 25px;
+  height: 50px;
+}
+
+.mail-icon-letter {
+  width: 50px;
+  height: 50px;
+}
+
+.mail-icon-arrow a:hover {
+    color: var(--icon-hover-color); /* Cambia el color del SVG a través del 'a' */
+    transform: translateY(-2px); /* Efecto de elevación como los otros botones */
+}
 
 .contact-toggle-checkbox { /* Ocultar el checkbox real */
   display: none;
