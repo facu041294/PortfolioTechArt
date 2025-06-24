@@ -127,20 +127,20 @@
                     <div class="technical-snippet">
                         <h4>Python Snippet (Conceptual):</h4>
                         <pre><code class="language-python">
-import unreal # O el API correspondiente (maya.cmds, bpy)
+                            import unreal # O el API correspondiente (maya.cmds, bpy)
 
-def procedural_placement(assets_to_place, target_actor, rules):
-    for asset_path in assets_to_place:
-        # Lógica para calcular posición, rotación, escala
-        # basada en 'rules' (ej. samplear landscape, evitar colisiones)
-        transform = calculate_transform(target_actor, rules)
-        if transform:
-            unreal.EditorLevelLibrary.spawn_actor_from_class(
-                unreal.EditorAssetLibrary.load_blueprint_class(asset_path),
-                transform.location,
-                transform.rotation
-            )
-# Esta es una simplificación, la lógica real sería más compleja.
+                            def procedural_placement(assets_to_place, target_actor, rules):
+                                for asset_path in assets_to_place:
+                                    # Lógica para calcular posición, rotación, escala
+                                    # basada en 'rules' (ej. samplear landscape, evitar colisiones)
+                                    transform = calculate_transform(target_actor, rules)
+                                    if transform:
+                                        unreal.EditorLevelLibrary.spawn_actor_from_class(
+                                            unreal.EditorAssetLibrary.load_blueprint_class(asset_path),
+                                            transform.location,
+                                            transform.rotation
+                                        )
+                            # Esta es una simplificación, la lógica real sería más compleja.
                         </code></pre>
                     </div>
                     <a href="[Enlace a GitHub o demo de la herramienta]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver código o demo de la herramienta</a>
@@ -165,51 +165,63 @@ def procedural_placement(assets_to_place, target_actor, rules):
         </section> <!-- Fin de process-highlights -->
 
         <!-- En la sección .cta-buttons -->
-        <section class="social-links">    
-            <div>
-                <a href="https://www.artstation.com/facu041294" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de Artstation">
-                    <img src="assets/img/artstation-svgrepo-com.svg" alt="Artstation Logo" class="social-icon">
+        <section class="connect-cta-section container">
+            <h2>Contacto</h2>
+            <p class="connect-subtitle">
+                ¿Interesado en trabajar juntos o tienes alguna pregunta? Conéctate conmigo a través de mis redes o envíame un mensaje directo.
+            </p>
+
+            <div class="connect-buttons-grid">
+                <!-- Enlace a ArtStation -->
+                <a href="https://www.artstation.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de ArtStation">
+                    <img src="assets/img/artstation-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
+                    ArtStation
                 </a>
-                <a href="https://linkedin.com/in/facundovillarreal/" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
-                    <img src="assets/img/linkedin-svgrepo-com.svg" alt="Linkedin Logo" class="social-icon">
+                <!-- Enlace a LinkedIn -->
+                <a href="https://linkedin.com/in/facundovillarreal/" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
+                    <img src="assets/img/linkedin-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
+                    LinkedIn
                 </a>
-                <a href="https://github.com/facu041294" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de Github">
-                    <img src="assets/img/github-svgrepo-com.svg" alt="Github Logo" class="social-icon">
+                <!-- Enlace a GitHub -->
+                <a href="https://github.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de GitHub">
+                    <img src="assets/img/github-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
+                    GitHub
                 </a>
+
+                <!-- ESTE ES EL LABEL QUE ACTÚA COMO BOTÓN -->
+                <label for="contact-toggle-checkbox" class="connect-button contact-toggle-button-styled" role="button" tabindex="0" aria-expanded="false">
+                    <img src="assets/img/mail-heart-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
+                    Mensaje Directo
+                </label>
+            </div>
+
+            <!-- ESTE ES EL CONTENEDOR DEL CHECKBOX Y DEL FORMULARIO DESPLEGABLE -->
+            <div class="contact-form-toggle-wrapper">
+                <input type="checkbox" id="contact-toggle-checkbox" class="contact-toggle-checkbox" aria-controls="contact-form-container">
+
+                <div id="contact-form-container" class="contact-form-container" aria-hidden="true">
+                    <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form actual-form">
+                        <h4>Envíame un mensaje:</h4>
+                        <div class="form-group">
+                            <label for="form-name">Nombre:</label>
+                            <input type="text" id="form-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-email">Email:</label>
+                            <input type="email" id="form-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-message">Mensaje:</label>
+                            <textarea id="form-message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button submit-form-button">Enviar Mensaje</button>
+                    </form>
+                    <div class="thank-you-message" style="display: none;">
+                        <p>¡Gracias por tu mensaje! Te responderé pronto.</p>
+                    </div>
+                </div>
             </div>
         </section>
-
-<!-- Botón/Checkbox para el formulario de contacto -->
-<div class="contact-form-toggle-wrapper">
-    <input type="checkbox" id="contact-toggle-checkbox" class="contact-toggle-checkbox" aria-controls="contact-form-container">
-    <label for="contact-toggle-checkbox" class="cta-button contact-toggle-button" role="button" aria-expanded="false">
-         <img src="assets/img/arrow-up-down-svgrepo-com.svg" alt="Show Logo" class="mail-icon-arrow">
-         <img src="assets/img/mail-heart-svgrepo-com.svg" alt="Mail Logo" class="mail-icon-letter"> 
-    </label>
-    <div id="contact-form-container" class="contact-form-container" aria-hidden="true">
-        <!-- Aquí irá el formulario de Formspree, inicialmente oculto -->
-        <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form actual-form">
-            <h4>Envíame un mensaje directo:</h4>
-            <div class="form-group">
-                <label for="form-name">Nombre*:</label>
-                <input type="text" id="form-name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="form-email">Email*:</label>
-                <input type="email" id="form-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="form-message">Mensaje*:</label>
-                <textarea id="form-message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="cta-button submit-form-button">Enviar Mensaje</button>
-        </form>
-        <div class="thank-you-message" style="display: none;"> <!-- Mensaje de agradecimiento, inicialmente oculto -->
-            <p>¡Gracias por tu mensaje! Te responderé pronto.</p>
-        </div>
-    </div>
-</div>
-
     </main> <!-- Fin del contenido principal -->
 
     <!-- Pie de Página del Sitio -->

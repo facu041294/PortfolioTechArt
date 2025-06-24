@@ -24,6 +24,7 @@
   --color-background-light: #f8f9fa;
   --color-text-light: #212529;
   --color-primary-light: #007bff;
+  --color-primary-light-rgb: 0, 123, 255; /* RGB para #007bff */
   --color-secondary-light: #6c757d;
   --color-border-light: #dee2e6;
   --color-card-bg-light: #ffffff;
@@ -33,6 +34,7 @@
   --color-background-dark: #121212; /* Un negro más profundo para mejor contraste */
   --color-text-dark: #e0e0e0;       /* Blanco ligeramente menos brillante */
   --color-primary-dark: #4dabf7;
+  --color-primary-dark-rgb: 77, 171, 247; /* RGB para #4dabf7 */
   --color-secondary-dark: #adb5bd;
   --color-border-dark: #3a3a3a;     /* Borde un poco más visible en oscuro */
   --color-card-bg-dark: #1e1e1e;    /* Fondo de tarjeta sutilmente diferente del bg */
@@ -552,166 +554,233 @@ body.mode-dark .cta-link::after {
 }
 
 /*------------------------------------*\
-  #ENLACES-SOCIALES
+  #SECCION-CONEXION-Y-CTA (CONNECT & CTA)
 \*------------------------------------*/
-.social-links {
-    margin-top: var(--base-spacing);
-    display: flex; /* Para alinear los iconos horizontalmente */
-    justify-content: center; /* Centra los iconos */
-    gap: calc(var(--base-spacing) * 1); /* Espacio entre iconos */
+.connect-cta-section {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  text-align: center;
+  background-color: var(--color-card-bg-light);
+  border-radius: 0;
+}
+body.mode-dark .connect-cta-section {
+  background-color: var(--color-card-bg-dark);
 }
 
-.social-links a {
-    display: inline-block; /* Para aplicar transformaciones */
-    color: var(--icon-color); /* Color inicial del icono */
-    transition: color 0.3s ease, transform 0.2s ease;
+.connect-cta-section h2 {
+    font-family: var(--font-primary); 
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary-light);
+}
+body.mode-dark .connect-cta-section h2 {
+    color: var(--color-primary-dark);
 }
 
-.social-icon {
-    width: 100px;
-    height: 50px;
-    fill: currentColor; /* Hereda el color del enlace 'a' padre, permite transición */
-    vertical-align: middle; /* Mejor alineación vertical */
+.connect-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    color: var(--color-secondary-light);
+    max-width: 65ch; /* Limitar ancho para legibilidad */
+    margin: 0 auto var(--spacing-lg) auto; /* Centrar y espacio inferior */
+}
+body.mode-dark .connect-subtitle {
+    color: var(--color-secondary-dark);
 }
 
-.social-links a:hover {
-    color: var(--icon-hover-color); /* Cambia el color del SVG a través del 'a' */
-    transform: translateY(-2px); /* Efecto de elevación como los otros botones */
+.connect-buttons-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Para que los botones bajen en pantallas pequeñas */
+  gap: var(--spacing-md); /* Espacio entre botones */
+  margin-bottom: var(--spacing-lg); /* Espacio antes del formulario desplegable (si se abre) */
+}
+
+.connect-button,
+.contact-toggle-button-styled { /* Estilo base para todos los botones de esta sección */
+  display: inline-flex; /* Para alinear icono y texto */
+  align-items: center;
+  justify-content: center; /* Centrar contenido si el texto es corto */
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent; /* Fondo transparente como en el ejemplo Golex */
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px; /* Bordes redondeados */
+  text-decoration: none;
+  font-weight: 500; /* Un peso medio */
+  font-size: 0.9rem;
+  transition: background-color var(--transition-speed) var(--transition-ease),
+              color var(--transition-speed) var(--transition-ease),
+              border-color var(--transition-speed) var(--transition-ease),
+              transform var(--transition-speed) var(--transition-ease);
+  min-width: 150px; /* Ancho mínimo para que no se vean muy pequeños */
+  cursor: pointer;
+}
+body.mode-dark .connect-button,
+body.mode-dark .contact-toggle-button-styled {
+  color: var(--color-text-dark);
+  border-color: var(--color-border-dark);
+}
+
+.connect-button:hover,
+.contact-toggle-button-styled:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+  color: white; /* O var(--color-card-bg-light) para contraste */
+  transform: translateY(-2px);
+}
+body.mode-dark .connect-button:hover,
+body.mode-dark .contact-toggle-button-styled:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-background-dark); /* Texto oscuro para buen contraste */
+}
+
+.connect-button-icon {
+  width: 1em; /* Tamaño del icono relativo al texto del botón */
+  height: 1em;
 }
 
 /*------------------------------------*\
   #FORMULARIO-CONTACTO-DESPLEGABLE
 \*------------------------------------*/
+
+/* El wrapper principal del toggle y el contenedor del formulario */
 .contact-form-toggle-wrapper {
-  position: relative; /* Para el posicionamiento del formulario */
-  width: 100%; /* Ocupa el ancho si está en columna */
-  max-width: 300px; /* Limita el ancho del botón/label */
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-}
-@media (min-width: 768px) { /* En desktop, puede ser uno más de los botones en línea */
-    .contact-form-toggle-wrapper {
-        width: auto;
-        max-width: none;
-    }
-}
-
-.mail-label {
-  margin-top: var(--base-spacing);
-  display: flex;
-  justify-content: center;
-  gap: calc(var(--base-spacing) * 1);
-}
-
-.mail-label a {
-  display: inline-block; /* Para aplicar transformaciones */
-    color: var(--icon-color); /* Color inicial del icono */
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.mail-icon-arrow {
-  width: 25px;
-  height: 50px;
-}
-
-.mail-icon-letter {
-  width: 50px;
-  height: 50px;
-}
-
-.mail-icon-arrow a:hover {
-    color: var(--icon-hover-color); /* Cambia el color del SVG a través del 'a' */
-    transform: translateY(-2px); /* Efecto de elevación como los otros botones */
-}
-
-.contact-toggle-checkbox { /* Ocultar el checkbox real */
-  display: none;
-}
-
-.contact-toggle-button {
-  display: block; /* Para que ocupe el ancho del wrapper si es necesario */
+  position: relative;
   width: 100%;
-  text-align: center; /* Centrar texto e icono */
+  max-width: 600px; /* Ajusta el ancho máximo del formulario */
+  margin: var(--spacing-md) auto 0 auto; /* Espacio arriba y centrado */
 }
 
+/* El checkbox real estará oculto, lo controlamos con el label */
+.contact-toggle-checkbox {
+  display: none; /* Oculta el checkbox real */
+}
+
+/* El label que parece un botón */
+.contact-toggle-button-styled {
+  /* Ya tiene estilos de .connect-button si esa clase también se aplica en el HTML */
+  /* Aquí puedes añadir estilos específicos adicionales si es necesario para el label/botón */
+}
+
+/* El contenedor del formulario que se despliega */
 .contact-form-container {
   background-color: var(--color-card-bg-light);
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
-  padding: var(--spacing-md);
+  padding: 0; /* Padding se aplicará cuando esté visible para la animación */
   margin-top: var(--spacing-sm);
   box-shadow: var(--shadow-md);
-  max-height: 0; /* Inicialmente oculto y sin altura */
-  overflow: hidden;
+
+  /* --- ESTADO INICIAL OCULTO --- */
+  max-height: 0;
   opacity: 0;
   visibility: hidden;
+  overflow: hidden; /* Muy importante para que max-height funcione */
+
   transition: max-height 0.5s var(--transition-ease),
               opacity 0.3s var(--transition-ease) 0.1s,
-              visibility 0s linear 0.5s, /* Ocultar después de la transición */
-              margin-top 0.5s var(--transition-ease),
-              padding 0.5s var(--transition-ease);
-  will-change: max-height, opacity; /* Optimización para la animación */
+              padding 0.5s var(--transition-ease),
+              visibility 0s linear 0.5s;
+  will-change: max-height, opacity, padding;
 }
 body.mode-dark .contact-form-container {
   background-color: var(--color-card-bg-dark);
   border-color: var(--color-border-dark);
 }
 
-/* Cuando el checkbox está activo, se muestra el formulario */
+/* --- ESTADO VISIBLE CUANDO EL CHECKBOX ESTÁ MARCADO --- */
 .contact-toggle-checkbox:checked ~ .contact-form-container {
-  max-height: 1000px; /* Altura suficiente para el contenido del form */
+  max-height: 1000px; /* Altura suficiente para el contenido */
   opacity: 1;
   visibility: visible;
+  padding: var(--spacing-md); /* Aplicar padding cuando está visible */
   transition: max-height 0.5s var(--transition-ease),
               opacity 0.3s var(--transition-ease),
-              visibility 0s linear 0s, /* Mostrar inmediatamente */
-              margin-top 0.5s var(--transition-ease),
-              padding 0.5s var(--transition-ease);
+              padding 0.5s var(--transition-ease),
+              visibility 0s linear 0s;
 }
 
+/* Estilos internos del formulario */
 .contact-form.actual-form h4 {
     font-family: var(--font-primary);
     font-weight: 600;
+    font-size: 1.25rem;
     margin-bottom: var(--spacing-md);
     text-align: left;
+    color: var(--color-text-light);
+}
+body.mode-dark .contact-form.actual-form h4 {
+    color: var(--color-text-dark);
 }
 
 .contact-form .form-group {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
   text-align: left;
 }
 .contact-form .form-group label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: var(--spacing-xs);
+  color: var(--color-secondary-light);
 }
+body.mode-dark .contact-form .form-group label {
+  color: var(--color-secondary-dark);
+}
+
 .contact-form .form-group input[type="text"],
 .contact-form .form-group input[type="email"],
 .contact-form .form-group textarea {
   width: 100%;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-sm);
   border: 1px solid var(--color-border-light);
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: var(--color-background-light);
   color: var(--color-text-light);
   font-family: var(--font-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
 }
+.contact-form .form-group input[type="text"]:focus,
+.contact-form .form-group input[type="email"]:focus,
+.contact-form .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+    /* Asegúrate de definir --color-primary-light-rgb en tu :root */
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-light-rgb, 0, 123, 255), 0.25);
+}
+
 body.mode-dark .contact-form .form-group input[type="text"],
 body.mode-dark .contact-form .form-group input[type="email"],
 body.mode-dark .contact-form .form-group textarea {
-    background-color: var(--color-code-bg-dark); /* Un fondo ligeramente diferente */
+    background-color: var(--color-code-bg-dark);
     border-color: var(--color-border-dark);
     color: var(--color-text-dark);
 }
+body.mode-dark .contact-form .form-group input[type="text"]:focus,
+body.mode-dark .contact-form .form-group input[type="email"]:focus,
+body.mode-dark .contact-form .form-group textarea:focus {
+    border-color: var(--color-primary-dark);
+    /* Asegúrate de definir --color-primary-dark-rgb en tu :root */
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-dark-rgb, 77, 171, 247), 0.25);
+}
+
 .contact-form .form-group textarea {
   resize: vertical;
   min-height: 120px;
 }
+
 .contact-form .submit-form-button {
   width: 100%;
   margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-transform: none;
+  font-size: 1rem;
+  /* Debería heredar estilos de .cta-button si también tiene esa clase en el HTML */
 }
 
 .thank-you-message {
@@ -720,12 +789,12 @@ body.mode-dark .contact-form .form-group textarea {
     border: 1px dashed var(--color-primary-light);
     border-radius: 6px;
     color: var(--color-primary-light);
+    margin-top: var(--spacing-md);
 }
 body.mode-dark .thank-you-message {
     border-color: var(--color-primary-dark);
     color: var(--color-primary-dark);
 }
-
 
 /*------------------------------------*\
   #PIE-DE-PAGINA (FOOTER)
