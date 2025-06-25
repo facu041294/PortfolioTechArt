@@ -33,16 +33,12 @@
             <!-- Contenedor para los botones de cambio de modo -->
             <div class="header-toggles">
                 <!-- Botón para cambiar entre modo claro y oscuro -->
-                <button id="theme-toggle" class="mode-toggle switch-toggle" aria-label="Cambiar modo claro/oscuro" role="switch" aria-checked="false">
-                    <!-- Los iconos reales (SVG o fuente de iconos) irían aquí.
-                         El CSS actual para .mode-toggle::after sugiere un switch visual,
-                         por lo que estos spans podrían no ser necesarios si se usa ese estilo. -->
-                    <span class="icon-light" aria-hidden="true">
-                        <img src="assets/img/sun-svgrepo-com.svg" class="icon icon-svg-sol" alt="Modo Claro">
-                    </span> <!-- Ejemplo con emoji, reemplazar con SVG/Icono -->
-                    <span class="icon-dark" aria-hidden="true">
-                        <img src="assets/img/moon-svgrepo-com.svg" class="icon icon-svg-luna" alt="Modo Oscuro">
-                    </span>  <!-- Ejemplo con emoji, reemplazar con SVG/Icono -->
+                <button id="theme-manager-button" class="mode-toggle" aria-live="polite" aria-label="Cambiar tema de color">
+                    <!-- El JS se encargará de poner el SVG correcto aquí -->
+                    <span class="icon-theme-current">
+                        <!-- Placeholder para el SVG del sol, luna o monitor -->
+                        <img src="assets/img/sun-svgrepo-com.svg" alt="Tema actual" class="theme-icon-svg">
+                    </span>
                 </button>
                 <!-- Botón para cambiar entre modo artista y técnico -->
                 <button id="profile-toggle" class="mode-toggle switch-toggle" aria-label="Cambiar modo artista/técnico" role="switch" aria-checked="false">
@@ -66,8 +62,17 @@
                 <!-- Texto de la sección Hero -->
                 <div class="hero-text">
                     <h2>Del Plano al Píxel: Un Viaje Técnico y Artístico</h2>
-                    <p>Fusionando 7 años de diseño arquitectónico con desarrollo de software para crear mundos y experiencias inmersivas como Artista Técnico en Unreal Engine.</p>
+                    <p>Con background en arquitectura, combino habilidades artísticas
+                para crear cinemáticas impactantes y conocimientos técnicos
+                para ofrecer soluciones integrales a mis clientes.</p>
+                    <div class="hero-cta-buttons">
+                        <a href="#process-highlights" class="cta-button primary-cta">Ver Proyectos</a>
+                        <a href="#habilidades-tecnicas" class="cta-button secondary-cta">Mis Habilidades</a>
+                        <!-- Asumiendo que tienes secciones con id="process-highlights" y id="habilidades-tecnicas" -->
+                    </div>
                 </div>
+                
+                
                 <!-- Elemento visual de la sección Hero (Video de Vimeo) -->
                 <div class="hero-visual">
                     <div class="vimeo-container"> <!-- Contenedor para hacer el iframe responsivo -->
@@ -85,9 +90,11 @@
         </section>
 
         <!-- Sección para destacar procesos o proyectos clave -->
-        <section class="process-highlights container">
-            <h2>Destellos del Proceso</h2>
-
+        <section class="process-highlights container" id="process-highlights">
+            <h2>Mis Proyectos</h2>
+            <p>
+                Una selección de mis trabajos en cinemáticas y herramientas de automatización
+            </p>
             <!-- Artículo individual de proceso/proyecto -->
             <article class="process-item">
                 <div class="process-visual">
@@ -127,20 +134,20 @@
                     <div class="technical-snippet">
                         <h4>Python Snippet (Conceptual):</h4>
                         <pre><code class="language-python">
-                            import unreal # O el API correspondiente (maya.cmds, bpy)
+import unreal # O el API correspondiente (maya.cmds, bpy)
 
-                            def procedural_placement(assets_to_place, target_actor, rules):
-                                for asset_path in assets_to_place:
-                                    # Lógica para calcular posición, rotación, escala
-                                    # basada en 'rules' (ej. samplear landscape, evitar colisiones)
-                                    transform = calculate_transform(target_actor, rules)
-                                    if transform:
-                                        unreal.EditorLevelLibrary.spawn_actor_from_class(
-                                            unreal.EditorAssetLibrary.load_blueprint_class(asset_path),
-                                            transform.location,
-                                            transform.rotation
-                                        )
-                            # Esta es una simplificación, la lógica real sería más compleja.
+def procedural_placement(assets_to_place, target_actor, rules):
+    for asset_path in assets_to_place:
+        # Lógica para calcular posición, rotación, escala
+        # basada en 'rules' (ej. samplear landscape, evitar colisiones)
+        transform = calculate_transform(target_actor, rules)
+        if transform:
+            unreal.EditorLevelLibrary.spawn_actor_from_class(
+                unreal.EditorAssetLibrary.load_blueprint_class(asset_path),
+                transform.location,
+                transform.rotation
+            )
+# Esta es una simplificación, la lógica real sería más compleja.
                         </code></pre>
                     </div>
                     <a href="[Enlace a GitHub o demo de la herramienta]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver código o demo de la herramienta</a>
@@ -163,6 +170,13 @@
             </article>
 
         </section> <!-- Fin de process-highlights -->
+
+        <section class="habilidades-tecnicas container" id="habilidades-tecnicas">
+            <h2>Habilidades Técnicas y Artisticas</h2>
+            <p id="">
+                Combinando conocimientos técnicos y artísticos para crear experiencias visuales impactantes
+            </p>
+        </section>
 
         <!-- En la sección .cta-buttons -->
         <section class="connect-cta-section container">

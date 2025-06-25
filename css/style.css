@@ -24,7 +24,9 @@
   --color-background-light: #f8f9fa;
   --color-text-light: #212529;
   --color-primary-light: #007bff;
+  --color-primary-artist-light: #fd7e14;
   --color-primary-light-rgb: 0, 123, 255; /* RGB para #007bff */
+  --color-primary-artist-light-rgb: 253, 126, 20;
   --color-secondary-light: #6c757d;
   --color-border-light: #dee2e6;
   --color-card-bg-light: #ffffff;
@@ -34,7 +36,9 @@
   --color-background-dark: #121212; /* Un negro más profundo para mejor contraste */
   --color-text-dark: #e0e0e0;       /* Blanco ligeramente menos brillante */
   --color-primary-dark: #4dabf7;
+  --color-primary-artist-dark: #ff9933;
   --color-primary-dark-rgb: 77, 171, 247; /* RGB para #4dabf7 */
+  --color-primary-artist-dark-rgb: 255, 153, 51;
   --color-secondary-dark: #adb5bd;
   --color-border-dark: #3a3a3a;     /* Borde un poco más visible en oscuro */
   --color-card-bg-dark: #1e1e1e;    /* Fondo de tarjeta sutilmente diferente del bg */
@@ -57,7 +61,12 @@
   /* Transiciones */
   --transition-speed: 0.25s; /* Ligeramente más suave */
   --transition-ease: ease-in-out;
+
+  /* Variable contextual para color primario */
+  --current-primary-color: var(--color-primary-light);
+  --current-primary-color-rgb: var(--color-primary-light-rgb);
 }
+
 
 /*------------------------------------*\
   #ESTILOS-BASE-DEL-BODY
@@ -76,7 +85,29 @@ body {
 body.mode-dark {
   background-color: var(--color-background-dark);
   color: var(--color-text-dark);
+  --current-primary-color: var(--color-primary-dark); /* Cambia al azul oscuro */
+  --current-primary-color-rgb: var(--color-primary-dark-rgb);
 }
+
+/* Cuando el body está en modo técnico (y claro por defecto) - este es el estado base */
+body.mode-technical {
+  --current-primary-color: var(--color-primary-light);
+  --current-primary-color-rgb: var(--color-primary-light-rgb);
+}
+
+/* MODO ARTISTA + MODO CLARO */
+body.mode-artist.mode-light { /* O simplemente body.mode-artist si el default es light */
+  --current-primary-color: var(--color-primary-artist-light);
+  --current-primary-color-rgb: var(--color-primary-artist-light-rgb);
+}
+
+/* MODO ARTISTA + MODO OSCURO */
+body.mode-artist.mode-dark {
+  --current-primary-color: var(--color-primary-artist-dark);
+  --current-primary-color-rgb: var(--color-primary-artist-dark-rgb);
+}
+
+/* MODO TÉCNICO + MODO OSCURO (ya cubierto por body.mode-dark) */
 
 /*------------------------------------*\
   #CONTENEDOR-PRINCIPAL-LAYOUT
@@ -124,19 +155,15 @@ body.mode-dark .site-header {
 .header-logo a {
   font-size: 1.6rem; /* Ligeramente más grande */
   font-weight: 700;
-  /* font-family: var(--font-secondary); /* Opcional: Usar fuente secundaria para el logo */
-  color: var(--color-text-light);
   text-decoration: none;
-  transition: color var(--transition-speed) var(--transition-ease);
+  color: var(--current-primary-color);
+  display: inline-block;
+  transition: opacity var(--transition-speed) ease-in-out, /* Para el fade del texto */
+              color var(--transition-speed) var(--transition-ease); /* Para el cambio de color */
+  display: inline-block; /* Para transiciones de opacidad */
 }
-body.mode-dark .header-logo a {
-  color: var(--color-text-dark);
-}
-.header-logo a:hover {
-  color: var(--color-primary-light);
-}
-body.mode-dark .header-logo a:hover {
-  color: var(--color-primary-dark);
+.header-logo a.text-fading {
+    opacity: 0;
 }
 
 .header-toggles {
@@ -148,7 +175,7 @@ body.mode-dark .header-logo a:hover {
   #TOGGLES-ESTILO-SWITCH
 \*------------------------------------*/
 .switch-toggle {
-  background-color: #ccc; /* Color base del track desactivado */
+  background-color: var(--color-primary-dark); /* Color base del track desactivado */
   border: none;
   border-radius: 30px; /* Hace el track redondeado */
   cursor: pointer;
@@ -176,40 +203,72 @@ body.mode-dark .header-logo a:hover {
               background-color var(--transition-speed) var(--transition-ease);
 }
 
-/* Estado Activo del Switch (manejado por JS añadiendo una clase, ej: .is-active) */
-/*.switch-toggle.is-active {
-  /* Color del track cuando está activo se definirá por modo 
+/* Estilos base para el botón de gestión de tema (sol/luna/monitor) */
+#theme-manager-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border: 0,5px solid var(--color-border-light);
+  border-radius: 8px;
+  background-color: var(--color-card-bg-light);
+  color: var(--color-secondary-light);
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--transition-speed) var(--transition-ease),
+              background-color var(--transition-speed) var(--transition-ease),
+              border-color var(--transition-speed) var(--transition-ease),
+              box-shadow var(--transition-speed) var(--transition-ease);
 }
-*/
+
+.theme-icon-svg {
+    width: 18px; /* O el tamaño que uses para los iconos de los toggles */
+    height: 18px;
+    display: block;
+}
+
 .switch-toggle.is-active::after {
   transform: translateX(30px); /* Mueve el círculo a la derecha (60 - 26 - 2 - 2) */
 }
 
 /* Colores específicos para el Theme Toggle */
-#theme-toggle.is-active { /* Cuando está en modo oscuro */
-  background-color: var(--color-primary-dark); /* O un color específico para "noche" */
+#theme-manager-button.is-active { /* Cuando está en modo oscuro */
+  background-color: var(--current-primary-color); /* O un color específico para "noche" */
 }
-#theme-toggle.is-active::after {
-  /* Podrías cambiar el color del círculo si quieres, ej. un amarillo para el sol */
-    background-color: #ffe600;
+
+body.mode-light #theme-manager-button { /* Estilo del track en modo claro (sol) */
+    background-color: hsl(55, 100%, 50%); /* Un color tipo sol */
 }
-body.mode-light #theme-toggle { /* Estilo del track en modo claro (sol) */
-    background-color: #ffaa00; /* Un color tipo sol */
+body.mode-dark #theme-manager-button { /* Estilo del track en modo oscuro (luna) */
+    background-color: #3070b4; /* Un color tipo noche */
 }
-body.mode-dark #theme-toggle { /* Estilo del track en modo oscuro (luna) */
-    background-color: #ffffff; /* Un color tipo noche */
+
+#theme-manager-button:hover {
+  transform: translateY(-3px); /* Movimiento hacia arriba */
+  box-shadow: var(--shadow-sm); /* Añadir una sombra sutil en hover */
+  background-color: #b1b1b1;
 }
-body.mode-dark #theme-toggle.is-active::after { /* Círculo en modo oscuro (luna activa) */
-    background-color: #222222; /* Color de la luna */
+
+body.mode-dark #theme-manager-button:hover {
+    background-color: #b1b1b1;
+    border-color: var(--color-secondary-dark); 
+}
+
+#theme-manager-button .icon-theme-current { /* El span que envuelve la imagen del icono */
+  display: flex; /* Ayuda a asegurar que la imagen dentro se comporte bien */
+  align-items: center;
+  justify-content: center;
 }
 
 
 /* Colores específicos para el Profile Toggle */
 #profile-toggle.is-active { /* Cuando está en modo técnico */
-  background-color: var(--color-primary-light); /* O un color técnico */
+  background-color: var(--color-primary-artist-dark); /* O un color técnico */
 }
 body.mode-dark #profile-toggle.is-active {
-    background-color: var(--color-primary-dark);
+  background-color: var(--color-primary-artist-dark);
 }
 
 /* Aquí irían los estilos para los SVGs si los superpones/colocas dentro */
@@ -236,15 +295,20 @@ body.mode-dark #profile-toggle.is-active {
 .hero-section {
     padding-top: var(--spacing-xl);
     padding-bottom: var(--spacing-xl);
-    /* background-color: var(--color-card-bg-light); /* Opcional: un fondo sutil para la sección hero */
-    /* body.mode-dark & { background-color: var(--color-card-bg-dark); } */
+    min-height: 85vh; /* Darle una altura mínima para que ocupe buena parte de la pantalla */
+    display: flex;
+    align-items: center; /* Centrar verticalmente el .hero-content-columns */
 }
 
 .hero-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--spacing-lg); /* Espacio entre texto y visual */
     align-items: center; /* Alinear verticalmente */
+}
+
+.hero-text {
+  flex: 1 1 450px;
 }
 
 .hero-text h2 {
@@ -253,10 +317,7 @@ body.mode-dark #profile-toggle.is-active {
   font-weight: 700;
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
-  color: var(--color-primary-light); /* Destacar el título */
-}
-body.mode-dark .hero-text h2 {
-  color: var(--color-primary-dark);
+  color: var(--current-primary-color); /* Destacar el título */
 }
 
 .hero-text p {
@@ -269,11 +330,54 @@ body.mode-dark .hero-text p {
 }
 
 .hero-visual {
-  /* flex: 1; No necesario con grid */
+  flex: 1 1 700px; 
   max-width: 100%;
   border-radius: 8px;
   overflow: hidden; /* Para que el iframe respete el borde redondeado */
   box-shadow: var(--shadow-lg); /* Sombra más prominente para el visual principal */
+}
+
+.hero-cta-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Para que los botones se apilen si no caben */
+  gap: var(--spacing-sm);
+}
+
+.cta-button.primary-cta {
+  background-color: var(--current-primary-color);
+  color: white; /* Asumiendo que el primario siempre tiene buen contraste con blanco */
+  border: 2px solid var(--current-primary-color);
+  /* ... hereda otros estilos de .cta-button si los tienes globales ... */
+  padding: calc(var(--spacing-sm)*0.8) var(--spacing-md);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+.cta-button.primary-cta:hover {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  transform: translateY(-2px);
+}
+
+.cta-button.secondary-cta {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  border: 2px solid var(--current-primary-color);
+  /* ... hereda otros estilos de .cta-button ... */
+  padding: calc(var(--spacing-sm)*0.8) var(--spacing-md);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+.cta-button.secondary-cta:hover {
+  background-color: var(--current-primary-color);
+  color: white; /* O el color de fondo de la tarjeta en modo oscuro */
+  transform: translateY(-2px);
+}
+body.mode-dark .cta-button.secondary-cta:hover {
+    color: var(--color-card-bg-dark);
 }
 
 .vimeo-container {
@@ -360,10 +464,10 @@ body.mode-dark .process-item {
   font-size: clamp(1.25rem, 3vw, 1.6rem); /* Tamaño de fuente fluido */
   margin-bottom: var(--spacing-sm);
   font-weight: 600;
-  color: var(--color-primary-light);
+  color: var(--current-primary-color);
 }
 body.mode-dark .process-text h3 {
-  color: var(--color-primary-dark);
+  color: var(--current-primary-color);
 }
 
 .process-text p {
@@ -438,12 +542,12 @@ body.mode-dark .image-slider {
 }
 
 .slider-control-item.active {
-  background-color: var(--color-primary-light);
+  background-color: var(--current-primary-color);
   color: white;
   font-weight: 600;
 }
 body.mode-dark .slider-control-item.active {
-  background-color: var(--color-primary-dark);
+  background-color: var(--current-primary-color);
   color: var(--color-card-bg-dark); /* Texto oscuro para contraste */
 }
 
@@ -519,7 +623,7 @@ body.mode-technical .technical-snippet {
 .cta-link {
   display: inline-block;
   text-decoration: none;
-  color: var(--color-primary-light);
+  color: var(--current-primary-color);
   font-weight: 600;
   margin-top: var(--spacing-sm); /* Espacio arriba del enlace */
   transition: color var(--transition-speed) var(--transition-ease), transform 0.1s ease-out;
@@ -534,7 +638,7 @@ body.mode-technical .technical-snippet {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--color-primary-light);
+    background-color: var(--current-primary-color);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
@@ -543,10 +647,10 @@ body.mode-technical .technical-snippet {
     transform-origin: bottom left;
 }
 body.mode-dark .cta-link {
-  color: var(--color-primary-dark);
+  color: var(--current-primary-color);
 }
 body.mode-dark .cta-link::after {
-    background-color: var(--color-primary-dark);
+    background-color: var(--current-primary-color);
 }
 /* Quitar text-decoration por defecto si usamos el custom */
 .cta-link:hover {
@@ -572,10 +676,10 @@ body.mode-dark .connect-cta-section {
     font-weight: 700;
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     margin-bottom: var(--spacing-sm);
-    color: var(--color-primary-light);
+    color: var(--current-primary-color);
 }
 body.mode-dark .connect-cta-section h2 {
-    color: var(--color-primary-dark);
+    color: var(--current-primary-color);
 }
 
 .connect-subtitle {
@@ -626,17 +730,17 @@ body.mode-dark .contact-toggle-button-styled {
 
 .connect-button:hover,
 .contact-toggle-button-styled:hover {
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary-light);
+  background-color: var(--current-primary-color);
+  border-color: var(--current-primary-color);
   color: white; /* O var(--color-card-bg-light) para contraste */
   transform: translateY(-2px);
 }
-body.mode-dark .connect-button:hover,
+/*body.mode-dark .connect-button:hover,
 body.mode-dark .contact-toggle-button-styled:hover {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
   color: var(--color-background-dark); /* Texto oscuro para buen contraste */
-}
+/*}*/ 
 
 .connect-button-icon {
   width: 1em; /* Tamaño del icono relativo al texto del botón */
@@ -749,9 +853,8 @@ body.mode-dark .contact-form .form-group label {
 .contact-form .form-group input[type="email"]:focus,
 .contact-form .form-group textarea:focus {
     outline: none;
-    border-color: var(--color-primary-light);
-    /* Asegúrate de definir --color-primary-light-rgb en tu :root */
-    box-shadow: 0 0 0 3px rgba(var(--color-primary-light-rgb, 0, 123, 255), 0.25);
+    border-color: var(--current-primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--current-primary-color-rgb, 0, 123, 255), 0.25);
 }
 
 body.mode-dark .contact-form .form-group input[type="text"],
@@ -764,9 +867,8 @@ body.mode-dark .contact-form .form-group textarea {
 body.mode-dark .contact-form .form-group input[type="text"]:focus,
 body.mode-dark .contact-form .form-group input[type="email"]:focus,
 body.mode-dark .contact-form .form-group textarea:focus {
-    border-color: var(--color-primary-dark);
-    /* Asegúrate de definir --color-primary-dark-rgb en tu :root */
-    box-shadow: 0 0 0 3px rgba(var(--color-primary-dark-rgb, 77, 171, 247), 0.25);
+    border-color: var(--current-primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--current-primary-color-rgb, 77, 171, 247), 0.25);
 }
 
 .contact-form .form-group textarea {
@@ -786,14 +888,14 @@ body.mode-dark .contact-form .form-group textarea:focus {
 .thank-you-message {
     padding: var(--spacing-md);
     text-align: center;
-    border: 1px dashed var(--color-primary-light);
+    border: 1px dashed var(--current-primary-color);
     border-radius: 6px;
-    color: var(--color-primary-light);
+    color: var(--current-primary-color);
     margin-top: var(--spacing-md);
 }
 body.mode-dark .thank-you-message {
-    border-color: var(--color-primary-dark);
-    color: var(--color-primary-dark);
+    border-color: var(--current-primary-color);
+    color: var(--current-primary-color);
 }
 
 /*------------------------------------*\
@@ -822,6 +924,203 @@ body.mode-dark .site-footer {
 /*------------------------------------*\
   #DISEÑO-RESPONSIVO (MEDIA QUERIES)
 \*------------------------------------*/
+/* Pantallas Ultrawide (ej. relación 21:9 o 32:9, como 3440x1440 o 3840x1080) */
+/* Esta media query se enfoca en la RELACIÓN DE ASPECTO más que solo el ancho. */
+/* Para 3840x1080, el ancho es 3840px (cae en >1921px), pero la altura es solo 1080px. */
+/* Podemos usar una combinación de min-width y aspect-ratio. */
+
+@media (max-width: 3800px) and (min-aspect-ratio: 21/9) {
+  /* Para pantallas muy anchas y panorámicas */
+  .container {
+    /* Podrías querer un max-width ligeramente mayor aquí si el diseño lo permite,
+       o mantener el de 1600px-1800px para el texto central. */
+    max-width: 3500px; /* Experimenta */
+  }
+
+  .hero-section-video-bg {
+    height: 70vh; /* Podrías reducir la altura relativa en ultrawide
+                     para que no sea excesivamente alto si el video no se adapta bien.
+                     O mantenerla si el video es panorámico. */
+  }
+
+  /* Para el video de fondo en ultrawide, es crucial que el video
+     tenga una buena composición para este formato o que se recorte de forma aceptable.
+     Vimeo con background=1 intentará llenar, pero el resultado depende del video original. */
+  .vimeo-background-container iframe {
+    /* Podrías necesitar ajustes específicos si el video de Vimeo se ve mal
+       en relaciones de aspecto extremas, pero es difícil sin ver el video.
+       A veces, permitir que el video tenga "letterboxing" (barras negras)
+       es mejor que un recorte extremo. El parámetro `background=1` de Vimeo
+       intenta evitar el letterboxing y hacer un "cover". */
+  }
+
+  .hero-text-overlay {
+      max-width: 900px; /* Incluso con un container más ancho, el texto del hero
+                           puede mantenerse más centrado y no tan ancho. */
+  }
+
+  /* Si tienes layouts de grid con auto-fit, se adaptarán mostrando más columnas.
+     Asegúrate de que el contenido dentro de esas columnas (ej. process-text)
+     siga siendo legible y no se vuelva demasiado estrecho si aparecen muchas columnas. */
+  .process-item {
+     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Columnas aún más anchas */
+  }
+}
+
+/* Pantallas Muy Grandes (2K y más - ej: > 1921px) */
+/* Este breakpoint manejará desde 2K (2560px de ancho) en adelante.
+   Para 4K (3840px) y 8K (7680px), estos estilos deberían seguir siendo válidos,
+   principalmente gracias al max-width del container. */
+@media (max-width: 2560.02px) {
+  :root {
+    /* font-size: 18px; /* Podrías subirlo otro poco */
+  }
+  .container {
+    max-width: 1600px; /* Un límite superior razonable para el contenido textual.
+                           Más allá de esto, las líneas de texto serían demasiado largas.
+                           Podrías experimentar con 1700px o 1800px si tienes muchos elementos visuales
+                           que se benefician de un contenedor ligeramente más ancho. */
+  }
+
+  /* Para elementos que SÍ quieres que ocupen más ancho que el .container principal: */
+  .hero-section-video-bg, /* Si quieres que el video de fondo siempre sea full-width */
+  .full-bleed-section { /* Una clase genérica para otras secciones de ancho completo */
+    /* No necesitan max-width aquí si ya son width: 100% a nivel de bloque */
+  }
+
+  .hero-text h2 {
+    font-size: clamp(3rem, 4vw, 4.2rem); /* Ajusta el límite superior del clamp */
+  }
+  .hero-text p {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+  }
+  .process-highlights h2 {
+    font-size: clamp(2.25rem, 3vw, 3rem);
+  }
+  .process-text h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  /* Si tus .process-item usan repeat(auto-fit, minmax(320px, 1fr)),
+     automáticamente crearán más columnas si hay espacio.
+     Podrías querer aumentar el minmax(VALORpx, ...) para que las columnas no sean demasiado estrechas.
+     Ejemplo: */
+  .process-item {
+    /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Columnas un poco más anchas */
+  }
+}
+
+/* Pantallas Grandes (ej: > 1400px hasta ~2K) */
+@media (max-width: 1920.02px) {
+  :root {
+    /* font-size: 17px; /* Podrías subirlo un poco si quieres un escalado general */
+  }
+  .container {
+    max-width: 1600px; /* Un buen max-width para 1920px y un poco más allá */
+  }
+  /* ... (los otros estilos que ya definimos para >1400px, ajustando clamps si es necesario) ... */
+  .hero-text h2 {
+    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  }
+  .hero-text p {
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  }
+  .process-highlights h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+  }
+  .process-text h3 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  }
+}
+
+/* Pantallas FullHD (ej: > 1400px) */
+@media (max-width: 1400.02px) { /* Usar .02px para evitar solapamientos exactos si hay otra regla en 1400px */
+  :root {
+    font-size: 17px; /* Esto afectaría a todas las unidades rem */
+  }
+
+  .container {
+    max-width: 1360px; /* Aumentar el ancho máximo del contenedor principal */
+                      /* Ajusta este valor según cuánto quieras que se expanda */
+    /* Podrías incluso quitar el max-width si quieres que ocupe casi todo,
+       pero generalmente se mantiene un max-width para legibilidad. */
+  }
+
+  /* Ajustes para la Sección Hero */
+  .hero-content {
+    gap: var(--spacing-xl); /* Un poco más de espacio entre texto y visual */
+    /* Si quisieras que el texto y el video tuvieran proporciones diferentes en pantallas muy anchas: */
+    /* grid-template-columns: 2fr 3fr; /* Ejemplo: visual un poco más grande que el texto */
+  }
+
+  .hero-text h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem); /* Permitir que el título sea un poco más grande */
+  }
+  .hero-text p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Párrafo ligeramente más grande */
+  }
+  /* No es necesario tocar .vimeo-container si .hero-visual se expande bien con el grid */
+
+
+  /* Ajustes para la Sección "Destellos del Proceso" */
+  .process-highlights h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem); /* Título de sección un poco más grande */
+  }
+
+  .process-item {
+    gap: var(--spacing-xl); /* Más espacio dentro de cada item de proceso */
+    padding: var(--spacing-xl); /* Más padding interno */
+    /* Si quieres que los process-item puedan tener más de 2 columnas si hay espacio
+       (esto requeriría cambiar el grid-template-columns de .process-item)
+       Por ahora, con repeat(auto-fit, minmax(320px, 1fr)), ya se adaptarán,
+       pero si el container es más ancho, los '1fr' serán más grandes. */
+  }
+
+  .process-text h3 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem); /* Títulos de proyecto un poco más grandes */
+  }
+  .process-text p {
+    font-size: 1rem; /* Asegurar que el texto de párrafo no quede muy pequeño */
+  }
+
+  /* Slider de Imágenes - podrían ser un poco más grandes si su contenedor crece */
+  .image-slider {
+    /* El aspect-ratio ya define su forma, y width: 100% lo ajusta al .process-visual */
+    /* No se necesitan cambios aquí a menos que quieras cambiar la proporción */
+  }
+
+  /* Snippets Técnicos */
+  .technical-snippet pre {
+    max-height: 350px; /* Un poco más de altura para el código si hay espacio */
+  }
+
+  /* Sección de Conexión y CTA */
+  .connect-cta-section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+  .connect-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+  }
+  .connect-buttons-grid {
+    gap: var(--spacing-lg); /* Un poco más de espacio entre botones */
+  }
+  .connect-button,
+  .contact-toggle-button-styled {
+    padding: var(--spacing-sm) var(--spacing-lg); /* Botones ligeramente más grandes */
+    font-size: 1rem;
+    min-width: 180px;
+  }
+
+  /* Formulario de Contacto Desplegable */
+  .contact-form-toggle-wrapper {
+    max-width: 700px; /* Permitir que el formulario sea un poco más ancho */
+  }
+  .contact-form.actual-form h4 {
+    font-size: 1.35rem;
+  }
+
+  /* Puedes añadir más ajustes específicos si ves que algo no escala bien */
+}
 
 /* Tablets y pantallas medianas (ej: < 992px) */
 @media (max-width: 991.98px) {
