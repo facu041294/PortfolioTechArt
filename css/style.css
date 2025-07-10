@@ -322,6 +322,9 @@ body.mode-dark #theme-manager-button {
 #process-highlights {
   scroll-margin-top: 100px;
 }
+#habilidades-tecnicas {
+  scroll-margin-top: 100px;
+}
 
 
 
@@ -751,14 +754,14 @@ body.mode-dark .timeline-item p {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .timeline-item.future input[type="checkbox"] {
   accent-color: var(--current-primary-color);
   width: 1rem;
   height: 1rem;
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .timeline-heading {
