@@ -694,7 +694,7 @@ body.mode-dark .cta-link {
 body.mode-dark .cta-link::after {
     background-color: var(--current-primary-color);
 }
-/* Quitar text-decoration por defecto si usamos el custom */
+
 .cta-link:hover {
   text-decoration: none;
 }
@@ -878,9 +878,13 @@ body.mode-dark .contact-toggle-button-styled {
 }
 
 
-.connect-button-icon {
-  width: 1em; /* Tamaño del icono relativo al texto del botón */
-  height: 1em;
+.connect-button-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  fill: currentColor;
 }
 
 /*------------------------------------*\
@@ -1093,6 +1097,10 @@ body.mode-dark .site-footer {
     flex-direction: column;
     text-align: center;
   }
+  .hero-logo-dynamic {
+  text-align: center;
+  width: 100%;
+}
   .hero-text-content {
     margin-bottom: var(--spacing-lg);
   }

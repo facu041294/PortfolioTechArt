@@ -7,7 +7,7 @@ export async function loadSocial() {
     const container = document.querySelector('.connect-buttons-grid');
     if (!container) throw new Error('Contenedor de botones sociales no encontrado.');
 
-    socials.forEach(({ platform, url, icon }) => {
+    socials.forEach(({ platform, url, svg }) => {
       const link = document.createElement('a');
       link.href = url;
       link.target = '_blank';
@@ -16,7 +16,9 @@ export async function loadSocial() {
       link.setAttribute('aria-label', `Visita mi perfil de ${platform}`);
 
       link.innerHTML = `
-        <img src="assets/img/${icon}" class="connect-button-icon" alt="${platform}" aria-hidden="true">
+        <span class="connect-button-icon" aria-hidden="true">
+          ${svg}
+        </span>
         ${platform}
       `;
 
