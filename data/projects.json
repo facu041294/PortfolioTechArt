@@ -1,0 +1,32 @@
+[
+  {
+    "id": "render-automotive",
+    "title": "Render Automotive, Entorno y manejo de Sequencer",
+    "desc": "Se realizó montaje de entorno, con manejo dinamico de cámaras seteadas para cíne, configuración de materiales y manejo de Particulas en Embergen.",
+    "imageSlider": ["car-render.jpg", "car-wire.jpg", "car-light.jpg"],
+    "imageLabels": ["Render", "Wire", "Light"],
+    "snippetImg": "car-particleEmbergen.png",
+    "link": "https://www.artstation.com/..."
+  },
+  {
+    "id": "shader-terreno",
+    "title": "Shader Terreno de Río",
+    "desc": "Material en Unreal Engine con capas adaptable para Landscape.",
+    "imageSlider": ["nieve-render.jpg", "nieve-graph.jpg", "nieve-mask.jpg"],
+    "imageLabels": ["Render", "Graph", "Mask"],
+    "snippetImg": "nieve-blueprint.png",
+    "link": "https://www.artstation.com/..."
+  },
+  {
+    "id": "widget-folder-structure-tool",
+    "title": "Herramienta de Estructurado de Carpetas en Unreal Engine",
+    "desc": "Automatiza la estructura de carpetas en el Content Browser en Unreal Engine.",
+    "imageSlider": ["tool-result.jpg", "tool-ui.jpg", "tool-heatmap.jpg"],
+    "imageLabels": ["Resultado", "UI", "Reglas"],
+    "snippetCode": {
+      "lang": "blueprint",
+      "code": "import unreal\n\ndef example():\n    print('Hello Unreal')"
+    },
+    "link": "https://github.com/..."
+  }
+]

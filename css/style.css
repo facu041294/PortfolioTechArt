@@ -10,6 +10,10 @@
   margin: 0;
   padding: 0;
 }
+html {
+  scroll-behavior: smooth; /* Scroll suave para anclas */
+  font-size: clamp(15px, 1.5vw, 17px);
+}
 
 /*------------------------------------*\
   #VARIABLES-CSS (CUSTOM PROPERTIES)
@@ -17,61 +21,59 @@
 :root {
   /* Fuentes */
   --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-secondary: 'Roboto Slab', serif; /* Para títulos, si se desea contraste visual */
   --font-code: 'Fira Code', 'Courier New', monospace; /* Para bloques de código */
 
-  /* Colores Modo Claro (Default) */
+  /* Colores */
   --color-background-light: #f8f9fa;
   --color-text-light: #212529;
-  --color-primary-light: #007bff;
+  --color-primary-tech-light: #007bff;
   --color-primary-artist-light: #fd7e14;
-  --color-primary-light-rgb: 0, 123, 255; /* RGB para #007bff */
+  --color-primary-tech-light-rgb: 0, 123, 255;
   --color-primary-artist-light-rgb: 253, 126, 20;
   --color-secondary-light: #6c757d;
   --color-border-light: #dee2e6;
   --color-card-bg-light: #ffffff;
   --color-code-bg-light: #e9ecef;
 
-  /* Colores Modo Oscuro */
-  --color-background-dark: #121212; /* Un negro más profundo para mejor contraste */
-  --color-text-dark: #e0e0e0;       /* Blanco ligeramente menos brillante */
-  --color-primary-dark: #4dabf7;
+  --color-background-dark: #121212;
+  --color-text-dark: #e0e0e0;
+  --color-primary-tech-dark: #4dabf7;
   --color-primary-artist-dark: #ff9933;
-  --color-primary-dark-rgb: 77, 171, 247; /* RGB para #4dabf7 */
+  --color-primary-tech-dark-rgb: 77, 171, 247;
   --color-primary-artist-dark-rgb: 255, 153, 51;
   --color-secondary-dark: #adb5bd;
-  --color-border-dark: #3a3a3a;     /* Borde un poco más visible en oscuro */
-  --color-card-bg-dark: #1e1e1e;    /* Fondo de tarjeta sutilmente diferente del bg */
+  --color-border-dark: #3a3a3a;
+  --color-card-bg-dark: #1e1e1e;
   --color-code-bg-dark: #2a2a2a;
-  --icon-color: #515151;
 
-  /* Sombras */
+  /* Variable contextual para color primario (default a técnico claro) */
+  --current-primary-color: var(--color-primary-tech-light);
+  --current-primary-color-rgb: var(--color-primary-tech-light-rgb);
+
+  /* Sombras y Espaciado */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 5px 10px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 20px rgba(0,0,0, 0.07); /* Para elementos más destacados */
-
-
-  /* Espaciado (Consistente con el proyecto anterior) */
-  --spacing-xs: 0.5rem;  /* 8px */
-  --spacing-sm: 1rem;    /* 16px */
-  --spacing-md: 1.5rem;  /* 24px */
-  --spacing-lg: 2.5rem;  /* 40px */
-  --spacing-xl: 4rem;    /* 64px */
+  --shadow-lg: 0 10px 20px rgba(0,0,0, 0.07);
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
 
   /* Transiciones */
-  --transition-speed: 0.25s; /* Ligeramente más suave */
+  --transition-speed: 0.25s;
   --transition-ease: ease-in-out;
-
-  /* Variable contextual para color primario */
-  --current-primary-color: var(--color-primary-light);
-  --current-primary-color-rgb: var(--color-primary-light-rgb);
 }
 
 
 /*------------------------------------*\
-  #ESTILOS-BASE-DEL-BODY
+  #ESTILOS-BASE-Y-TEMAS
 \*------------------------------------*/
 body {
+  min-height: 100dvh;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-primary);
   line-height: 1.7; /* Un poco más de espaciado para legibilidad */
   background-color: var(--color-background-light);
@@ -79,46 +81,79 @@ body {
   transition: background-color var(--transition-speed) var(--transition-ease),
               color var(--transition-speed) var(--transition-ease);
   font-size: 16px; /* Base para rem, aunque 100% es también válido */
+  overflow-x: hidden;
+}
+main {
+  flex: 1;
 }
 
-/* Estilos para el modo oscuro aplicados al body */
-body.mode-dark {
+/* Aplicación de colores primarios contextuales */
+body.mode-light.mode-technical {
+  --current-primary-color: var(--color-primary-tech-light);
+  --current-primary-color-rgb: var(--color-primary-tech-light-rgb);
+}
+body.mode-dark.mode-technical {
   background-color: var(--color-background-dark);
   color: var(--color-text-dark);
-  --current-primary-color: var(--color-primary-dark); /* Cambia al azul oscuro */
-  --current-primary-color-rgb: var(--color-primary-dark-rgb);
+  --current-primary-color: var(--color-primary-tech-dark);
+  --current-primary-color-rgb: var(--color-primary-tech-dark-rgb);
 }
-
-/* Cuando el body está en modo técnico (y claro por defecto) - este es el estado base */
-body.mode-technical {
-  --current-primary-color: var(--color-primary-light);
-  --current-primary-color-rgb: var(--color-primary-light-rgb);
-}
-
-/* MODO ARTISTA + MODO CLARO */
-body.mode-artist.mode-light { /* O simplemente body.mode-artist si el default es light */
+body.mode-light.mode-artist {
   --current-primary-color: var(--color-primary-artist-light);
   --current-primary-color-rgb: var(--color-primary-artist-light-rgb);
 }
-
-/* MODO ARTISTA + MODO OSCURO */
-body.mode-artist.mode-dark {
+body.mode-dark.mode-artist {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
   --current-primary-color: var(--color-primary-artist-dark);
   --current-primary-color-rgb: var(--color-primary-artist-dark-rgb);
 }
 
-/* MODO TÉCNICO + MODO OSCURO (ya cubierto por body.mode-dark) */
-
 /*------------------------------------*\
-  #CONTENEDOR-PRINCIPAL-LAYOUT
+  #COMPONENTES-REUTILIZABLES
 \*------------------------------------*/
 .container {
   width: 90%;
-  max-width: 1280px; /* Ajustado para un portfolio con más contenido visual */
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--spacing-md); /* Más padding lateral para pantallas grandes */
   padding-right: var(--spacing-md);
+}
+.cta-button {
+  padding: calc(var(--spacing-sm) * 0.9) var(--spacing-md);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed) var(--transition-ease);
+  border: 2px solid transparent;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+.primary-cta {
+  background-color: var(--current-primary-color);
+  color: white;
+  border-color: var(--current-primary-color);
+}
+.primary-cta:hover {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  transform: translateY(-2px);
+}
+.secondary-cta {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  border-color: var(--current-primary-color);
+}
+.secondary-cta:hover {
+  background-color: var(--current-primary-color);
+  color: var(--color-card-bg-light);
+}
+body.mode-dark .secondary-cta:hover {
+  color: var(--color-card-bg-dark);
+}
+.section-block {
+  padding-block: var(--spacing-xl);
 }
 
 /*------------------------------------*\
@@ -153,14 +188,15 @@ body.mode-dark .site-header {
 }
 
 .header-logo a {
-  font-size: 1.6rem; /* Ligeramente más grande */
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 700;
   text-decoration: none;
   color: var(--current-primary-color);
-  display: inline-block;
-  transition: opacity var(--transition-speed) ease-in-out, /* Para el fade del texto */
+  min-width: 220px;
+  text-align: left;
+  transition: opacity 0.4s ease-in-out, /* Para el fade del texto */
               color var(--transition-speed) var(--transition-ease); /* Para el cambio de color */
-  display: inline-block; /* Para transiciones de opacidad */
+  padding-inline: 0;
 }
 .header-logo a.text-fading {
     opacity: 0;
@@ -174,241 +210,225 @@ body.mode-dark .site-header {
 /*------------------------------------*\
   #TOGGLES-ESTILO-SWITCH
 \*------------------------------------*/
-.switch-toggle {
-  background-color: var(--color-primary-dark); /* Color base del track desactivado */
-  border: none;
-  border-radius: 30px; /* Hace el track redondeado */
-  cursor: pointer;
-  display: inline-block; /* O flex si necesitas alinear SVGs internos */
-  height: 30px;        /* Altura del track */
-  position: relative;
-  width: 60px;         /* Ancho del track */
-  transition: background-color var(--transition-speed) var(--transition-ease);
-  -webkit-tap-highlight-color: transparent; /* Quita highlight azul en móviles */
-  padding: 0; /* Resetear padding */
-  overflow: hidden; /* Para que el círculo no se salga si es un poco más grande */
-}
-
-.switch-toggle::after { /* Este es el círculo (thumb) que se mueve */
-  content: "";
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  height: 26px;        /* Ligeramente más pequeño que el track */
-  width: 26px;         /* Ligeramente más pequeño que el track */
-  position: absolute;
-  top: 2px;            /* Centrado verticalmente (30 - 26) / 2 */
-  left: 2px;           /* Posición inicial (desactivado) */
-  transition: transform var(--transition-speed) var(--transition-ease),
-              background-color var(--transition-speed) var(--transition-ease);
-}
-
-/* Estilos base para el botón de gestión de tema (sol/luna/monitor) */
-#theme-manager-button {
+.mode-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  border: 0,5px solid var(--color-border-light);
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
-  background-color: var(--color-card-bg-light);
+  background-color: transparent;
   color: var(--color-secondary-light);
   cursor: pointer;
   position: relative;
-  transition: transform var(--transition-speed) var(--transition-ease),
-              background-color var(--transition-speed) var(--transition-ease),
-              border-color var(--transition-speed) var(--transition-ease),
-              box-shadow var(--transition-speed) var(--transition-ease);
+  border: 1px solid transparent;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+body.mode-dark .mode-toggle {
+  color: var(--color-secondary-dark);
+}
+.mode-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.mode-toggle:focus-visible {
+  outline: 2px solid var(--current-primary-color);
+  outline-offset: 2px;
 }
 
-.theme-icon-svg {
-    width: 18px; /* O el tamaño que uses para los iconos de los toggles */
-    height: 18px;
-    display: block;
-}
 
+.switch-toggle {
+  width: 80px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: var(--color-secondary-light);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+.switch-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 34px;
+  height: 34px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition-speed) var(--transition-ease);
+  z-index: 2; 
+}
+.switch-toggle.is-active {
+  background-color: var(--current-primary-color);
+}
 .switch-toggle.is-active::after {
-  transform: translateX(30px); /* Mueve el círculo a la derecha (60 - 26 - 2 - 2) */
+  transform: translateX(40px);
+}
+body.mode-artist .switch-toggle {
+  background-color: var(--color-primary-tech-light);
+}
+body.mode-artist.mode-dark .switch-toggle {
+  background-color: var(--color-primary-tech-dark);
 }
 
-/* Colores específicos para el Theme Toggle */
-#theme-manager-button.is-active { /* Cuando está en modo oscuro */
-  background-color: var(--current-primary-color); /* O un color específico para "noche" */
+body.mode-technical .switch-toggle {
+  background-color: var(--color-primary-artist-light);
 }
-
-body.mode-light #theme-manager-button { /* Estilo del track en modo claro (sol) */
-    background-color: hsl(55, 100%, 50%); /* Un color tipo sol */
-}
-body.mode-dark #theme-manager-button { /* Estilo del track en modo oscuro (luna) */
-    background-color: #3070b4; /* Un color tipo noche */
-}
-
-#theme-manager-button:hover {
-  transform: translateY(-3px); /* Movimiento hacia arriba */
-  box-shadow: var(--shadow-sm); /* Añadir una sombra sutil en hover */
-  background-color: #b1b1b1;
-}
-
-body.mode-dark #theme-manager-button:hover {
-    background-color: #b1b1b1;
-    border-color: var(--color-secondary-dark); 
-}
-
-#theme-manager-button .icon-theme-current { /* El span que envuelve la imagen del icono */
-  display: flex; /* Ayuda a asegurar que la imagen dentro se comporte bien */
-  align-items: center;
-  justify-content: center;
-}
-
-
-/* Colores específicos para el Profile Toggle */
-#profile-toggle.is-active { /* Cuando está en modo técnico */
-  background-color: var(--color-primary-artist-dark); /* O un color técnico */
-}
-body.mode-dark #profile-toggle.is-active {
+body.mode-technical.mode-dark .switch-toggle {
   background-color: var(--color-primary-artist-dark);
 }
-
-/* Aquí irían los estilos para los SVGs si los superpones/colocas dentro */
-
-.switch-toggle .icon-svg-sol,
-.switch-toggle .icon-svg-luna {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px; height: 18px;
-    transition: opacity var(--transition-speed);
+/* ICONOS individuales */
+.switch-toggle .icon-artist,
+.switch-toggle .icon-technical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  z-index: 3; /* Sobre el círculo blanco */
+  transition: opacity var(--transition-speed) var(--transition-ease);
+  pointer-events: none;
 }
-.switch-toggle .icon-svg-sol { left: 5px; }
-.switch-toggle .icon-svg-luna { right: 5px; opacity: 0.5; }
 
-.switch-toggle.is-active .icon-svg-sol { opacity: 0.5; }
-.switch-toggle.is-active .icon-svg-luna { opacity: 1; }
+.switch-toggle .icon-artist {
+  left: 4px;
+  opacity: 1;
+}
+.switch-toggle .icon-technical {
+  right: 4px;
+  opacity: 0.4;
+}
+
+.switch-toggle.is-active .icon-artist {
+  opacity: 0.4;
+}
+.switch-toggle.is-active .icon-technical {
+  opacity: 1;
+}
+
+#theme-manager-button {
+  border: 1px solid var(--color-border-light);
+  background-color: var(--color-card-bg-light);
+}
+body.mode-dark #theme-manager-button {
+  border-color: var(--color-border-dark);
+  background-color: var(--color-card-bg-dark);
+}
+#theme-manager-button .theme-icon-svg {
+  width: 20px; height: 20px;
+}
+#process-highlights {
+  scroll-margin-top: 100px;
+}
 
 
 
 /*------------------------------------*\
   #SECCION-HERO
 \*------------------------------------*/
-.hero-section {
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-    min-height: 85vh; /* Darle una altura mínima para que ocupe buena parte de la pantalla */
-    display: flex;
-    align-items: center; /* Centrar verticalmente el .hero-content-columns */
+.hero-section-fullscreen {
+  min-height: calc(100vh - 65px); /* Altura de la pantalla menos la altura aprox del header */
+  display: flex ;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-xl);
+  justify-content: space-between;
+  padding-block: var(--spacing-lg);
 }
-
-.hero-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-lg); /* Espacio entre texto y visual */
-    align-items: center; /* Alinear verticalmente */
-}
-
-.hero-text {
-  flex: 1 1 450px;
-}
-
-.hero-text h2 {
-  font-family: var(--font-secondary); /* Usar fuente secundaria para el título principal */
-  font-size: clamp(2rem, 5vw, 3rem); /* Tamaño de fuente fluido */
+.hero-logo-dynamic a {
+  font-family: var(--font-primary);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 700;
+  color: var(--current-primary-color);
+  text-decoration: none;
+  transition: opacity 0.4s ease-in-out;
+}
+.hero-logo-dynamic a.text-fading {
+  opacity: 0;
+}
+body.mode-dark .hero-logo-dynamic a {
+  color: var(--current-primary-color); /* Se mantiene el mismo para consistencia */
+}
+.hero-content-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+.hero-text-content {
+  flex: 1 1 35%;
+  min-width: 300px;
+}
+.hero-text-content h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--current-primary-color);
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
-  color: var(--current-primary-color); /* Destacar el título */
 }
-
-.hero-text p {
-  font-size: clamp(1rem, 2.5vw, 1.125rem); /* Tamaño de fuente fluido */
+body.mode-dark .hero-text-content h1 {
+  color: var(--color-text-dark);
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
   color: var(--color-secondary-light);
-  max-width: 60ch; /* Mejorar legibilidad del párrafo */
+  margin-bottom: var(--spacing-lg);
+  max-width: 55ch;
 }
-body.mode-dark .hero-text p {
+body.mode-dark .hero-subtitle {
   color: var(--color-secondary-dark);
 }
-
-.hero-visual {
-  flex: 1 1 700px; 
-  max-width: 100%;
-  border-radius: 8px;
-  overflow: hidden; /* Para que el iframe respete el borde redondeado */
-  box-shadow: var(--shadow-lg); /* Sombra más prominente para el visual principal */
-}
-
 .hero-cta-buttons {
   display: flex;
-  flex-wrap: wrap; /* Para que los botones se apilen si no caben */
+  flex-wrap: wrap;
   gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
-
-.cta-button.primary-cta {
-  background-color: var(--current-primary-color);
-  color: white; /* Asumiendo que el primario siempre tiene buen contraste con blanco */
-  border: 2px solid var(--current-primary-color);
-  /* ... hereda otros estilos de .cta-button si los tienes globales ... */
-  padding: calc(var(--spacing-sm)*0.8) var(--spacing-md);
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all var(--transition-speed) var(--transition-ease);
+.hero-visual-content {
+  flex: 1 1 60%;
+  min-width: 320px;
 }
-.cta-button.primary-cta:hover {
-  background-color: transparent;
-  color: var(--current-primary-color);
-  transform: translateY(-2px);
+.vimeo-embed-responsive {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  background-color: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: block;
 }
-
-.cta-button.secondary-cta {
-  background-color: transparent;
-  color: var(--current-primary-color);
-  border: 2px solid var(--current-primary-color);
-  /* ... hereda otros estilos de .cta-button ... */
-  padding: calc(var(--spacing-sm)*0.8) var(--spacing-md);
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all var(--transition-speed) var(--transition-ease);
-}
-.cta-button.secondary-cta:hover {
-  background-color: var(--current-primary-color);
-  color: white; /* O el color de fondo de la tarjeta en modo oscuro */
-  transform: translateY(-2px);
-}
-body.mode-dark .cta-button.secondary-cta:hover {
-    color: var(--color-card-bg-dark);
-}
-
-.vimeo-container {
-    position: relative;
-    padding-bottom: 56.25%; /* Relación 16:9 para el video */
-    height: 0;
-    background-color: #000; /* Fondo negro mientras carga el video */
-}
-
-.vimeo-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0; /* Quitar borde del iframe */
+.vimeo-embed-responsive iframe {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /*------------------------------------*\
-  #SECCION-DESTACADOS-DEL-PROCESO
+  #SECCION-DE-CONTENIDO (Proyectos, Habilidades, Contacto)
 \*------------------------------------*/
-.process-highlights {
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
-}
-
-.process-highlights h2 {
-    font-family: var(--font-secondary);
-    font-size: clamp(1.75rem, 4vw, 2.25rem); /* Tamaño de fuente fluido */
+.section-title { /* Clase genérica para títulos de sección */
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 800;
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    color: var(--current-primary-color);
+}
+.section-subtitle { /* Clase genérica para subtítulos */
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    color: var(--color-secondary-light);
+    max-width: 65ch;
+    margin: 0 auto var(--spacing-lg) auto;
+    text-align: center;
+}
+body.mode-dark .section-subtitle {
+    color: var(--color-secondary-dark);
 }
 
 .process-item {
@@ -438,6 +458,10 @@ body.mode-dark .process-item {
 }
 .process-item.layout-reversed .process-text {
   order: 0; /* Texto a la izquierda */
+}
+.process-text,
+.process-visual {
+  align-self: stretch;
 }
 /* Asegurar que en pantallas pequeñas vuelvan al orden natural si se apilan */
 @media (max-width: 767.98px) {
@@ -494,6 +518,13 @@ body.mode-dark .image-slider {
 }
 
 .slider-image {
+  background: repeating-linear-gradient( /* Para evitar flickers */
+    -45deg,
+    #e9ecef,
+    #e9ecef 10px,
+    #f8f9fa 10px,
+    #f8f9fa 20px
+  );
   position: absolute;
   top: 0;
   left: 0;
@@ -612,11 +643,19 @@ body.mode-dark .technical-snippet img {
 }
 
 /* Lógica para mostrar/ocultar snippet según modo Artist/Technical */
+body .technical-snippet {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 body.mode-artist .technical-snippet {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 body.mode-technical .technical-snippet {
-  display: block; /* o 'grid'/'flex' si se necesita layout interno */
+  opacity: 1;
+  visibility: visible;
+  height: auto;
 }
 
 /* Enlace "Ver más" dentro del Process Item */
@@ -642,6 +681,9 @@ body.mode-technical .technical-snippet {
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
+.cta-link:active {
+  transform: scale(0.96);
+}
 .cta-link:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
@@ -657,12 +699,106 @@ body.mode-dark .cta-link::after {
   text-decoration: none;
 }
 
+.timeline {
+  border-left: 3px solid var(--current-primary-color);
+  padding-left: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  left: -1.1rem;
+  width: 12px;
+  height: 12px;
+  background-color: var(--current-primary-color);
+  border-radius: 50%;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: var(--color-secondary-light);
+  font-weight: 600;
+}
+body.mode-dark .timeline-date {
+  color: var(--color-secondary-dark);
+}
+
+.timeline-item h3 {
+  font-size: 1.2rem;
+  color: var(--current-primary-color);
+  margin: 0.2rem 0;
+}
+
+.timeline-item p {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+body.mode-dark .timeline-item p {
+  color: var(--color-text-dark);
+}
+
+.timeline-item.future label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.timeline-item.future input[type="checkbox"] {
+  accent-color: var(--current-primary-color);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.timeline-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--current-primary-color);
+  margin: var(--spacing-md) 0 var(--spacing-sm);
+  text-align: center;
+}
+
+
+.timeline-item.future .timeline-future-label {
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Modo claro */
+body.mode-light .timeline-item.future input[type="checkbox"]:checked + .timeline-future-label {
+  color: #111;
+}
+body.mode-light .timeline-item.future input[type="checkbox"]:not(:checked) + .timeline-future-label {
+  color: #999;
+}
+
+/* Modo oscuro */
+body.mode-dark .timeline-item.future input[type="checkbox"]:checked + .timeline-future-label {
+  color: #fff;
+}
+body.mode-dark .timeline-item.future input[type="checkbox"]:not(:checked) + .timeline-future-label {
+  color: #666;
+}
+
+
+
 /*------------------------------------*\
   #SECCION-CONEXION-Y-CTA (CONNECT & CTA)
 \*------------------------------------*/
 .connect-cta-section {
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
   text-align: center;
   background-color: var(--color-card-bg-light);
   border-radius: 0;
@@ -735,12 +871,12 @@ body.mode-dark .contact-toggle-button-styled {
   color: white; /* O var(--color-card-bg-light) para contraste */
   transform: translateY(-2px);
 }
-/*body.mode-dark .connect-button:hover,
-body.mode-dark .contact-toggle-button-styled:hover {
-  background-color: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-  color: var(--color-background-dark); /* Texto oscuro para buen contraste */
-/*}*/ 
+.connect-button:focus-visible,
+.contact-toggle-button-styled:focus-visible {
+  outline: 2px solid var(--current-primary-color);
+  outline-offset: 2px;
+}
+
 
 .connect-button-icon {
   width: 1em; /* Tamaño del icono relativo al texto del botón */
@@ -762,12 +898,6 @@ body.mode-dark .contact-toggle-button-styled:hover {
 /* El checkbox real estará oculto, lo controlamos con el label */
 .contact-toggle-checkbox {
   display: none; /* Oculta el checkbox real */
-}
-
-/* El label que parece un botón */
-.contact-toggle-button-styled {
-  /* Ya tiene estilos de .connect-button si esa clase también se aplica en el HTML */
-  /* Aquí puedes añadir estilos específicos adicionales si es necesario para el label/botón */
 }
 
 /* El contenedor del formulario que se despliega */
@@ -879,7 +1009,7 @@ body.mode-dark .contact-form .form-group textarea:focus {
 .contact-form .submit-form-button {
   width: 100%;
   margin-top: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
+  /* padding: var(--spacing-sm) var(--spacing-md); */
   text-transform: none;
   font-size: 1rem;
   /* Debería heredar estilos de .cta-button si también tiene esa clase en el HTML */
@@ -924,278 +1054,118 @@ body.mode-dark .site-footer {
 /*------------------------------------*\
   #DISEÑO-RESPONSIVO (MEDIA QUERIES)
 \*------------------------------------*/
-/* Pantallas Ultrawide (ej. relación 21:9 o 32:9, como 3440x1440 o 3840x1080) */
-/* Esta media query se enfoca en la RELACIÓN DE ASPECTO más que solo el ancho. */
-/* Para 3840x1080, el ancho es 3840px (cae en >1921px), pero la altura es solo 1080px. */
-/* Podemos usar una combinación de min-width y aspect-ratio. */
+/* Primero los ajustes para pantallas pequeñas (Mobile First Approach) */
 
-@media (max-width: 3800px) and (min-aspect-ratio: 21/9) {
-  /* Para pantallas muy anchas y panorámicas */
-  .container {
-    /* Podrías querer un max-width ligeramente mayor aquí si el diseño lo permite,
-       o mantener el de 1600px-1800px para el texto central. */
-    max-width: 3500px; /* Experimenta */
-  }
-
-  .hero-section-video-bg {
-    height: 70vh; /* Podrías reducir la altura relativa en ultrawide
-                     para que no sea excesivamente alto si el video no se adapta bien.
-                     O mantenerla si el video es panorámico. */
-  }
-
-  /* Para el video de fondo en ultrawide, es crucial que el video
-     tenga una buena composición para este formato o que se recorte de forma aceptable.
-     Vimeo con background=1 intentará llenar, pero el resultado depende del video original. */
-  .vimeo-background-container iframe {
-    /* Podrías necesitar ajustes específicos si el video de Vimeo se ve mal
-       en relaciones de aspecto extremas, pero es difícil sin ver el video.
-       A veces, permitir que el video tenga "letterboxing" (barras negras)
-       es mejor que un recorte extremo. El parámetro `background=1` de Vimeo
-       intenta evitar el letterboxing y hacer un "cover". */
-  }
-
-  .hero-text-overlay {
-      max-width: 900px; /* Incluso con un container más ancho, el texto del hero
-                           puede mantenerse más centrado y no tan ancho. */
-  }
-
-  /* Si tienes layouts de grid con auto-fit, se adaptarán mostrando más columnas.
-     Asegúrate de que el contenido dentro de esas columnas (ej. process-text)
-     siga siendo legible y no se vuelva demasiado estrecho si aparecen muchas columnas. */
-  .process-item {
-     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Columnas aún más anchas */
-  }
-}
-
-/* Pantallas Muy Grandes (2K y más - ej: > 1921px) */
-/* Este breakpoint manejará desde 2K (2560px de ancho) en adelante.
-   Para 4K (3840px) y 8K (7680px), estos estilos deberían seguir siendo válidos,
-   principalmente gracias al max-width del container. */
-@media (max-width: 2560.02px) {
-  :root {
-    /* font-size: 18px; /* Podrías subirlo otro poco */
-  }
-  .container {
-    max-width: 1600px; /* Un límite superior razonable para el contenido textual.
-                           Más allá de esto, las líneas de texto serían demasiado largas.
-                           Podrías experimentar con 1700px o 1800px si tienes muchos elementos visuales
-                           que se benefician de un contenedor ligeramente más ancho. */
-  }
-
-  /* Para elementos que SÍ quieres que ocupen más ancho que el .container principal: */
-  .hero-section-video-bg, /* Si quieres que el video de fondo siempre sea full-width */
-  .full-bleed-section { /* Una clase genérica para otras secciones de ancho completo */
-    /* No necesitan max-width aquí si ya son width: 100% a nivel de bloque */
-  }
-
-  .hero-text h2 {
-    font-size: clamp(3rem, 4vw, 4.2rem); /* Ajusta el límite superior del clamp */
-  }
-  .hero-text p {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-  }
-  .process-highlights h2 {
-    font-size: clamp(2.25rem, 3vw, 3rem);
-  }
-  .process-text h3 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-  }
-
-  /* Si tus .process-item usan repeat(auto-fit, minmax(320px, 1fr)),
-     automáticamente crearán más columnas si hay espacio.
-     Podrías querer aumentar el minmax(VALORpx, ...) para que las columnas no sean demasiado estrechas.
-     Ejemplo: */
-  .process-item {
-    /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Columnas un poco más anchas */
-  }
-}
-
-/* Pantallas Grandes (ej: > 1400px hasta ~2K) */
-@media (max-width: 1920.02px) {
-  :root {
-    /* font-size: 17px; /* Podrías subirlo un poco si quieres un escalado general */
-  }
-  .container {
-    max-width: 1600px; /* Un buen max-width para 1920px y un poco más allá */
-  }
-  /* ... (los otros estilos que ya definimos para >1400px, ajustando clamps si es necesario) ... */
-  .hero-text h2 {
-    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
-  }
-  .hero-text p {
-    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-  }
-  .process-highlights h2 {
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-  }
-  .process-text h3 {
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-  }
-}
-
-/* Pantallas FullHD (ej: > 1400px) */
-@media (max-width: 1400.02px) { /* Usar .02px para evitar solapamientos exactos si hay otra regla en 1400px */
-  :root {
-    font-size: 17px; /* Esto afectaría a todas las unidades rem */
-  }
-
-  .container {
-    max-width: 1360px; /* Aumentar el ancho máximo del contenedor principal */
-                      /* Ajusta este valor según cuánto quieras que se expanda */
-    /* Podrías incluso quitar el max-width si quieres que ocupe casi todo,
-       pero generalmente se mantiene un max-width para legibilidad. */
-  }
-
-  /* Ajustes para la Sección Hero */
-  .hero-content {
-    gap: var(--spacing-xl); /* Un poco más de espacio entre texto y visual */
-    /* Si quisieras que el texto y el video tuvieran proporciones diferentes en pantallas muy anchas: */
-    /* grid-template-columns: 2fr 3fr; /* Ejemplo: visual un poco más grande que el texto */
-  }
-
-  .hero-text h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem); /* Permitir que el título sea un poco más grande */
-  }
-  .hero-text p {
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Párrafo ligeramente más grande */
-  }
-  /* No es necesario tocar .vimeo-container si .hero-visual se expande bien con el grid */
-
-
-  /* Ajustes para la Sección "Destellos del Proceso" */
-  .process-highlights h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem); /* Título de sección un poco más grande */
-  }
-
-  .process-item {
-    gap: var(--spacing-xl); /* Más espacio dentro de cada item de proceso */
-    padding: var(--spacing-xl); /* Más padding interno */
-    /* Si quieres que los process-item puedan tener más de 2 columnas si hay espacio
-       (esto requeriría cambiar el grid-template-columns de .process-item)
-       Por ahora, con repeat(auto-fit, minmax(320px, 1fr)), ya se adaptarán,
-       pero si el container es más ancho, los '1fr' serán más grandes. */
-  }
-
-  .process-text h3 {
-    font-size: clamp(1.4rem, 3vw, 1.8rem); /* Títulos de proyecto un poco más grandes */
-  }
-  .process-text p {
-    font-size: 1rem; /* Asegurar que el texto de párrafo no quede muy pequeño */
-  }
-
-  /* Slider de Imágenes - podrían ser un poco más grandes si su contenedor crece */
-  .image-slider {
-    /* El aspect-ratio ya define su forma, y width: 100% lo ajusta al .process-visual */
-    /* No se necesitan cambios aquí a menos que quieras cambiar la proporción */
-  }
-
-  /* Snippets Técnicos */
-  .technical-snippet pre {
-    max-height: 350px; /* Un poco más de altura para el código si hay espacio */
-  }
-
-  /* Sección de Conexión y CTA */
-  .connect-cta-section h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-  }
-  .connect-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  }
-  .connect-buttons-grid {
-    gap: var(--spacing-lg); /* Un poco más de espacio entre botones */
-  }
-  .connect-button,
-  .contact-toggle-button-styled {
-    padding: var(--spacing-sm) var(--spacing-lg); /* Botones ligeramente más grandes */
-    font-size: 1rem;
-    min-width: 180px;
-  }
-
-  /* Formulario de Contacto Desplegable */
-  .contact-form-toggle-wrapper {
-    max-width: 700px; /* Permitir que el formulario sea un poco más ancho */
-  }
-  .contact-form.actual-form h4 {
-    font-size: 1.35rem;
-  }
-
-  /* Puedes añadir más ajustes específicos si ves que algo no escala bien */
-}
-
-/* Tablets y pantallas medianas (ej: < 992px) */
-@media (max-width: 991.98px) {
-  .container {
-      padding-left: var(--spacing-sm);
-      padding-right: var(--spacing-sm);
-  }
-  .hero-content {
-    /* grid-template-columns: 1fr; Se maneja con auto-fit ahora */
-    text-align: center; /* Centrar texto si el visual va abajo */
-  }
-  .hero-text p {
-      margin-left: auto;
-      margin-right: auto; /* Centrar el párrafo si el texto está centrado */
-  }
-  .hero-visual {
-    /* max-width: 80%; Ya no es necesario con grid, o ajustar si se ve muy grande */
-    margin-top: var(--spacing-lg);
-  }
-
-  /* El .process-item ya se vuelve de una columna por el minmax(320px, 1fr) en su grid */
-}
-
-/* Móviles (ej: < 768px) */
+/* Móviles (hasta 767px) */
 @media (max-width: 767.98px) {
-  /* Reducir un poco los tamaños de fuente base en móvil si es necesario,
-     aunque los clamp() ya ayudan mucho */
   body {
-      font-size: 15px; /* O mantener 16px y ajustar clamps */
+    font-size: 15px;
   }
-  .header-logo a {
-      font-size: 1.35rem;
-  }
-  .mode-toggle {
-      font-size: 1.2rem;
-      width: 36px;
-      height: 36px;
+  .container {
+    width: 95%;
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
   }
 
-  .hero-visual {
-    margin-top: var(--spacing-md);
+  /* Header */
+  .header-container {
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  .header-logo {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .header-toggles {
+    flex-basis: 100%;
+    justify-content: center;
   }
 
-  .process-item {
-      padding: var(--spacing-md);
-  }
-
-  .cta-buttons {
+  /* Hero */
+  .hero-section-fullscreen {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: var(--spacing-md); /* Un poco más de espacio */
+    justify-content: center;
+    padding-block: var(--spacing-lg);
+    min-height: 100svh;
   }
-  .cta-button {
-      width: 100%;
-      padding: var(--spacing-sm) var(--spacing-md); /* Ajustar padding para botones full-width */
+  .hero-content-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text-content {
+    margin-bottom: var(--spacing-lg);
+  }
+  .hero-cta-buttons {
+    justify-content: center;
+  }
+  .hero-visual-content {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  /* Proyectos */
+  .process-item,
+  .process-item.layout-reversed {
+    grid-template-columns: 1fr;
+  }
+  .process-item.layout-reversed .process-visual,
+  .process-item.layout-reversed .process-text {
+    order: initial;
+  }
+
+  /* Contacto */
+  .connect-buttons-grid {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-sm);
   }
 }
 
-/* Móviles muy pequeños (ej: < 480px) */
-@media (max-width: 479.98px) {
-    .container {
-        padding-left: var(--spacing-xs);
-        padding-right: var(--spacing-xs);
+
+/* Tablets (desde 768px hasta 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
     }
-    .header-toggles {
-        gap: var(--spacing-xs); /* Menos espacio entre toggles */
+    .hero-text-content {
+        margin-bottom: var(--spacing-lg);
     }
-    .process-highlights h2, .cta-section h2 {
-        margin-bottom: var(--spacing-md);
-    }
-    .slider-controls {
-        padding: calc(var(--spacing-xs)*0.8) var(--spacing-sm);
-    }
-    .slider-control-item {
-        font-size: 0.75rem;
-        padding: var(--spacing-xs) calc(var(--spacing-sm)*0.8);
-    }
+}
+
+/* Pantallas Grandes (desde 992px) */
+@media (min-width: 992px) {
+  .hero-text-content {
+    text-align: left; /* Volver a alinear a la izquierda */
+  }
+  .hero-cta-buttons {
+    justify-content: flex-start; /* Alinear botones a la izquierda */
+  }
+}
+
+/* Ajuste para FullHD y más, para que el video crezca */
+@media (min-width: 1200px) {
+  .hero-content-wrapper {
+    gap: var(--spacing-xl);
+  }
+  .hero-text-content { flex-basis: 40%; }
+  .hero-visual-content { flex-basis: 55%; }
+}
+
+@media (min-width: 1600px) {
+  .hero-visual-content iframe {
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+
+/* Ajuste para 2K y más */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+  .hero-text-content { flex-basis: 30%; }
+  .hero-visual-content { flex-basis: 65%; }
 }
