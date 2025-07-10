@@ -16,18 +16,17 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
     <!-- Script principal, 'defer' asegura que se ejecute después de que el HTML se haya parseado -->
-    <script defer src="js/script.js"></script>
+    <script defer type="module" src="js/main.js"></script>
     <script defer src="js/prism.js"></script>
 </head>
 
 <!-- El body tendrá clases dinámicas para los modos (light/dark, artist/technical) -->
 <body class="mode-light mode-artist"> <!-- Default modes -->
-
     <!-- Cabecera del Sitio -->
     <header class="site-header sticky-header"> <!-- 'sticky-header' para la funcionalidad de header pegajoso -->
         <div class="header-container container">
             <!-- Logo o Nombre del Sitio -->
-            <div class="header-logo">
+            <div class="hero-logo-dynamic">
                 <a href="#">Facundo Villarreal</a> <!-- Enlace a la página de inicio (actualmente la misma página) -->
             </div>
             <!-- Contenedor para los botones de cambio de modo -->
@@ -37,17 +36,17 @@
                     <!-- El JS se encargará de poner el SVG correcto aquí -->
                     <span class="icon-theme-current">
                         <!-- Placeholder para el SVG del sol, luna o monitor -->
-                        <img src="assets/img/sun-svgrepo-com.svg" alt="Tema actual" class="theme-icon-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                     </span>
                 </button>
                 <!-- Botón para cambiar entre modo artista y técnico -->
                 <button id="profile-toggle" class="mode-toggle switch-toggle" aria-label="Cambiar modo artista/técnico" role="switch" aria-checked="false">
-                    <span class="icon-artist" aria-hidden="true">
-                        <img src="assets/img/brush-svgrepo-com.svg" class="icon icon-svg-sol" alt="Modo Artista">
-                    </span> <!-- Ejemplo con emoji, reemplazar con SVG/Icono -->
-                    <span class="icon-technical" aria-hidden="true">
-                        <img src="assets/img/gear-11-svgrepo-com.svg" class="icon icon-svg-luna" alt="Modo Técnico">
-                    </span><!-- Ejemplo con emoji, reemplazar con SVG/Icono -->
+                    <span class="icon-artist">
+                        <img src="assets/img/brush-svgrepo-com.svg" class="icon-artist" alt="Modo Artista">
+                    </span>
+                    <span class="icon-technical">
+                        <img src="assets/img/gear-11-svgrepo-com.svg" class="icon-technical" alt="Modo Técnico">
+                    </span>
                 </button>
             </div>
         </div>
@@ -57,10 +56,10 @@
     <main>
 
         <!-- Sección Hero de bienvenida e introducción -->
-        <section class="hero-section container">
-            <div class="hero-content">
+        <section class="hero-section-fullscreen container section-block">
+            <div class="hero-content-wrapper">
                 <!-- Texto de la sección Hero -->
-                <div class="hero-text">
+                <div class="hero-text-content">
                     <h2>Del Plano al Píxel: Un Viaje Técnico y Artístico</h2>
                     <p>Con background en arquitectura, combino habilidades artísticas
                 para crear cinemáticas impactantes y conocimientos técnicos
@@ -68,21 +67,20 @@
                     <div class="hero-cta-buttons">
                         <a href="#process-highlights" class="cta-button primary-cta">Ver Proyectos</a>
                         <a href="#habilidades-tecnicas" class="cta-button secondary-cta">Mis Habilidades</a>
-                        <!-- Asumiendo que tienes secciones con id="process-highlights" y id="habilidades-tecnicas" -->
                     </div>
                 </div>
                 
                 
                 <!-- Elemento visual de la sección Hero (Video de Vimeo) -->
-                <div class="hero-visual">
-                    <div class="vimeo-container"> <!-- Contenedor para hacer el iframe responsivo -->
+                <div class="hero-visual-content">
+                    <div class="vimeo-embed-responsive">
                         <iframe 
                             src="https://player.vimeo.com/video/983405007?h=9c4d70c300&autopause=0&background=1&dnt=1"
                             frameborder="0"
                             allow="autoplay; fullscreen; picture-in-picture"
                             allowfullscreen
                             loading="lazy"
-                            title="Reel o Video Destacado de Facundo Villarreal"> <!-- Título descriptivo para accesibilidad -->
+                            title="Reel o Video Destacado de Facundo Villarreal">
                         </iframe>
                     </div>
                 </div>
@@ -90,19 +88,20 @@
         </section>
 
         <!-- Sección para destacar procesos o proyectos clave -->
-        <section class="process-highlights container" id="process-highlights">
-            <h2>Mis Proyectos</h2>
-            <p>
+        <section class="process-highlights container section-block" id="process-highlights">
+            <h2 class="section-title">Mis Proyectos</h2>
+            <p class="section-subtitle">
                 Una selección de mis trabajos en cinemáticas y herramientas de automatización
             </p>
             <!-- Artículo individual de proceso/proyecto -->
-            <article class="process-item">
-                <div class="process-visual">
+            
+            <!--<article class="process-item">
+                <div class="process-visual">-->
                     <!-- Slider de imágenes para el shader de nieve -->
-                    <div class="image-slider" data-slider-id="shader-nieve">
-                        <div class="slider-images">
+                    <!--<div class="image-slider" data-slider-id="shader-nieve">
+                        <div class="slider-images">-->
                             <!-- Reemplazar 'nieve-render.jpg' con la ruta correcta, ej: 'assets/img/projects/nieve/render.jpg' -->
-                            <img src="assets/img/nieve-render.jpg" alt="Render final del shader de nieve interactiva" class="slider-image active" data-layer="Render Final">
+                            <!--<img src="assets/img/nieve-render.jpg" alt="Render final del shader de nieve interactiva" class="slider-image active" data-layer="Render Final">
                             <img src="assets/img/nieve-graph.jpg" alt="Gráfico de nodos del material de nieve en Unreal Engine" class="slider-image" data-layer="Material Graph">
                             <img src="assets/img/nieve-mask.jpg" alt="Máscara de interacción utilizada para las huellas en la nieve" class="slider-image" data-layer="Interaction Mask">
                         </div>
@@ -115,23 +114,23 @@
                 </div>
                 <div class="process-text">
                     <h3>Shader Nieve Interactiva</h3>
-                    <p>Desarrollo de un material avanzado en Unreal Engine que simula nieve acumulada y permite interacción dinámica (huellas, deformación) utilizando Blueprints y texturas de render target para la persistencia de la deformación.</p>
+                    <p>Desarrollo de un material avanzado en Unreal Engine que simula nieve acumulada y permite interacción dinámica (huellas, deformación) utilizando Blueprints y texturas de render target para la persistencia de la deformación.</p>-->
                     <!-- Snippet técnico (visible en modo técnico) -->
-                    <div class="technical-snippet">
+                    <!--<div class="technical-snippet">
                         <h4>Blueprint Logic Snippet:</h4>
                         <img src="assets/img/nieve-blueprint.png" alt="Captura de pantalla del Blueprint para la interacción de la nieve">
                     </div>
                     <a href="[Enlace a ArtStation o proyecto detallado]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver más detalles del proyecto</a>
                 </div>
-            </article>
+            </article>-->
 
             <!-- Otro artículo de proceso/proyecto, con layout invertido -->
-            <article class="process-item layout-reversed">
+            <!--<article class="process-item layout-reversed">
                 <div class="process-text">
                     <h3>Herramienta de Layout Procedural</h3>
-                    <p>Creación de una herramienta en Python para Unreal Engine (o Maya/Blender) que automatiza la colocación de assets (ej: vegetación, rocas) siguiendo reglas definidas por el usuario (noise, pendientes, áreas de exclusión), optimizando significativamente el workflow de creación de entornos extensos.</p>
+                    <p>Creación de una herramienta en Python para Unreal Engine (o Maya/Blender) que automatiza la colocación de assets (ej: vegetación, rocas) siguiendo reglas definidas por el usuario (noise, pendientes, áreas de exclusión), optimizando significativamente el workflow de creación de entornos extensos.</p>-->
                      <!-- Snippet técnico (visible en modo técnico) -->
-                    <div class="technical-snippet">
+                    <!--<div class="technical-snippet">
                         <h4>Python Snippet (Conceptual):</h4>
                         <pre><code class="language-python">
 import unreal # O el API correspondiente (maya.cmds, bpy)
@@ -152,9 +151,9 @@ def procedural_placement(assets_to_place, target_actor, rules):
                     </div>
                     <a href="[Enlace a GitHub o demo de la herramienta]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver código o demo de la herramienta</a>
                 </div>
-                <div class="process-visual">
+                <div class="process-visual">-->
                      <!-- Slider de imágenes para la herramienta procedural -->
-                    <div class="image-slider" data-slider-id="procedural-tool">
+                    <!--<div class="image-slider" data-slider-id="procedural-tool">
                         <div class="slider-images">
                             <img src="assets/img/tool-result.jpg" alt="Entorno generado utilizando la herramienta de layout procedural" class="slider-image active" data-layer="Resultado Final">
                             <img src="assets/img/tool-ui.jpg" alt="Interfaz de usuario de la herramienta de layout procedural" class="slider-image" data-layer="UI Herramienta">
@@ -167,44 +166,50 @@ def procedural_placement(assets_to_place, target_actor, rules):
                         </div>
                     </div>
                 </div>
-            </article>
+            </article>-->
 
         </section> <!-- Fin de process-highlights -->
 
-        <section class="habilidades-tecnicas container" id="habilidades-tecnicas">
-            <h2>Habilidades Técnicas y Artisticas</h2>
-            <p id="">
-                Combinando conocimientos técnicos y artísticos para crear experiencias visuales impactantes
-            </p>
+        <section class="timeline-section container section-block" id="habilidades-tecnicas">
+            <h2 class="section-title">Mi Camino Técnico & Artístico</h2>
+            <p class="section-subtitle">Desde arquitectura hasta herramientas técnicas para Unreal Engine</p>
+
+            <div class="timeline">
+                <!-- Aquí se inyectarán dinámicamente los eventos desde timeline.json -->
+            </div>
+            
         </section>
 
         <!-- En la sección .cta-buttons -->
-        <section class="connect-cta-section container">
+        <section class="connect-cta-section container section-block">
             <h2>Contacto</h2>
             <p class="connect-subtitle">
                 ¿Interesado en trabajar juntos o tienes alguna pregunta? Conéctate conmigo a través de mis redes o envíame un mensaje directo.
             </p>
 
             <div class="connect-buttons-grid">
+                
+                <!-- Fue reemplazado por el modulo de loadSocial.js-->
                 <!-- Enlace a ArtStation -->
-                <a href="https://www.artstation.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de ArtStation">
+                <!--<a href="https://www.artstation.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de ArtStation">
                     <img src="assets/img/artstation-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
                     ArtStation
-                </a>
+                </a>-->
                 <!-- Enlace a LinkedIn -->
-                <a href="https://linkedin.com/in/facundovillarreal/" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
+                <!--<a href="https://linkedin.com/in/facundovillarreal/" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
                     <img src="assets/img/linkedin-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
                     LinkedIn
-                </a>
+                </a>-->
                 <!-- Enlace a GitHub -->
-                <a href="https://github.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de GitHub">
+                <!--<a href="https://github.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de GitHub">
                     <img src="assets/img/github-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
                     GitHub
-                </a>
+                </a>-->
+                
 
                 <!-- ESTE ES EL LABEL QUE ACTÚA COMO BOTÓN -->
                 <label for="contact-toggle-checkbox" class="connect-button contact-toggle-button-styled" role="button" tabindex="0" aria-expanded="false">
-                    <img src="assets/img/mail-heart-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
                     Mensaje Directo
                 </label>
             </div>
@@ -228,7 +233,7 @@ def procedural_placement(assets_to_place, target_actor, rules):
                             <label for="form-message">Mensaje:</label>
                             <textarea id="form-message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="cta-button submit-form-button">Enviar Mensaje</button>
+                        <button type="submit" class="cta-button primary-cta submit-form-button">Enviar Mensaje</button>
                     </form>
                     <div class="thank-you-message" style="display: none;">
                         <p>¡Gracias por tu mensaje! Te responderé pronto.</p>
@@ -241,7 +246,7 @@ def procedural_placement(assets_to_place, target_actor, rules):
     <!-- Pie de Página del Sitio -->
     <footer class="site-footer">
         <div class="container">
-            <p>© <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
+            <p>© 2023 - <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
             <!-- El script se encarga de actualizar el año -->
         </div>
     </footer>

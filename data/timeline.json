@@ -1,0 +1,77 @@
+[
+  {
+    "type": "past",
+    "year": "2012",
+    "title": "Técnico en Reparación de Computadores | Actualidad",
+    "desc": "Modelado 3D, visualizaciones arquitectónicas y primer acercamiento a motores de render."
+  },
+  {
+    "type": "past",
+    "year": "2013",
+    "title": "Inicio de carrera en Arquitectura | 2017",
+    "desc": "Modelado 3D, visualizaciones arquitectónicas y primer acercamiento a motores de render."
+  },
+  {
+    "type": "past",
+    "year": "2019",
+    "title": "Inicio Profesionalizante en Teleperformance | 2023",
+    "desc": "Modelado 3D, visualizaciones arquitectónicas y primer acercamiento a motores de render."
+  },
+  {
+    "type": "past",
+    "year": "2023",
+    "title": "Inicio de Tecnicatura en Desarrollo de Software | Actualidad",
+    "desc": "Modelado 3D, visualizaciones arquitectónicas y primer acercamiento a motores de render."
+  },
+  {
+    "type": "past",
+    "year": "2024",
+    "title": "Inicio Master Unreal Engine - Max Sarlija | Actualidad",
+    "desc": "Desarrollo de cinemáticas, shaders interactivos y lógica técnica en Blueprints."
+  },
+  {
+    "type": "past",
+    "year": "2025",
+    "title": "Curso Amazon Web Services (AWS) Academy Cloud Foundations | Finalizado",
+    "desc": "Desarrollo de cinemáticas, shaders interactivos y lógica técnica en Blueprints."
+  },
+  {
+    "type": "heading",
+    "label": "OBJETIVOS A FUTURO"
+  },
+  {
+    "type": "future",
+    "checked": true,
+    "label": "Completar y deployar Landing Page con fundamentos de HTML y CSS + JavaScript Vanilla"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Completar Curso de UX/UI en Udemy"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Curso de Python intermedio"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Creación de herramientas con Python para UE"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Finalizar Master Enviro & Technical Art by Maximiliano Sarlija"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Publicar demo técnica en ArtStation"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Refactorizar Landing Page con React + Tailwind"
+  }
+]
