@@ -1,19 +1,104 @@
-# Portfolio_V01
+# 🌐 Portfolio_V01 - Facundo Villarreal
 
-La idea aqui es poder desarrollar mi portfolio web, aprendiendo HTML, CSS, JS en un principio. 
-De mis averiguaciones lo que quiero obtener como producto final, se realizaria con REACT y/o Tailwind, todavia debo ir mas a profundidad sobre que se puede hacer
+Este repositorio contiene la primera versión de mi portfolio web personal, desarrollado desde cero utilizando tecnologías base como **HTML**, **CSS**, y **JavaScript**, con un enfoque claro en **UX/UI**, **performance**, y **estructura modular**.
+![Vista Previa del Portfolio](assets/img/screenshot-portfolio.jpg)
+---
 
-En un principio quiero armar una web donde pueda mostrar tanto mi lado artistico como mi lado tecnico todo apuntando al puesto de Technical Artist que es el que anhelo, para eso se me ocurre tener slides de imagenes y videos incrustrados en la web, en la parte tecnica poder mostrar bloques de codigo de algunas tools o procesos de automatizacion que haga.
+## 🎯 Objetivo del Proyecto
 
-A partir de eso surgió la idea de hacer toogles/switches de modo claro/oscuro, pero aplicado al concepto de arte/tecnico, para dependiendo de lo que quiera ver el observador del momento, elija si ver el apartado artistico o el apartado tecnico del "producto" creado.
+Mi propósito fue crear un espacio digital que represente de forma equilibrada **mi perfil técnico y artístico**, inspirado en los valores del rol de **Technical Artist**. Esto se traduce en una plataforma que permita visualizar:
 
-## Mi idea con el readme.md
-Pienso que ir mostrando mi idea, progreso, dificultades me brinda la posibilidad de recibir feedback, ayuda y tambien para analizar mis pensamientos escritos
+- 🎨 *Cinemáticas, composiciones, shaders interactivos y recursos visuales*
+- 🧠 *Automatización, lógica en Blueprints, snippets de código y herramientas técnicas*
 
-### Vitacora
-28/05/2025
-Apliqué hasta ahora lo que vengo aprendiendo en HTML y CSS en la materia de Front End de la tecnicatura que estoy cursando. Me ayude con LLM's en la parte de JS para poder aprender a animar algunas cosas y aplicar funcionalidades
+Para ello, implementé un sistema de **switch de perfil (Artístico / Técnico)**, además del tradicional **modo claro / oscuro**, permitiendo al observador cambiar el enfoque del portfolio en tiempo real.
 
-31/05/2025
-Agregué unos toogle para el modo claro y el modo oscuro, y para el apartado artistico y técnico. Todavia no me convencen los SVG en color y la animación. Me gustaria que los toogle tengan escrito el nombre del modo, por ahi no tanto en el toogle de claro/oscuro pero si en el artistico/tecnico, para que se denote.
-me falta todavia terminar de acomodar la parte de redes sociales en la parte inferior y la parte de contactame
+---
+
+## 🚀 Características Clave
+
+- ✨ **Modularización de código**: Cada funcionalidad está dividida en módulos `JS` independientes bajo `/modules`, anticipando una futura migración a **React**.
+- 🌒 **Switch de tema claro/oscuro/sistema** con SVGs dinámicos accesibles y persistencia en `localStorage`.
+- 🎭 **Switch de perfil Técnico/Artístico**, que modifica tanto estilos como contenido mostrado (`snippets`, layout, color, tono).
+- 🎞️ **Slider de imágenes interactivo** en cada proyecto.
+- 🧠 **Timeline** dinámico renderizado desde JSON, dividido en:
+  - `Eventos pasados` (educación, experiencias)
+  - `Objetivos futuros` (con checkboxes visuales no interactivos)
+- 📹 **Video de cabecera embebido desde Vimeo**, con reproducción automática.
+- 🌐 **Botones sociales** inyectados desde JSON con SVGs en línea, accesibles, escalables y responsive.
+- 💬 **Formulario de contacto desplegable**, 100% funcional via Formspree.
+- 📱 **Diseño responsive** para todas las relaciones de aspecto: mobile, tablets, monitores 16:9, y 2K/4K.
+- ⚙️ **Performance optimizada** con Lighthouse:  
+  - Desktop: `Performance 100`, `SEO 100`, `Accesibilidad >95`
+  - Mobile: `Performance >73`, con mejoras en curso
+
+---
+
+## 🧩 Arquitectura y Proyección
+
+Aunque el sitio está desarrollado con tecnologías "vanilla", todo fue diseñado con una **mentalidad escalable**:
+
+- El código CSS sigue una estructura mantenible y comentada por secciones.
+- Los archivos JSON (`projects.json`, `timeline.json`, `social.json`) desacoplan la lógica de contenido.
+- Se favorece la legibilidad, la accesibilidad y el mantenimiento en cada sección.
+
+🛠️ El próximo paso será refactorizar el proyecto usando **React + TailwindCSS**, aprovechando:
+
+- Componentes reutilizables
+- Hooks de estado para gestión de modo tema/perfil
+- `Context API` o Zustand para persistencia de estado global
+- `Framer Motion` para animaciones más fluidas
+- `Astro` o `Next.js` si se requiere SSR o rendimiento extremo
+
+---
+
+## 🧠 Metodología de Aprendizaje
+
+Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestión del conocimiento en el que documento cada decisión, problema y solución aplicada.
+
+### Log de aprendizaje:
+
+- `18/04/2025`: Comienzo de la cursada en la materia de Front End de la Tecnicatura en Desarrollo de Software dictada por Javier Rodriguez Gallardo.
+- `28/05/2025`: Primer prototipo con HTML y CSS. Estructura semántica. Implementación de sliders con ayuda de LLMs.
+- `31/05/2025`: Primeros toggles de tema. Experimentación con SVGs. UX/UI para modos.
+- `06/07/2025`: Sistema modular completo. Carga dinámica de proyectos y timeline. Refactorización de CSS.
+- `09/07/2025`: Optimización con PageSpeed, revisión de contraste, accesibilidad y performance móvil.
+
+---
+
+## 🧪 Stack Tecnológico
+
+| Tecnología | Uso |
+|------------|-----|
+| HTML5 / CSS3 / JS | Base del sitio |
+| JSON | Contenido externo desacoplado |
+| Formspree | Envío de formularios |
+| Vimeo | Hosting de video |
+| Lighthouse | Medición de performance |
+| GitHub Pages | Hosting gratuito |
+
+---
+
+## 📎 Enlaces útiles
+
+- 🔗 [Portfolio Online](https://facu041294.github.io/Portfolio_V01/)
+- 💻 [Repositorio en GitHub](https://github.com/facu041294/Portfolio_V01)
+- 🧑‍🎨 [ArtStation](https://www.artstation.com/facu041294)
+- 👔 [LinkedIn](https://www.linkedin.com/in/facundovillarreal)
+
+---
+
+## 📩 Contacto
+
+Si te interesa mi perfil técnico y artístico, podés contactarme desde el formulario en la sección "Conectemos", o vía [LinkedIn](https://www.linkedin.com/in/facundovillarreal).
+
+---
+
+## ⚖️ Licencia
+
+Este proyecto es de uso personal con fines educativos y profesionales. Todos los assets y contenido pertenecen a Facundo Villarreal. El código puede consultarse para fines de aprendizaje.
+
+---
+
+> _"Del plano al píxel: un viaje técnico y artístico."_  
+> — Facundo Villarreal

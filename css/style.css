@@ -129,6 +129,7 @@ body.mode-dark.mode-artist {
   display: inline-block;
   text-align: center;
   cursor: pointer;
+  box-shadow: var(--shadow-md);
 }
 .primary-cta {
   background-color: var(--current-primary-color);
@@ -322,6 +323,9 @@ body.mode-dark #theme-manager-button {
 #process-highlights {
   scroll-margin-top: 100px;
 }
+#habilidades-tecnicas {
+  scroll-margin-top: 100px;
+}
 
 
 
@@ -342,6 +346,7 @@ body.mode-dark #theme-manager-button {
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 700;
   color: var(--current-primary-color);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   text-decoration: none;
   transition: opacity 0.4s ease-in-out;
 }
@@ -350,6 +355,7 @@ body.mode-dark #theme-manager-button {
 }
 body.mode-dark .hero-logo-dynamic a {
   color: var(--current-primary-color); /* Se mantiene el mismo para consistencia */
+  text-shadow: 0 2px 2px rgb(0, 0, 0);
 }
 .hero-content-wrapper {
   display: flex;
@@ -367,11 +373,13 @@ body.mode-dark .hero-logo-dynamic a {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   color: var(--current-primary-color);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
 }
 body.mode-dark .hero-text-content h1 {
   color: var(--color-text-dark);
+  text-shadow: 0 2px 2px rgb(0, 0, 0);
 }
 .hero-subtitle {
   font-size: clamp(1rem, 2.2vw, 1.15rem);
@@ -398,6 +406,7 @@ body.mode-dark .hero-subtitle {
   height: auto;
   background-color: #111;
   border-radius: 12px;
+  box-shadow: var(--shadow-md);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   display: block;
@@ -419,10 +428,12 @@ body.mode-dark .hero-subtitle {
     text-align: center;
     margin-bottom: var(--spacing-sm);
     color: var(--current-primary-color);
+    text-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
 }
 .section-subtitle { /* Clase genérica para subtítulos */
     font-size: clamp(1rem, 2.5vw, 1.15rem);
     color: var(--color-secondary-light);
+    text-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
     max-width: 65ch;
     margin: 0 auto var(--spacing-lg) auto;
     text-align: center;
@@ -735,6 +746,7 @@ body.mode-dark .timeline-date {
 .timeline-item h3 {
   font-size: 1.2rem;
   color: var(--current-primary-color);
+  text-shadow: 0 1px 1px rgb(0, 0, 0,0.2);
   margin: 0.2rem 0;
 }
 
@@ -751,14 +763,14 @@ body.mode-dark .timeline-item p {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .timeline-item.future input[type="checkbox"] {
   accent-color: var(--current-primary-color);
   width: 1rem;
   height: 1rem;
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .timeline-heading {
@@ -766,6 +778,7 @@ body.mode-dark .timeline-item p {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--current-primary-color);
+  text-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
   margin: var(--spacing-md) 0 var(--spacing-sm);
   text-align: center;
 }
@@ -801,7 +814,8 @@ body.mode-dark .timeline-item.future input[type="checkbox"]:not(:checked) + .tim
 .connect-cta-section {
   text-align: center;
   background-color: var(--color-card-bg-light);
-  border-radius: 0;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
 }
 body.mode-dark .connect-cta-section {
   background-color: var(--color-card-bg-dark);
@@ -813,9 +827,11 @@ body.mode-dark .connect-cta-section {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     margin-bottom: var(--spacing-sm);
     color: var(--current-primary-color);
+    text-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
 }
 body.mode-dark .connect-cta-section h2 {
     color: var(--current-primary-color);
+    text-shadow: 0 2px 2px rgb(0, 0, 0);
 }
 
 .connect-subtitle {

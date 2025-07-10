@@ -9,7 +9,7 @@
     <meta name="author" content="Facundo Villarreal">
 
     <!-- Enlace a la hoja de estilos principal -->
-    <!-- Usar rutas relativas para facilitar el despliegue, especialmente en GitHub Pages -->
+    <!-- Usar rutas relativas para facilitar el despliegue -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/prism.css">
 
@@ -20,20 +20,19 @@
     <script defer src="js/prism.js"></script>
 </head>
 
-<!-- El body tendrá clases dinámicas para los modos (light/dark, artist/technical) -->
 <body class="mode-light mode-artist"> <!-- Default modes -->
     <!-- Cabecera del Sitio -->
-    <header class="site-header sticky-header"> <!-- 'sticky-header' para la funcionalidad de header pegajoso -->
+    <header class="site-header sticky-header"> <!-- 'sticky-header' -->
         <div class="header-container container">
-            <!-- Logo o Nombre del Sitio -->
+            <!-- Nombre del Sitio -->
             <div class="hero-logo-dynamic">
-                <a href="#">Facundo Villarreal</a> <!-- Enlace a la página de inicio (actualmente la misma página) -->
+                <a href="#">Facundo Villarreal</a> <!-- Enlace a la página de inicio/home -->
             </div>
-            <!-- Contenedor para los botones de cambio de modo -->
+            <!-- Contenedor para los botones de cambio de tema y modo -->
             <div class="header-toggles">
-                <!-- Botón para cambiar entre modo claro y oscuro -->
+                <!-- Botón para cambiar entre modo claro, oscuro y sistema -->
                 <button id="theme-manager-button" class="mode-toggle" aria-live="polite" aria-label="Cambiar tema de color">
-                    <!-- El JS se encargará de poner el SVG correcto aquí -->
+                    <!-- El advancedThemeManager.js se encargará de poner el SVG correcto aquí -->
                     <span class="icon-theme-current">
                         <!-- Placeholder para el SVG del sol, luna o monitor -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
@@ -80,7 +79,8 @@
                             allow="autoplay; fullscreen; picture-in-picture"
                             allowfullscreen
                             loading="lazy"
-                            title="Reel o Video Destacado de Facundo Villarreal">
+                            title="Reel o Video Destacado de Facundo Villarreal"
+                            fetchpriority="low">
                         </iframe>
                     </div>
                 </div>
@@ -93,80 +93,7 @@
             <p class="section-subtitle">
                 Una selección de mis trabajos en cinemáticas y herramientas de automatización
             </p>
-            <!-- Artículo individual de proceso/proyecto -->
-            
-            <!--<article class="process-item">
-                <div class="process-visual">-->
-                    <!-- Slider de imágenes para el shader de nieve -->
-                    <!--<div class="image-slider" data-slider-id="shader-nieve">
-                        <div class="slider-images">-->
-                            <!-- Reemplazar 'nieve-render.jpg' con la ruta correcta, ej: 'assets/img/projects/nieve/render.jpg' -->
-                            <!--<img src="assets/img/nieve-render.jpg" alt="Render final del shader de nieve interactiva" class="slider-image active" data-layer="Render Final">
-                            <img src="assets/img/nieve-graph.jpg" alt="Gráfico de nodos del material de nieve en Unreal Engine" class="slider-image" data-layer="Material Graph">
-                            <img src="assets/img/nieve-mask.jpg" alt="Máscara de interacción utilizada para las huellas en la nieve" class="slider-image" data-layer="Interaction Mask">
-                        </div>
-                        <div class="slider-controls">
-                            <button class="slider-control-item active" data-target-layer="Render Final">Render</button>
-                            <button class="slider-control-item" data-target-layer="Material Graph">Graph</button>
-                            <button class="slider-control-item" data-target-layer="Interaction Mask">Mask</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-text">
-                    <h3>Shader Nieve Interactiva</h3>
-                    <p>Desarrollo de un material avanzado en Unreal Engine que simula nieve acumulada y permite interacción dinámica (huellas, deformación) utilizando Blueprints y texturas de render target para la persistencia de la deformación.</p>-->
-                    <!-- Snippet técnico (visible en modo técnico) -->
-                    <!--<div class="technical-snippet">
-                        <h4>Blueprint Logic Snippet:</h4>
-                        <img src="assets/img/nieve-blueprint.png" alt="Captura de pantalla del Blueprint para la interacción de la nieve">
-                    </div>
-                    <a href="[Enlace a ArtStation o proyecto detallado]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver más detalles del proyecto</a>
-                </div>
-            </article>-->
-
-            <!-- Otro artículo de proceso/proyecto, con layout invertido -->
-            <!--<article class="process-item layout-reversed">
-                <div class="process-text">
-                    <h3>Herramienta de Layout Procedural</h3>
-                    <p>Creación de una herramienta en Python para Unreal Engine (o Maya/Blender) que automatiza la colocación de assets (ej: vegetación, rocas) siguiendo reglas definidas por el usuario (noise, pendientes, áreas de exclusión), optimizando significativamente el workflow de creación de entornos extensos.</p>-->
-                     <!-- Snippet técnico (visible en modo técnico) -->
-                    <!--<div class="technical-snippet">
-                        <h4>Python Snippet (Conceptual):</h4>
-                        <pre><code class="language-python">
-import unreal # O el API correspondiente (maya.cmds, bpy)
-
-def procedural_placement(assets_to_place, target_actor, rules):
-    for asset_path in assets_to_place:
-        # Lógica para calcular posición, rotación, escala
-        # basada en 'rules' (ej. samplear landscape, evitar colisiones)
-        transform = calculate_transform(target_actor, rules)
-        if transform:
-            unreal.EditorLevelLibrary.spawn_actor_from_class(
-                unreal.EditorAssetLibrary.load_blueprint_class(asset_path),
-                transform.location,
-                transform.rotation
-            )
-# Esta es una simplificación, la lógica real sería más compleja.
-                        </code></pre>
-                    </div>
-                    <a href="[Enlace a GitHub o demo de la herramienta]" class="cta-link" target="_blank" rel="noopener noreferrer">Ver código o demo de la herramienta</a>
-                </div>
-                <div class="process-visual">-->
-                     <!-- Slider de imágenes para la herramienta procedural -->
-                    <!--<div class="image-slider" data-slider-id="procedural-tool">
-                        <div class="slider-images">
-                            <img src="assets/img/tool-result.jpg" alt="Entorno generado utilizando la herramienta de layout procedural" class="slider-image active" data-layer="Resultado Final">
-                            <img src="assets/img/tool-ui.jpg" alt="Interfaz de usuario de la herramienta de layout procedural" class="slider-image" data-layer="UI Herramienta">
-                            <img src="assets/img/tool-heatmap.jpg" alt="Visualización de mapa de densidad o reglas de placement de la herramienta" class="slider-image" data-layer="Reglas Placement">
-                        </div>
-                        <div class="slider-controls">
-                             <button class="slider-control-item active" data-target-layer="Resultado Final">Resultado</button>
-                             <button class="slider-control-item" data-target-layer="UI Herramienta">UI</button>
-                             <button class="slider-control-item" data-target-layer="Reglas Placement">Reglas</button>
-                        </div>
-                    </div>
-                </div>
-            </article>-->
+            <!-- Artículos individuales de proceso/proyecto generado por loadProjects.js -->
 
         </section> <!-- Fin de process-highlights -->
 
@@ -190,23 +117,7 @@ def procedural_placement(assets_to_place, target_actor, rules):
             <div class="connect-buttons-grid">
                 
                 <!-- Fue reemplazado por el modulo de loadSocial.js-->
-                <!-- Enlace a ArtStation -->
-                <!--<a href="https://www.artstation.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de ArtStation">
-                    <img src="assets/img/artstation-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
-                    ArtStation
-                </a>-->
-                <!-- Enlace a LinkedIn -->
-                <!--<a href="https://linkedin.com/in/facundovillarreal/" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
-                    <img src="assets/img/linkedin-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
-                    LinkedIn
-                </a>-->
-                <!-- Enlace a GitHub -->
-                <!--<a href="https://github.com/facu041294" class="connect-button" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de GitHub">
-                    <img src="assets/img/github-svgrepo-com.svg" alt="" class="connect-button-icon" aria-hidden="true">
-                    GitHub
-                </a>-->
                 
-
                 <!-- ESTE ES EL LABEL QUE ACTÚA COMO BOTÓN -->
                 <label for="contact-toggle-checkbox" class="connect-button contact-toggle-button-styled" role="button" tabindex="0" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
@@ -248,6 +159,9 @@ def procedural_placement(assets_to_place, target_actor, rules):
         <div class="container">
             <p>© 2023 - <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
             <!-- El script se encarga de actualizar el año -->
+            <a href="https://github.com/facu041294/Portfolio_V01" target="_blank" rel="noopener noreferrer" class="cta-link">
+                Ver repositorio de este sitio en GitHub
+            </a>
         </div>
     </footer>
 
