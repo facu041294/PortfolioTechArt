@@ -1077,8 +1077,8 @@ body.mode-dark .site-footer {
 \*------------------------------------*/
 /* Primero los ajustes para pantallas pequeñas (Mobile First Approach) */
 
-/* Móviles (hasta 767px) */
-@media (max-width: 767.98px) {
+/* Móviles (hasta 768px) */
+@media (max-width: 768px) {
   body {
     font-size: 15px;
   }
@@ -1148,8 +1148,8 @@ body.mode-dark .site-footer {
 }
 
 
-/* Tablets (desde 768px hasta 991px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
+/* Tablets (desde 769px hasta 991px) */
+@media (min-width: 769px) and (max-width: 991.98px) {
     .hero-content-wrapper {
         flex-direction: column;
         text-align: center;
