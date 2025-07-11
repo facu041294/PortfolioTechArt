@@ -81,8 +81,8 @@ Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestió
 
 ## 📎 Enlaces útiles
 
-- 🔗 [Portfolio Online](https://facu041294.github.io/Portfolio_V01/)
-- 💻 [Repositorio en GitHub](https://github.com/facu041294/Portfolio_V01)
+- 🔗 [Portfolio Online](https://facu041294.github.io/PortfolioTechArt/)
+- 💻 [Repositorio en GitHub](https://github.com/facu041294/PortfolioTechArt)
 - 🧑‍🎨 [ArtStation](https://www.artstation.com/facu041294)
 - 👔 [LinkedIn](https://www.linkedin.com/in/facundovillarreal)
 
