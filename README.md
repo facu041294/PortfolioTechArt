@@ -1,6 +1,7 @@
 # 🌐 Portfolio_V01 - Facundo Villarreal
 
 Este repositorio contiene la primera versión de mi portfolio web personal, desarrollado desde cero utilizando tecnologías base como **HTML**, **CSS**, y **JavaScript**, con un enfoque claro en **UX/UI**, **performance**, y **estructura modular**.
+
 ![Vista Previa del Portfolio](assets/img/screenshot-portfolio.jpg)
 ---
 
@@ -81,8 +82,8 @@ Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestió
 
 ## 📎 Enlaces útiles
 
-- 🔗 [Portfolio Online](https://facu041294.github.io/Portfolio_V01/)
-- 💻 [Repositorio en GitHub](https://github.com/facu041294/Portfolio_V01)
+- 🔗 [Portfolio Online](https://facu041294.github.io/PortfolioTechArt/)
+- 💻 [Repositorio en GitHub](https://github.com/facu041294/PortfolioTechArt)
 - 🧑‍🎨 [ArtStation](https://www.artstation.com/facu041294)
 - 👔 [LinkedIn](https://www.linkedin.com/in/facundovillarreal)
 
