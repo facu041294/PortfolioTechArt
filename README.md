@@ -1,6 +1,7 @@
 # 🌐 PortfolioTechArt - Facundo Villarreal
 
 Este repositorio contiene la primera versión de mi portfolio web personal, desarrollado desde cero utilizando tecnologías base como **HTML**, **CSS**, y **JavaScript**, con un enfoque claro en **UX/UI**, **performance**, y **estructura modular**.
+
 ![Vista Previa del Portfolio](assets/img/screenshot-portfolio.jpg)
 ---
 
