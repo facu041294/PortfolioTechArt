@@ -1,0 +1,67 @@
+[
+  {
+    "type": "past",
+    "year": "2025",
+    "title": "Technical Artist & Pipeline Developer | Presente",
+    "desc": "Desarrollo de LookDev Studio Pro en MEL, automatizando flujos de trabajo. Optimización de hardware y rendering cinemático en Unreal Engine 5."
+  },
+  {
+    "type": "past",
+    "year": "2025",
+    "title": "Head of R&D & Systems Architecture @ CALLEIDOCOM | Presente",
+    "desc": "Diseño de arquitecturas técnicas y automatización de workflows con Python y LangChain para agentes autónomos CX."
+  },
+  {
+    "type": "past",
+    "year": "2024",
+    "title": "Tech. Degree in Software Development | IFTS N°29",
+    "desc": "Formación integral en desarrollo de software, algoritmos y estructuras de datos."
+  },
+  {
+    "type": "past",
+    "year": "2024",
+    "title": "Master Enviro & Technical Art | Max Sarlija Academy",
+    "desc": "Especialización en desarrollo de cinemáticas, shaders interactivos y lógica técnica en motores de render."
+  },
+  {
+    "type": "past",
+    "year": "2019",
+    "title": "L2 IT Support Specialist @ TELEPERFORMANCE | 2023",
+    "desc": "Troubleshooting técnico complejo. Autoría de documentación de procesos estandarizados logrando un 90% de resolución bajo SLA."
+  },
+  {
+    "type": "past",
+    "year": "2013",
+    "title": "Arquitectura @ Univ. Nacional de Tucumán | 2019",
+    "desc": "Bases sólidas de diseño espacial, proporción, lógica constructiva y composición visual aplicada a entornos 3D."
+  },
+  {
+    "type": "heading",
+    "label": "OBJETIVOS A FUTURO"
+  },
+  {
+    "type": "future",
+    "checked": true,
+    "label": "Diseñar y publicar portfolio enfocado en Technical Art (Astro)"
+  },
+  {
+    "type": "future",
+    "checked": true,
+    "label": "Completar desarrollo de herramienta LookDev Studio Pro (MEL)"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Especialización Profesional Continua: Technical Artist (Sept 2026)"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Migración de LookDev Studio Pro a Python Core (PyMEL)"
+  },
+  {
+    "type": "future",
+    "checked": false,
+    "label": "Obtener Certificación Oficial Unity Essentials (Abr 2026)"
+  }
+]

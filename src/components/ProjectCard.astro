@@ -1,0 +1,133 @@
+---
+// src/components/ProjectCard.astro
+interface Props {
+  project: {
+    id: string;
+    title: string;
+    descArtist: string;
+    descTechnical: string;
+    timeSaved?: string;
+    imageSlider: string[];
+    imageLabels: string[];
+    snippetImg?: string;
+    snippetCode?: {
+      lang: string;
+      code: string;
+    };
+    link: string;
+    category?: string;
+    tags?: string[];
+  };
+  index: number;
+}
+
+const { project, index } = Astro.props;
+
+// Determinamos los tags y categorías predeterminadas si no existen aún en el JSON
+const projectCategory = project.category || "pipeline-tools";
+const projectTags = project.tags || [];
+
+// Normalizar la ruta base asegurando que termine con barra inclinada
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+---
+
+<!-- Tarjeta Compacta (Vista Grid) -->
+<div 
+  class="project-card-compact" 
+  data-project-id={project.id}
+  data-category={projectCategory}
+  data-tags={projectTags.join(',')}
+>
+  <div class="card-image-wrapper">
+    <img 
+      src={`${base}assets/img/${project.imageSlider[0]}`} 
+      alt={project.title} 
+      class="card-cover-image"
+      loading="lazy"
+    />
+    <span class="card-category-tag">{projectCategory === 'pipeline-tools' ? 'Pipeline & Tools' : projectCategory === 'ai-devops' ? 'IA & DevOps' : projectCategory === '3d-art' ? 'Art & Texturing' : 'Cinematics & FX'}</span>
+  </div>
+  <div class="card-content">
+    <h3>{project.title}</h3>
+    <p class="card-desc artist-desc">{project.descArtist}</p>
+    <p class="card-desc technical-desc">{project.descTechnical}</p>
+    <button class="open-details-btn">Ver Detalles</button>
+  </div>
+</div>
+
+<!-- Modal de Detalle Completo (Oculto por defecto) -->
+<div class="project-modal-overlay" id={`modal-${project.id}`} aria-hidden="true">
+  <div class="project-modal-content">
+    <button class="close-modal-btn" aria-label="Cerrar detalles">&times;</button>
+    
+    <div class="modal-body-layout">
+      <!-- Lado Izquierdo: Textos, snippets y link -->
+      <div class="modal-text-side">
+        <span class="modal-category-tag">{projectCategory === 'pipeline-tools' ? 'Pipeline & Tools' : projectCategory === 'ai-devops' ? 'IA & DevOps' : projectCategory === '3d-art' ? 'Art & Texturing' : 'Cinematics & FX'}</span>
+        <h2>{project.title}</h2>
+        
+        {project.timeSaved && (
+          <div class="time-saved-badge">
+            <span class="badge-label">Tiempo Ahorrado:</span>
+            <span class="badge-value">{project.timeSaved}</span>
+          </div>
+        )}
+
+        <p class="project-desc artist-desc">{project.descArtist}</p>
+        <p class="project-desc technical-desc">{project.descTechnical}</p>
+        
+        <a href={project.link} class="cta-button primary-cta modal-cta-link" target="_blank" rel="noopener noreferrer">
+          Ver proyecto completo
+        </a>
+      </div>
+
+      <!-- Lado Derecho: Slider de Imágenes interactivo -->
+      <div class="modal-visual-side">
+        <div class="image-slider" data-slider-id={project.id}>
+          <div class="slider-images">
+            {project.imageSlider.map((img, i) => (
+              <img 
+                src={`${base}assets/img/${img}`} 
+                class={`slider-image ${i === 0 ? 'active' : ''} lightbox-trigger`} 
+                data-layer={project.imageLabels[i]} 
+                loading="lazy" 
+                alt={`${project.title} - ${project.imageLabels[i]}`}
+              />
+            ))}
+          </div>
+
+          <!-- Flechas de navegación -->
+          <button class="slider-arrow prev-arrow" aria-label="Imagen anterior">&lsaquo;</button>
+          <button class="slider-arrow next-arrow" aria-label="Imagen siguiente">&rsaquo;</button>
+
+          <div class="slider-controls">
+            {project.imageLabels.map((label, i) => (
+              <button 
+                class={`slider-control-item ${i === 0 ? 'active' : ''}`} 
+                data-target-layer={label}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p class="lightbox-hint">💡 Haz clic en la imagen para ver de cerca</p>
+      </div>
+
+      <!-- Lado Inferior (Full-width): Snippets de Código o de Blueprints -->
+      {project.snippetImg && (
+        <div class="technical-snippet full-width-snippet">
+          <h4>Blueprint Logic Snippet:</h4>
+          <img src={`${base}assets/img/${project.snippetImg}`} alt={`Captura técnica de ${project.title}`} class="lightbox-trigger" />
+        </div>
+      )}
+
+      {project.snippetCode && (
+        <div class="technical-snippet full-width-snippet">
+          <h4>{project.snippetCode.lang.toUpperCase()} Snippet:</h4>
+          <pre><code class={`language-${project.snippetCode.lang}`}>{project.snippetCode.code}</code></pre>
+        </div>
+      )}
+    </div>
+  </div>
+</div>

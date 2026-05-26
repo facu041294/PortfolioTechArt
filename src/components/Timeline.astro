@@ -1,0 +1,30 @@
+---
+// src/components/Timeline.astro
+import timelineData from '../data/timeline.json';
+---
+
+<div class="timeline">
+  {timelineData.map((item) => {
+    if (item.type === 'heading') {
+      return <h3 class="timeline-heading">{item.label}</h3>;
+    } else if (item.type === 'past') {
+      return (
+        <div class="timeline-item past">
+          <span class="timeline-date">{item.year}</span>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+        </div>
+      );
+    } else if (item.type === 'future') {
+      return (
+        <div class="timeline-item future">
+          <label>
+            <input type="checkbox" checked={item.checked} disabled />
+            <span class="timeline-future-label">{item.label}</span>
+          </label>
+        </div>
+      );
+    }
+    return null;
+  })}
+</div>

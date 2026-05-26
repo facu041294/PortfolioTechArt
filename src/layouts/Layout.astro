@@ -1,0 +1,104 @@
+---
+// src/layouts/Layout.astro
+import '../styles/style.css';
+import '../styles/prism.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Facundo Villarreal - Technical Artist", 
+  description = "Portfolio de Facundo Villarreal, Technical Artist especializado en Unreal Engine, fusionando diseño arquitectónico y desarrollo de software."
+} = Astro.props;
+
+// Normalizar la ruta base para asegurar que siempre termine con una barra diagonal
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="author" content="Facundo Villarreal">
+    
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://facu041294.github.io/PortfolioTechArt/">
+    <meta property="og:image" content={`${base}assets/img/Gemini_Generated_Image_9nzdfd9nzdfd9nzd (1).jpg`}>
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={`${base}assets/img/Gemini_Generated_Image_9nzdfd9nzdfd9nzd (1).jpg`}>
+
+    <link rel="icon" href={`${base}assets/img/favicon_isotype.png`} type="image/png">
+</head>
+<body class="mode-light mode-artist">
+    <!-- Cabecera del Sitio -->
+    <header class="site-header sticky-header">
+        <div class="header-container container">
+            <!-- Nombre del Sitio con Isotipo Dinámico 3D Flip -->
+            <div class="hero-logo-dynamic">
+                <div class="isotype-wrapper">
+                    <div class="isotype-inner">
+                        <div class="isotype-face isotype-artist">
+                            <img src={`${base}assets/img/Recurso%203@2x.png`} class="header-isotype" alt="Isotipo Artístico" />
+                        </div>
+                        <div class="isotype-face isotype-technical">
+                            <img src={`${base}assets/img/Recurso%204@2x.png`} class="header-isotype" alt="Isotipo Técnico" />
+                        </div>
+                    </div>
+                </div>
+                <a href="#">Facundo Villarreal</a>
+            </div>
+            <!-- Contenedor para los botones de cambio de tema y modo -->
+            <div class="header-toggles">
+                <!-- Botón para cambiar entre modo claro, oscuro y sistema -->
+                <button id="theme-manager-button" class="mode-toggle" aria-live="polite" aria-label="Cambiar tema de color">
+                    <span class="icon-theme-current">
+                        <!-- El script advancedThemeManager.js inyectará el SVG correspondiente aquí -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </span>
+                </button>
+                <!-- Botón para cambiar entre modo artista y técnico -->
+                <button id="profile-toggle" class="mode-toggle switch-toggle" aria-label="Cambiar modo artista/técnico" role="switch" aria-checked="false">
+                    <span class="icon-artist">
+                        <img src={`${base}assets/img/brush-svgrepo-com.svg`} class="icon-artist" alt="Modo Artista">
+                    </span>
+                    <span class="icon-technical">
+                        <img src={`${base}assets/img/gear-11-svgrepo-com.svg`} class="icon-technical" alt="Modo Técnico">
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main>
+        <slot />
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2023 - <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
+            <a href="https://github.com/facu041294/PortfolioTechArt" target="_blank" rel="noopener noreferrer" class="cta-link">
+                Ver repositorio de este sitio en GitHub
+            </a>
+        </div>
+    </footer>
+
+    <!-- Carga e hidratación de scripts de interactividad en el cliente -->
+    <script>
+        import '../js/main.js';
+        import '../js/prism.js';
+    </script>
+</body>
+</html>

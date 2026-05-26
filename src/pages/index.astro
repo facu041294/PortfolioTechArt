@@ -1,0 +1,524 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import SocialGrid from '../components/SocialGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TechnicalToolkit from '../components/TechnicalToolkit.astro';
+import projects from '../data/projects.json';
+---
+
+<Layout>
+    <!-- Sección Hero de bienvenida e introducción -->
+    <section class="hero-section-fullscreen container section-block">
+        <div class="hero-content-wrapper">
+            <!-- Texto de la sección Hero -->
+            <div class="hero-text-content">
+                <div class="hero-profile-avatar">
+                    <img src="/PortfolioTechArt/assets/img/Gemini_Generated_Image_9nzdfd9nzdfd9nzd (1).jpg" alt="Facundo Villarreal - Technical Artist" class="profile-avatar-img" />
+                </div>
+                <h1>Del Plano al Píxel: Un Viaje Técnico y Artístico</h1>
+                <p class="hero-subtitle artist-desc">Technical Artist con background en arquitectura espacial. Traduzco conceptos arquitectónicos en mundos digitales fotorrealistas mediante modelado, iluminación cinemática y texturizado PBR, manteniendo siempre el foco en la composición y la calidad visual sin comprometer el rendimiento.</p>
+                <p class="hero-subtitle technical-desc">Software Developer y Technical Artist enfocado en escalabilidad. Automatizo pipelines de producción (Maya, Unreal Engine) usando Python, MEL y C++, desarrollando herramientas como LookDev Studio Pro para reducir cuellos de botella y empoderar a los equipos de arte.</p>
+                <div class="hero-cta-buttons">
+                    <a href="#process-highlights" class="cta-button primary-cta">Ver Proyectos</a>
+                    <a href="#habilidades-tecnicas" class="cta-button secondary-cta">Mis Habilidades</a>
+                    <a href="/PortfolioTechArt/assets/pdf/FACUNDO VILLARREAL CV.pdf" target="_blank" class="cta-button secondary-cta">📄 Descargar CV</a>
+                </div>
+            </div>
+            
+            <!-- Elemento visual de la sección Hero (Video de Vimeo) -->
+            <div class="hero-visual-content">
+                <div class="vimeo-embed-responsive">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1100758815?h=9c4d70c300&autopause=0&background=1&dnt=1"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy"
+                        title="Video Destacado de Facundo Villarreal"
+                        fetchpriority="low">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Proyectos Clave (Grid y Filtros) -->
+    <section class="process-highlights container section-block" id="process-highlights">
+        <h2 class="section-title">Mis Proyectos</h2>
+        <p class="section-subtitle">
+            Una selección de mis trabajos en cinemáticas y herramientas de automatización
+        </p>
+
+        <!-- Barra de Filtros de Categorías -->
+        <div class="category-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="pipeline-tools">Pipeline & Tools</button>
+            <button class="filter-btn" data-filter="ai-devops">IA & DevOps</button>
+            <button class="filter-btn" data-filter="3d-art">Art & Texturing</button>
+            <button class="filter-btn" data-filter="cinematics-fx">Cinematics & FX</button>
+        </div>
+
+        <!-- Listado de Tarjetas Compactas Pre-renderizadas (Orden invertido: Nuevas primero) -->
+        <div class="projects-grid">
+            {projects.slice().reverse().map((project, index) => (
+                <ProjectCard project={project} index={index} />
+            ))}
+        </div>
+
+        <!-- Botón Ver Más para proyectos ocultos bajo el límite de 2 filas -->
+        <div class="show-more-container">
+            <button id="show-more-projects-btn" class="cta-button secondary-cta">Ver Más</button>
+        </div>
+    </section>
+
+    <!-- Sección de Timeline de Camino Técnico & Artístico -->
+    <section class="timeline-section container section-block" id="habilidades-tecnicas">
+        <h2 class="section-title">Mi Camino Técnico & Artístico</h2>
+        <p class="section-subtitle">Desde arquitectura hasta herramientas técnicas para Unreal Engine</p>
+
+        <TechnicalToolkit />
+
+        <Timeline />
+    </section>
+
+    <!-- Sección CTA y Contacto -->
+    <section class="connect-cta-section container section-block">
+        <h2>Contacto</h2>
+        <p class="connect-subtitle">
+            ¿Interesado en trabajar juntos o tienes alguna pregunta? Conéctate conmigo a través de mis redes o envíame un mensaje directo.
+        </p>
+
+        <SocialGrid />
+        <ContactForm />
+    </section>
+
+    <!-- Visualizador de Imagen Global (Lightbox) -->
+    <div id="lightbox-global" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-label="Visualizador de cerca">
+        <button class="close-lightbox-btn" aria-label="Cerrar visualizador">&times;</button>
+        <img id="lightbox-image" src="" alt="Visualizador en pantalla completa" />
+    </div>
+</Layout>
+
+<style is:global>
+    /* Estilos globales añadidos en index.astro para compatibilidad */
+    .projects-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-lg);
+        width: 100%;
+        max-width: 1620px; /* 5 tarjetas de 300px + 4 espacios de 24px + margen de tolerancia */
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: var(--spacing-md);
+        transition: max-height 0.4s ease;
+    }
+
+    .show-more-container {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--spacing-xl);
+        width: 100%;
+    }
+
+    #show-more-projects-btn {
+        display: none; /* Controlado dinámicamente por JS */
+        padding: 10px 30px;
+        font-size: 0.9rem;
+    }
+
+    /* Barra de Filtros de Categorías Estilo Cápsula */
+    .category-filters {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: var(--spacing-xl);
+        flex-wrap: wrap;
+        background-color: rgba(0, 0, 0, 0.03);
+        padding: 6px;
+        border-radius: 40px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid var(--color-border-light);
+        backdrop-filter: blur(4px);
+    }
+    
+    body.mode-dark .category-filters {
+        background-color: rgba(255, 255, 255, 0.02);
+        border-color: var(--color-border-dark);
+        backdrop-filter: blur(8px);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02);
+    }
+    
+    .filter-btn {
+        background-color: transparent;
+        color: var(--color-text-light);
+        border: none;
+        padding: 8px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.8rem;
+        transition: all var(--transition-speed) var(--transition-ease);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    body.mode-dark .filter-btn {
+        color: var(--color-secondary-dark);
+    }
+    
+    .filter-btn:hover {
+        color: var(--current-primary-color);
+        transform: translateY(-1px);
+    }
+    
+    .filter-btn.active {
+        background-color: var(--current-primary-color);
+        color: white !important;
+        box-shadow: 0 4px 15px rgba(var(--current-primary-color-rgb), 0.3);
+    }
+    
+    body.mode-dark .filter-btn.active {
+        color: var(--color-background-dark) !important;
+    }
+</style>
+
+<script>
+    // Lógica del cliente: Filtros, Modales y Lightbox
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- 1. LÓGICA DE FILTRADO DE TARJETAS GRID Y LÍMITE DE FILAS ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card-compact') as NodeListOf<HTMLElement>;
+        const projectsGrid = document.querySelector('.projects-grid') as HTMLElement;
+        const showMoreBtn = document.getElementById('show-more-projects-btn') as HTMLElement;
+
+        // Limita la visualización de proyectos a máximo 2 filas
+        function limitProjectRows() {
+            if (!projectsGrid) return;
+            const cards = Array.from(projectsGrid.querySelectorAll('.project-card-compact')) as HTMLElement[];
+            if (cards.length === 0) return;
+
+            const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+
+            // Limpiar la clase de limitación en todas las tarjetas
+            cards.forEach(card => {
+                card.classList.remove('is-hidden-by-limit');
+            });
+
+            // Tarjetas que corresponden al filtro activo
+            const activeCards = cards.filter(card => {
+                const category = card.getAttribute('data-category');
+                return activeFilter === 'all' || category === activeFilter;
+            });
+
+            // Si el grid está expandido, mostramos todas las activas
+            if (projectsGrid.classList.contains('is-expanded')) {
+                activeCards.forEach(card => {
+                    const wasHidden = card.style.display === 'none' || card.style.opacity === '0';
+                    card.style.display = 'flex';
+                    if (wasHidden) {
+                        card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        card.offsetHeight; // Reflow
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                        setTimeout(() => {
+                            card.style.transition = '';
+                        }, 250);
+                    }
+                });
+                if (showMoreBtn) showMoreBtn.style.display = 'none';
+                return;
+            }
+
+            // Agrupar las tarjetas activas por su offsetTop para identificar filas
+            const rowsMap = new Map<number, HTMLElement[]>();
+            activeCards.forEach(card => {
+                const wasHidden = card.style.display === 'none';
+                if (wasHidden) {
+                    card.style.display = 'flex';
+                }
+                const top = card.offsetTop;
+                if (!rowsMap.has(top)) {
+                    rowsMap.set(top, []);
+                }
+                rowsMap.get(top)!.push(card);
+                if (wasHidden) {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Ordenar las filas por su posición vertical (offsetTop)
+            const sortedOffsets = Array.from(rowsMap.keys()).sort((a, b) => a - b);
+            let hasHiddenCards = false;
+
+            activeCards.forEach(card => {
+                const top = card.offsetTop;
+                const rowIndex = sortedOffsets.indexOf(top);
+
+                if (rowIndex >= 2) { // 3ra fila en adelante
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    card.style.display = 'none';
+                    card.classList.add('is-hidden-by-limit');
+                    hasHiddenCards = true;
+                } else {
+                    const wasHidden = card.style.display === 'none' || card.style.opacity === '0';
+                    card.style.display = 'flex';
+                    if (wasHidden) {
+                        card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        card.offsetHeight; // Reflow
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                        setTimeout(() => {
+                            card.style.transition = '';
+                        }, 250);
+                    }
+                }
+            });
+
+            // Mostrar u ocultar el botón "Ver Más"
+            if (showMoreBtn) {
+                showMoreBtn.style.display = hasHiddenCards ? 'block' : 'none';
+            }
+        }
+
+        // Evento de Filtros
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+
+                // Cambiar estado activo de los botones de filtro
+                document.querySelector('.filter-btn.active')?.classList.remove('active');
+                button.classList.add('active');
+
+                // Al cambiar de filtro se reinicia la expansión
+                if (projectsGrid) {
+                    projectsGrid.classList.remove('is-expanded');
+                }
+
+                // Ocultar de inmediato las tarjetas que no corresponden al filtro
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (filter !== 'all' && cardCategory !== filter) {
+                        card.style.transition = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Evaluar la distribución y límite de filas inmediatamente
+                limitProjectRows();
+            });
+        });
+
+        // Evento de "Ver Más"
+        if (showMoreBtn && projectsGrid) {
+            showMoreBtn.addEventListener('click', () => {
+                projectsGrid.classList.add('is-expanded');
+                limitProjectRows();
+            });
+        }
+
+        // Ejecutar límite inicial al cargar la página
+        // Esperamos un momento a que las imágenes y fuentes terminen de cargar para calcular offsets correctamente
+        window.addEventListener('load', () => {
+            limitProjectRows();
+        });
+        
+        // También re-evaluamos en resize para adaptarnos a cambios en el flujo responsivo
+        window.addEventListener('resize', limitProjectRows);
+
+        // --- 2. LÓGICA DE MODALES DE DETALLE ---
+        const modalOverlays = document.querySelectorAll('.project-modal-overlay') as NodeListOf<HTMLElement>;
+        const closeButtons = document.querySelectorAll('.close-modal-btn');
+        const openButtons = document.querySelectorAll('.open-details-btn');
+        const compactCards = document.querySelectorAll('.project-card-compact') as NodeListOf<HTMLElement>;
+
+        // Abrir modal al hacer clic en el botón o en la tarjeta compacta
+        compactCards.forEach(card => {
+            const projectId = card.getAttribute('data-project-id');
+            const modal = document.getElementById(`modal-${projectId}`);
+
+            const openModal = () => {
+                if (modal) {
+                    modal.classList.add('is-open');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; // Prevenir scroll de fondo
+                    
+                    // Asegurar que el slider del modal esté inicializado
+                    const sliderEl = modal.querySelector('.image-slider');
+                    if (sliderEl && !sliderEl.classList.contains('slider-initialized')) {
+                        // Forzar el redimensionamiento del slider para asegurar las proporciones correctas
+                        window.dispatchEvent(new Event('resize'));
+                    }
+                }
+            };
+
+            card.addEventListener('click', (e) => {
+                // Si hizo clic en un botón secundario, no abrir el modal completo
+                if ((e.target as HTMLElement).tagName === 'A') return;
+                openModal();
+            });
+        });
+
+        // Cerrar modales
+        const closeModal = (modal: HTMLElement) => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restaurar scroll
+        };
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const modal = (e.target as HTMLElement).closest('.project-modal-overlay') as HTMLElement;
+                if (modal) closeModal(modal);
+            });
+        });
+
+        modalOverlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                // Cerrar solo si hizo clic en el fondo gris del overlay
+                if (e.target === overlay) closeModal(overlay);
+            });
+        });
+
+        // --- 3. LÓGICA DEL LIGHTBOX GLOBAL (ZOOM DE IMAGEN) ---
+        const lightbox = document.getElementById('lightbox-global') as HTMLElement;
+        const lightboxImg = document.getElementById('lightbox-image') as HTMLImageElement;
+        const closeLightboxBtn = document.querySelector('.close-lightbox-btn');
+        const triggers = document.querySelectorAll('.lightbox-trigger') as NodeListOf<HTMLImageElement>;
+
+        triggers.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (lightbox && lightboxImg) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('is-open');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                }
+            });
+        });
+
+        const closeLightbox = () => {
+            if (lightbox) {
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+            }
+        };
+
+        if (closeLightboxBtn) closeLightboxBtn.addEventListener('click', closeLightbox);
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+            });
+        }
+
+        // --- 4. ACCESIBILIDAD: CERRAR CON TECLA ESCAPE ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Cerrar Lightbox primero si está abierto
+                if (lightbox?.classList.contains('is-open')) {
+                    closeLightbox();
+                } else {
+                    // Si no, cerrar cualquier modal de detalles abierto
+                    const activeModal = document.querySelector('.project-modal-overlay.is-open') as HTMLElement;
+                    if (activeModal) closeModal(activeModal);
+                }
+            }
+        });
+
+        // --- 5. LÓGICA DE REPRODUCCIÓN SECUENCIAL DE VIMEO HERO ---
+        const vimeoIframe = document.querySelector('.vimeo-embed-responsive iframe') as HTMLIFrameElement;
+        
+        function loadVimeoPlayerSDK(): Promise<any> {
+            return new Promise((resolve, reject) => {
+                if ((window as any).Vimeo) {
+                    resolve((window as any).Vimeo);
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = 'https://player.vimeo.com/api/player.js';
+                script.onload = () => resolve((window as any).Vimeo);
+                script.onerror = () => reject(new Error('Failed to load Vimeo SDK'));
+                document.head.appendChild(script);
+            });
+        }
+        
+        if (vimeoIframe) {
+            // Lista de videos secuenciales de Vimeo
+            // Reemplaza 'ID_VIDEO_2' e 'ID_VIDEO_3' (y sus hashes si son privados/unlisted)
+            // con los IDs de tus otros videos de Vimeo.
+            const videos = [
+                { id: '1100758815', hash: '9c4d70c300' }, // Video 1
+                { id: '1141257492', hash: 'eb742f4d8e' }, // Video 2
+                { id: '1160606037', hash: '78ef4f1dd5' }  // Video 3
+            ];
+            
+            let currentVideoIndex = 0;
+            
+            loadVimeoPlayerSDK().then((Vimeo: any) => {
+                const player = new Vimeo.Player(vimeoIframe);
+                
+                let isChangingVideo = false;
+                
+                function playNextVideo() {
+                    if (isChangingVideo) return;
+                    isChangingVideo = true;
+                    
+                    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                    const nextVideo = videos[currentVideoIndex];
+                    
+                    let videoUrl = `https://player.vimeo.com/video/${nextVideo.id}`;
+                    const params = [];
+                    if (nextVideo.hash) {
+                        params.push(`h=${nextVideo.hash}`);
+                    }
+                    params.push('autopause=0');
+                    params.push('background=1'); // Mapear como background para ocultar controles en cuentas free
+                    params.push('dnt=1');
+                    
+                    videoUrl += '?' + params.join('&');
+                    
+                    player.loadVideo(videoUrl).then(() => {
+                        player.play().then(() => {
+                            // Resetear el flag un momento después de empezar la reproducción
+                            setTimeout(() => {
+                                isChangingVideo = false;
+                            }, 1000);
+                        });
+                    }).catch((err: any) => {
+                        console.error('Error al cargar el siguiente video en Vimeo:', err);
+                        isChangingVideo = false;
+                    });
+                }
+
+                // Evento ended: por si acaso no está en modo background
+                player.on('ended', () => {
+                    playNextVideo();
+                });
+
+                // Evento timeupdate: para forzar el cambio antes de que el modo background reinicie el bucle de Vimeo
+                player.on('timeupdate', (data: any) => {
+                    if (data.duration > 0 && data.seconds >= data.duration - 0.8) {
+                        playNextVideo();
+                    }
+                });
+            }).catch(err => {
+                console.error('Error al inicializar el SDK de Vimeo:', err);
+            });
+        }
+    });
+</script>

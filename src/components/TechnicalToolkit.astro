@@ -1,0 +1,127 @@
+---
+// src/components/TechnicalToolkit.astro
+---
+
+<div class="technical-toolkit">
+    <div class="toolkit-grid">
+        <!-- Herramientas Principales -->
+        <div class="tool-card">
+            <span class="tool-icon">🎮</span>
+            <h4>Unreal Engine 5</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+            <p>Blueprints, Sequencer, Material Graph</p>
+        </div>
+        
+        <div class="tool-card">
+            <span class="tool-icon">🧊</span>
+            <h4>Autodesk Maya</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
+            <p>Modelado, Retopología, LookDev</p>
+        </div>
+
+        <div class="tool-card">
+            <span class="tool-icon">🎨</span>
+            <h4>Substance Painter</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
+            <p>PBR Texturing, Smart Materials</p>
+        </div>
+
+        <!-- Lenguajes & Programación -->
+        <div class="tool-card">
+            <span class="tool-icon">🐍</span>
+            <h4>Python / MEL</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
+            <p>Pipeline Scripts, Automation</p>
+        </div>
+        
+        <div class="tool-card">
+            <span class="tool-icon">⚙️</span>
+            <h4>C++</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 60%;"></div></div>
+            <p>Plugins & Lógica Base (UE5)</p>
+        </div>
+
+        <!-- Desarrollo Web & Otros -->
+        <div class="tool-card">
+            <span class="tool-icon">🌐</span>
+            <h4>JS / WebTech</h4>
+            <div class="skill-bar"><div class="skill-level" style="width: 75%;"></div></div>
+            <p>Vanilla JS, Three.js, Astro</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .technical-toolkit {
+        margin: var(--spacing-xl) 0;
+    }
+    
+    .toolkit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .tool-card {
+        background-color: var(--color-surface-light);
+        border: 1px solid var(--color-border-light);
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-md);
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    body.mode-dark .tool-card {
+        background-color: var(--color-surface-dark);
+        border-color: var(--color-border-dark);
+    }
+    
+    .tool-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        border-color: var(--current-primary-color);
+    }
+    
+    body.mode-dark .tool-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .tool-icon {
+        font-size: 2rem;
+        margin-bottom: 4px;
+    }
+
+    .tool-card h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--color-text-light);
+    }
+    
+    body.mode-dark .tool-card h4 {
+        color: var(--color-text-dark);
+    }
+
+    .tool-card p {
+        margin: 0;
+        font-size: 0.85rem;
+        opacity: 0.8;
+    }
+
+    .skill-bar {
+        width: 100%;
+        height: 6px;
+        background-color: rgba(128, 128, 128, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 4px 0;
+    }
+
+    .skill-level {
+        height: 100%;
+        background-color: var(--current-primary-color);
+        border-radius: 4px;
+        transition: width 1s ease-in-out;
+    }
+</style>
