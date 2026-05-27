@@ -1,5 +1,26 @@
 [
   {
+    "id": "metahumans-awards",
+    "title": "MetaHumans Awards: Creación de Character",
+    "descArtist": "Creación y customización de personajes fotorrealistas con alta fidelidad para secuencias cinemáticas y proyectos galardonados.",
+    "descTechnical": "Integración avanzada de MetaHumans en Unreal Engine 5. Optimización de assets, ajustes de retopología y grooming, y setup de rigs faciales para captura de movimiento en tiempo real.",
+    "timeSaved": "Pipeline de personajes integrado directamente en el motor.",
+    "imageSlider": [
+      "HeroMetaHumanAwards.png"
+    ],
+    "imageLabels": [
+      "Character Render"
+    ],
+    "link": "",
+    "category": "3d-art",
+    "tags": [
+      "Unreal Engine 5",
+      "MetaHuman",
+      "Character Art",
+      "Grooming"
+    ]
+  },
+  {
     "id": "lookdev-studio-pro",
     "title": "LookDev Studio Pro (MEL Tool)",
     "descArtist": "Automatización integral de entornos de Look Development. Mantiene la consistencia visual del equipo eliminando la variación en fondos, setups de luces y cámaras.",
@@ -192,12 +213,12 @@
     "descTechnical": "Secuencias generadas en Unreal Engine con optimización de assets pesados y uso intensivo de Sequencer para renderizado offline sin pérdida de frames.",
     "timeSaved": "Optimizado para render en 4K en tiempo real.",
     "imageSlider": [
-      "uninvited_cinematic.png"
+      "UNINVITEDFirstScene.png"
     ],
     "imageLabels": [
       "UNINVITED Cinematic"
     ],
-    "link": "",
+    "link": "https://www.artstation.com/artwork/L4Pwkr",
     "category": "cinematics-fx",
     "tags": [
       "Unreal Engine",
@@ -213,7 +234,7 @@
     "descTechnical": "Manejo de post-procesos avanzados, volumetrías dinámicas y optimización de materiales para mantener consistencia en secuencias de acción rápida.",
     "timeSaved": "Pipeline de arte 100% integrado en Unreal.",
     "imageSlider": [
-      "eternal_penance_cinematic.png"
+      "ETERNAL_PENANCEFirstScene.png"
     ],
     "imageLabels": [
       "ETERNAL PENANCE Cinematic"
