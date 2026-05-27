@@ -1876,3 +1876,17 @@ body.mode-dark .footer-bottom {
 .back-to-top-small:hover {
   animation: none;
 }
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  transition: padding 0.3s ease;
+}
+@media (max-width: 900px) {
+  .footer-left {
+    align-items: center;
+  }
+}
+
