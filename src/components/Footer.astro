@@ -69,7 +69,7 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
 
     if (contactCheckbox && contactFormContainer) {
         contactCheckbox.addEventListener('change', (e) => {
-            if (e.target.checked) {
+            if ((e.target as HTMLInputElement).checked) {
                 // Un único scroll relativo suave que se activa casi junto con la animación.
                 // Al pedirle bajar 600px (más de lo que mide el form), el navegador deslizará 
                 // la pantalla fluidamente y se detendrá naturalmente al tocar el nuevo fondo de la página.
