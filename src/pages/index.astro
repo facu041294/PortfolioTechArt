@@ -63,7 +63,7 @@ import projects from '../data/projects.json';
 
         <!-- Listado de Tarjetas Compactas Pre-renderizadas (Orden invertido: Nuevas primero) -->
         <div class="projects-grid">
-            {projects.slice().reverse().map((project, index) => (
+            {projects.map((project, index) => (
                 <ProjectCard project={project} index={index} />
             ))}
         </div>

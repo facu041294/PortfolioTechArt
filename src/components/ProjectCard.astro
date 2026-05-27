@@ -28,7 +28,8 @@ const projectCategory = project.category || "pipeline-tools";
 const projectTags = project.tags || [];
 
 // Normalizar la ruta base asegurando que termine con barra inclinada
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+const rawBase = String(import.meta.env.BASE_URL || '/');
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 ---
 
 <!-- Tarjeta Compacta (Vista Grid) -->
