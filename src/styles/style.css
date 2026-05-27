@@ -21,7 +21,7 @@ html {
 :root {
   /* Fuentes */
   --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-code: 'Fira Code', 'Courier New', monospace; /* Para bloques de c├│digo */
+  --font-code: 'Fira Code', 'Courier New', monospace; /* Para bloques de câ”œâ”‚digo */
 
   /* Colores */
   --color-background-light: #f8f9fa;
@@ -46,7 +46,7 @@ html {
   --color-card-bg-dark: #1e1e1e;
   --color-code-bg-dark: #2a2a2a;
 
-  /* Variable contextual para color primario (default a t├®cnico claro) */
+  /* Variable contextual para color primario (default a tâ”œÂ®cnico claro) */
   --current-primary-color: var(--color-primary-tech-light);
   --current-primary-color-rgb: var(--color-primary-tech-light-rgb);
 
@@ -75,19 +75,19 @@ body {
   display: flex;
   flex-direction: column;
   font-family: var(--font-primary);
-  line-height: 1.7; /* Un poco m├ís de espaciado para legibilidad */
+  line-height: 1.7; /* Un poco mâ”œÃ­s de espaciado para legibilidad */
   background-color: var(--color-background-light);
   color: var(--color-text-light);
   transition: background-color var(--transition-speed) var(--transition-ease),
               color var(--transition-speed) var(--transition-ease);
-  font-size: 16px; /* Base para rem, aunque 100% es tambi├®n v├ílido */
+  font-size: 16px; /* Base para rem, aunque 100% es tambiâ”œÂ®n vâ”œÃ­lido */
   overflow-x: hidden;
 }
 main {
   flex: 1;
 }
 
-/* Aplicaci├│n de colores primarios contextuales */
+/* Aplicaciâ”œâ”‚n de colores primarios contextuales */
 body.mode-light.mode-technical {
   --current-primary-color: var(--color-primary-tech-light);
   --current-primary-color-rgb: var(--color-primary-tech-light-rgb);
@@ -116,7 +116,7 @@ body.mode-dark.mode-artist {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacing-md); /* M├ís padding lateral para pantallas grandes */
+  padding-left: var(--spacing-md); /* Mâ”œÃ­s padding lateral para pantallas grandes */
   padding-right: var(--spacing-md);
 }
 .cta-button {
@@ -169,7 +169,7 @@ body.mode-dark .secondary-cta:hover {
   transition: background-color var(--transition-speed) var(--transition-ease),
               border-color var(--transition-speed) var(--transition-ease);
 }
-/* Estilos espec├¡ficos para header en modo oscuro */
+/* Estilos especâ”œÂ¡ficos para header en modo oscuro */
 body.mode-dark .site-header {
   background-color: var(--color-card-bg-dark);
   border-bottom-color: var(--color-border-dark);
@@ -179,7 +179,7 @@ body.mode-dark .site-header {
 .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 1000; /* Asegura que est├® por encima de otro contenido */
+  z-index: 1000; /* Asegura que estâ”œÂ® por encima de otro contenido */
 }
 
 .header-container {
@@ -211,7 +211,7 @@ body.mode-dark .hero-logo-dynamic a {
 
 /* Estilo para los isotipos de cabecera con giro 3D vertical (2.5 giros) */
 .isotype-wrapper {
-  width: 56px; /* Tamaño del isotipo ampliado */
+  width: 56px; /* TamaÃ±o del isotipo ampliado */
   height: 56px;
   margin-right: 12px;
   display: inline-block;
@@ -227,7 +227,7 @@ body.mode-dark .hero-logo-dynamic a {
   transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Curva springy */
 }
 
-/* En modo técnico, rotamos el contenedor sobre el eje vertical Y con 2.5 giros */
+/* En modo tÃ©cnico, rotamos el contenedor sobre el eje vertical Y con 2.5 giros */
 body.mode-technical .isotype-inner {
   transform: rotateY(900deg);
 }
@@ -239,7 +239,7 @@ body.mode-technical .isotype-inner {
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Importante para Safari */
-  backface-visibility: hidden; /* Oculta la cara cuando está de espaldas */
+  backface-visibility: hidden; /* Oculta la cara cuando estÃ¡ de espaldas */
 }
 
 .header-isotype {
@@ -249,7 +249,7 @@ body.mode-technical .isotype-inner {
   transition: filter var(--transition-speed) var(--transition-ease);
 }
 
-/* Isotipo Técnico está rotado 180 grados sobre el eje Y por defecto en la cara trasera */
+/* Isotipo TÃ©cnico estÃ¡ rotado 180 grados sobre el eje Y por defecto en la cara trasera */
 .isotype-technical {
   transform: rotateY(180deg);
 }
@@ -348,7 +348,7 @@ body.mode-technical.mode-dark .switch-toggle {
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  z-index: 3; /* Sobre el c├¡rculo blanco */
+  z-index: 3; /* Sobre el câ”œÂ¡rculo blanco */
   transition: opacity var(--transition-speed) var(--transition-ease);
   pointer-events: none;
 }
@@ -426,7 +426,7 @@ body.mode-dark .hero-logo-dynamic a {
   width: 100%;
 }
 
-/* Invertir el orden en el Hero para modo técnico */
+/* Invertir el orden en el Hero para modo tÃ©cnico */
 body.mode-technical .hero-content-wrapper {
   flex-direction: row-reverse;
 }
@@ -457,7 +457,7 @@ body.mode-dark .hero-subtitle {
   color: var(--color-secondary-dark);
 }
 
-/* Ocultar/Mostrar subtítulos según el perfil activo */
+/* Ocultar/Mostrar subtÃ­tulos segÃºn el perfil activo */
 body.mode-artist .hero-subtitle.technical-desc {
   display: none !important;
 }
@@ -502,7 +502,7 @@ body.mode-technical .hero-subtitle.technical-desc {
 /*------------------------------------*\
   #SECCION-DE-CONTENIDO (Proyectos, Habilidades, Contacto)
 \*------------------------------------*/
-.section-title { /* Clase gen├®rica para t├¡tulos de secci├│n */
+.section-title { /* Clase genâ”œÂ®rica para tâ”œÂ¡tulos de secciâ”œâ”‚n */
     font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 800;
     text-align: center;
@@ -510,7 +510,7 @@ body.mode-technical .hero-subtitle.technical-desc {
     color: var(--current-primary-color);
     text-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
 }
-.section-subtitle { /* Clase gen├®rica para subt├¡tulos */
+.section-subtitle { /* Clase genâ”œÂ®rica para subtâ”œÂ¡tulos */
     font-size: clamp(1rem, 2.5vw, 1.15rem);
     color: var(--color-secondary-light);
     text-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
@@ -523,19 +523,19 @@ body.mode-dark .section-subtitle {
 }
 
 .process-item {
-  display: grid; /* Usar grid para m├ís control */
+  display: grid; /* Usar grid para mâ”œÃ­s control */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsivo */
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
   background-color: var(--color-card-bg-light);
   padding: var(--spacing-lg);
-  border-radius: 12px; /* Bordes m├ís redondeados */
+  border-radius: 12px; /* Bordes mâ”œÃ­s redondeados */
   box-shadow: var(--shadow-md);
   transition: background-color var(--transition-speed) var(--transition-ease),
               transform var(--transition-speed) var(--transition-ease);
 }
 .process-item:hover {
-    transform: translateY(-5px); /* Sutil efecto de elevaci├│n al pasar el mouse */
+    transform: translateY(-5px); /* Sutil efecto de elevaciâ”œâ”‚n al pasar el mouse */
     box-shadow: var(--shadow-lg);
 }
 body.mode-dark .process-item {
@@ -543,7 +543,7 @@ body.mode-dark .process-item {
 }
 
 /* Layout invertido para el segundo, cuarto, etc. item */
-/* Con Grid, podemos cambiar el orden de las ├íreas o usar order en los hijos */
+/* Con Grid, podemos cambiar el orden de las â”œÃ­reas o usar order en los hijos */
 .process-item.layout-reversed .process-visual {
   order: 1; /* Visual a la derecha (en LTR) si grid es de 2 columnas */
 }
@@ -554,7 +554,7 @@ body.mode-dark .process-item {
 .process-visual {
   align-self: stretch;
 }
-/* Asegurar que en pantallas peque├▒as vuelvan al orden natural si se apilan */
+/* Asegurar que en pantallas pequeâ”œâ–’as vuelvan al orden natural si se apilan */
 @media (max-width: 767.98px) {
     .process-item,
     .process-item.layout-reversed {
@@ -576,7 +576,7 @@ body.mode-dark .process-item {
 
 .process-text h3 {
   font-family: var(--font-secondary);
-  font-size: clamp(1.25rem, 3vw, 1.6rem); /* Tama├▒o de fuente fluido */
+  font-size: clamp(1.25rem, 3vw, 1.6rem); /* Tamaâ”œâ–’o de fuente fluido */
   margin-bottom: var(--spacing-sm);
   font-weight: 600;
   color: var(--current-primary-color);
@@ -587,16 +587,16 @@ body.mode-dark .process-text h3 {
 
 .process-text p {
   margin-bottom: var(--spacing-md);
-  font-size: 0.95rem; /* Ligeramente m├ís peque├▒o para descripciones */
+  font-size: 0.95rem; /* Ligeramente mâ”œÃ­s pequeâ”œâ–’o para descripciones */
 }
 
-/* Estilos del Slider de Im├ígenes (sin cambios significativos, ya estaban bien) */
+/* Estilos del Slider de Imâ”œÃ­genes (sin cambios significativos, ya estaban bien) */
 .image-slider {
   position: relative;
   overflow: hidden;
   /* border-radius: 6px; Ya aplicado en .process-visual */
   aspect-ratio: 16 / 9;
-  background-color: var(--color-code-bg-light); /* Fondo mientras cargan im├ígenes */
+  background-color: var(--color-code-bg-light); /* Fondo mientras cargan imâ”œÃ­genes */
 }
 body.mode-dark .image-slider {
     background-color: var(--color-code-bg-dark);
@@ -640,7 +640,7 @@ body.mode-dark .image-slider {
   transform: translateX(-50%);
   display: flex;
   gap: var(--spacing-xs);
-  background-color: rgba(20, 20, 20, 0.6); /* Un poco m├ís oscuro y menos transparente */
+  background-color: rgba(20, 20, 20, 0.6); /* Un poco mâ”œÃ­s oscuro y menos transparente */
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 20px;
   z-index: 2;
@@ -648,12 +648,12 @@ body.mode-dark .image-slider {
 }
 
 .slider-control-item {
-  background-color: rgba(220, 220, 220, 0.8); /* M├ís opaco */
+  background-color: rgba(220, 220, 220, 0.8); /* Mâ”œÃ­s opaco */
   border: none;
   padding: calc(var(--spacing-xs) * 0.8) var(--spacing-sm); /* Ajustar padding */
   border-radius: 15px;
   cursor: pointer;
-  font-size: 0.8rem; /* M├ís peque├▒o */
+  font-size: 0.8rem; /* Mâ”œÃ­s pequeâ”œâ–’o */
   font-weight: 500;
   transition: background-color var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease);
   color: #212121; /* Texto oscuro para contraste */
@@ -673,12 +673,12 @@ body.mode-dark .slider-control-item.active {
   color: var(--color-card-bg-dark); /* Texto oscuro para contraste */
 }
 
-/* Estilos del Snippet T├®cnico */
+/* Estilos del Snippet Tâ”œÂ®cnico */
 .technical-snippet {
   background-color: var(--color-code-bg-light);
   border: 1px solid var(--color-border-light);
-  border-radius: 8px; /* M├ís redondeado */
-  padding: var(--spacing-md); /* M├ís padding */
+  border-radius: 8px; /* Mâ”œÃ­s redondeado */
+  padding: var(--spacing-md); /* Mâ”œÃ­s padding */
   margin-top: var(--spacing-md);
   margin-bottom: var(--spacing-md);
   transition: background-color var(--transition-speed) var(--transition-ease),
@@ -691,11 +691,11 @@ body.mode-dark .technical-snippet {
 
 .technical-snippet h4 {
     font-size: 0.8rem;
-    margin-bottom: var(--spacing-sm); /* M├ís espacio */
+    margin-bottom: var(--spacing-sm); /* Mâ”œÃ­s espacio */
     font-weight: 600;
     color: var(--color-secondary-light);
     text-transform: uppercase;
-    letter-spacing: 0.5px; /* Peque├▒o espaciado de letras */
+    letter-spacing: 0.5px; /* Pequeâ”œâ–’o espaciado de letras */
 }
 body.mode-dark .technical-snippet h4 {
     color: var(--color-secondary-dark);
@@ -706,9 +706,9 @@ body.mode-dark .technical-snippet h4 {
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
-  max-height: 300px; /* Un poco m├ís de altura */
+  max-height: 300px; /* Un poco mâ”œÃ­s de altura */
   overflow-y: auto;
-  border-radius: 4px; /* Redondear el contenedor del c├│digo */
+  border-radius: 4px; /* Redondear el contenedor del câ”œâ”‚digo */
 }
 
 .technical-snippet code {
@@ -733,7 +733,7 @@ body.mode-dark .technical-snippet img {
     border-color: var(--color-border-dark);
 }
 
-/* L├│gica para mostrar/ocultar snippet seg├║n modo Artist/Technical */
+/* Lâ”œâ”‚gica para mostrar/ocultar snippet segâ”œâ•‘n modo Artist/Technical */
 body .technical-snippet {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
@@ -761,7 +761,7 @@ body.mode-technical .technical-snippet {
   overflow-x: auto;
 }
 
-/* Enlace "Ver m├ís" dentro del Process Item */
+/* Enlace "Ver mâ”œÃ­s" dentro del Process Item */
 .cta-link {
   display: inline-block;
   text-decoration: none;
@@ -940,13 +940,13 @@ body.mode-dark .connect-subtitle {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Para que los botones bajen en pantallas peque├▒as */
+  flex-wrap: wrap; /* Para que los botones bajen en pantallas pequeâ”œâ–’as */
   gap: var(--spacing-md); /* Espacio entre botones */
   margin-bottom: var(--spacing-lg); /* Espacio antes del formulario desplegable (si se abre) */
 }
 
 .connect-button,
-.contact-toggle-button-styled { /* Estilo base para todos los botones de esta secci├│n */
+.contact-toggle-button-styled { /* Estilo base para todos los botones de esta secciâ”œâ”‚n */
   display: inline-flex; /* Para alinear icono y texto */
   align-items: center;
   justify-content: center; /* Centrar contenido si el texto es corto */
@@ -963,7 +963,7 @@ body.mode-dark .connect-subtitle {
               color var(--transition-speed) var(--transition-ease),
               border-color var(--transition-speed) var(--transition-ease),
               transform var(--transition-speed) var(--transition-ease);
-  min-width: 150px; /* Ancho m├¡nimo para que no se vean muy peque├▒os */
+  min-width: 150px; /* Ancho mâ”œÂ¡nimo para que no se vean muy pequeâ”œâ–’os */
   cursor: pointer;
 }
 body.mode-dark .connect-button,
@@ -1003,11 +1003,11 @@ body.mode-dark .contact-toggle-button-styled {
 .contact-form-toggle-wrapper {
   position: relative;
   width: 100%;
-  max-width: 600px; /* Ajusta el ancho m├íximo del formulario */
+  max-width: 600px; /* Ajusta el ancho mâ”œÃ­ximo del formulario */
   margin: var(--spacing-md) auto 0 auto; /* Espacio arriba y centrado */
 }
 
-/* El checkbox real estar├í oculto, lo controlamos con el label */
+/* El checkbox real estarâ”œÃ­ oculto, lo controlamos con el label */
 .contact-toggle-checkbox {
   display: none; /* Oculta el checkbox real */
 }
@@ -1017,7 +1017,7 @@ body.mode-dark .contact-toggle-button-styled {
   background-color: var(--color-card-bg-light);
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
-  padding: 0; /* Padding se aplicar├í cuando est├® visible para la animaci├│n */
+  padding: 0; /* Padding se aplicarâ”œÃ­ cuando estâ”œÂ® visible para la animaciâ”œâ”‚n */
   margin-top: var(--spacing-sm);
   box-shadow: var(--shadow-md);
 
@@ -1038,12 +1038,12 @@ body.mode-dark .contact-form-container {
   border-color: var(--color-border-dark);
 }
 
-/* --- ESTADO VISIBLE CUANDO EL CHECKBOX EST├ü MARCADO --- */
+/* --- ESTADO VISIBLE CUANDO EL CHECKBOX ESTâ”œÃ¼ MARCADO --- */
 .contact-toggle-checkbox:checked ~ .contact-form-container {
   max-height: 1000px; /* Altura suficiente para el contenido */
   opacity: 1;
   visibility: visible;
-  padding: var(--spacing-md); /* Aplicar padding cuando est├í visible */
+  padding: var(--spacing-md); /* Aplicar padding cuando estâ”œÃ­ visible */
   transition: max-height 0.5s var(--transition-ease),
               opacity 0.3s var(--transition-ease),
               padding 0.5s var(--transition-ease),
@@ -1124,7 +1124,7 @@ body.mode-dark .contact-form .form-group textarea:focus {
   /* padding: var(--spacing-sm) var(--spacing-md); */
   text-transform: none;
   font-size: 1rem;
-  /* Deber├¡a heredar estilos de .cta-button si tambi├®n tiene esa clase en el HTML */
+  /* Deberâ”œÂ¡a heredar estilos de .cta-button si tambiâ”œÂ®n tiene esa clase en el HTML */
 }
 
 .thank-you-message {
@@ -1164,11 +1164,11 @@ body.mode-dark .site-footer {
 
 
 /*------------------------------------*\
-  #DISE├æO-RESPONSIVO (MEDIA QUERIES)
+  #DISEâ”œÃ¦O-RESPONSIVO (MEDIA QUERIES)
 \*------------------------------------*/
-/* Primero los ajustes para pantallas peque├▒as (Mobile First Approach) */
+/* Primero los ajustes para pantallas pequeâ”œâ–’as (Mobile First Approach) */
 
-/* M├│viles (hasta 768px) */
+/* Mâ”œâ”‚viles (hasta 768px) */
 @media (max-width: 768px) {
   body {
     font-size: 15px;
@@ -1260,7 +1260,7 @@ body.mode-dark .site-footer {
   }
 }
 
-/* Ajuste para FullHD y m├ís, para que el video crezca */
+/* Ajuste para FullHD y mâ”œÃ­s, para que el video crezca */
 @media (min-width: 1200px) {
   .hero-content-wrapper {
     gap: var(--spacing-xl);
@@ -1277,7 +1277,7 @@ body.mode-dark .site-footer {
 }
 
 
-/* Ajuste para 2K y m├ís */
+/* Ajuste para 2K y mâ”œÃ­s */
 @media (min-width: 1920px) {
   .container {
     max-width: 1600px;
@@ -1740,7 +1740,7 @@ body.mode-dark .mega-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Borde superior decorativo seg�n el modo */
+/* Borde superior decorativo según el modo */
 .mega-footer::before {
   content: '';
   display: block;
@@ -1852,13 +1852,32 @@ body.mode-dark .footer-bottom {
   display: inline-block;
 }
 
+@keyframes bounceHover {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
 .back-to-top-small {
   padding: 8px 16px;
   font-size: 0.85rem;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  line-height: 1;
+  animation: bounceHover 2s infinite ease-in-out;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.back-to-top-small:hover {
+  animation: none;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 body:not(.mode-dark) .back-to-top-small {
   border-color: rgba(0, 0, 0, 0.2);
 }
-
+body:not(.mode-dark) .back-to-top-small:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
