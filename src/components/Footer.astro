@@ -1,6 +1,7 @@
 ---
 import SocialGrid from './SocialGrid.astro';
 import ContactForm from './ContactForm.astro';
+import ContactModal from './ContactModal.astro';
 
 // Normalizamos BASE_URL en caso de que sea undefined
 const baseUrl = String(import.meta.env.BASE_URL || '/');
@@ -44,6 +45,8 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
     </div>
 </footer>
 
+<ContactModal />
+
 <script>
     // Configurar año dinámico
     const yearSpan = document.getElementById('current-year');
@@ -62,30 +65,40 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
         });
     }
 
-    // Hacer scroll y focus al formulario de contacto cuando se abre
+    // LÓGICA OPCIÓN A: ResizeObserver
     const contactCheckbox = document.getElementById('contact-toggle-checkbox');
     const contactFormContainer = document.getElementById('contact-form-container');
     const firstFormInput = document.getElementById('form-name');
 
     if (contactCheckbox && contactFormContainer) {
+        let resizeObserver = null;
+        let lastHeight = contactFormContainer.offsetHeight;
+
         contactCheckbox.addEventListener('change', (e) => {
             if ((e.target as HTMLInputElement).checked) {
-                // Un único scroll relativo suave que se activa casi junto con la animación.
-                // Al pedirle bajar 600px (más de lo que mide el form), el navegador deslizará 
-                // la pantalla fluidamente y se detendrá naturalmente al tocar el nuevo fondo de la página.
-                setTimeout(() => {
-                    window.scrollBy({
-                        top: 600,
-                        behavior: 'smooth'
-                    });
-                }, 50);
+                // Iniciar observador para sincronizar la altura cuadro por cuadro
+                lastHeight = contactFormContainer.offsetHeight;
                 
-                // Esperamos que termine la animación para hacer focus
-                setTimeout(() => {
-                    if (firstFormInput) {
-                        firstFormInput.focus({ preventScroll: true });
+                resizeObserver = new ResizeObserver((entries) => {
+                    for (let entry of entries) {
+                        const newHeight = entry.contentRect.height;
+                        const diff = newHeight - lastHeight;
+                        if (diff > 0) {
+                            window.scrollBy(0, diff); // Scroll síncrono por cada pixel crecido
+                        }
+                        lastHeight = newHeight;
                     }
-                }, 550);
+                });
+                
+                resizeObserver.observe(contactFormContainer);
+                
+                // Limpiar observador al terminar animación y hacer focus
+                setTimeout(() => {
+                    if (resizeObserver) resizeObserver.disconnect();
+                    if (firstFormInput) firstFormInput.focus({ preventScroll: true });
+                }, 600);
+            } else {
+                if (resizeObserver) resizeObserver.disconnect();
             }
         });
     }

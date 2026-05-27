@@ -1,0 +1,116 @@
+---
+// src/components/ContactModal.astro
+---
+
+<div id="contact-modal" class="contact-modal-overlay" aria-hidden="true" role="dialog">
+  <div class="contact-modal-content">
+    <button id="close-modal-btn" class="close-modal-btn" aria-label="Cerrar modal">&times;</button>
+    <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form actual-form">
+      <h4>Envíame un mensaje (Modal):</h4>
+      <div class="form-group">
+        <label for="modal-form-name">Nombre:</label>
+        <input type="text" id="modal-form-name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="modal-form-email">Email:</label>
+        <input type="email" id="modal-form-email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="modal-form-message">Mensaje:</label>
+        <textarea id="modal-form-message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="cta-button primary-cta submit-form-button">Enviar Mensaje</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .contact-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .contact-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .contact-modal-content {
+    background: var(--color-card-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  :global(body.mode-dark) .contact-modal-content {
+    background: var(--color-card-bg-dark);
+    border-color: var(--color-border-dark);
+  }
+
+  .contact-modal-overlay.active .contact-modal-content {
+    transform: translateY(0);
+  }
+
+  .close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--text-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .close-modal-btn:hover {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const modalBtn = document.getElementById('modal-trigger-btn');
+  const modal = document.getElementById('contact-modal');
+  const closeBtn = document.getElementById('close-modal-btn');
+  const firstInput = document.getElementById('modal-form-name');
+
+  if (modalBtn && modal && closeBtn) {
+    modalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.classList.add('active');
+      setTimeout(() => {
+        if (firstInput) firstInput.focus();
+      }, 300);
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  }
+</script>
