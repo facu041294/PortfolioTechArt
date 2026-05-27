@@ -2,104 +2,228 @@
   {
     "id": "lookdev-studio-pro",
     "title": "LookDev Studio Pro (MEL Tool)",
-    "descArtist": "Automatizaci\u00f3n integral de entornos de Look Development. Mantiene la consistencia visual del equipo eliminando la variaci\u00f3n en fondos, setups de luces y c\u00e1maras.",
-    "descTechnical": "Script MEL puro para Autodesk Maya sin dependencias externas. Calcula din\u00e1micamente el Bounding Box de los assets para generar cicloramas infinitos proporcionales, desplegando 3 luces cinem\u00e1ticas y 3 c\u00e1maras estandarizadas en < 5 segundos.",
-    "timeSaved": "99.6% de reducci\u00f3n de tiempo de setup (de 20 min a 5 seg por asset).",
-    "imageSlider": ["MuestraRenderOutput.png", "MuestraStudioGenerado.png", "MuestraDeVentanaConBotonScript.png", "MeshSoloOutliner.png"],
-    "imageLabels": ["Render Final", "Entorno Generado", "Script UI", "Outliner"],
+    "descArtist": "Automatización integral de entornos de Look Development. Mantiene la consistencia visual del equipo eliminando la variación en fondos, setups de luces y cámaras.",
+    "descTechnical": "Script MEL puro para Autodesk Maya sin dependencias externas. Calcula dinámicamente el Bounding Box de los assets para generar cicloramas infinitos proporcionales, desplegando 3 luces cinemáticas y 3 cámaras estandarizadas en < 5 segundos.",
+    "timeSaved": "99.6% de reducción de tiempo de setup (de 20 min a 5 seg por asset).",
+    "imageSlider": [
+      "MuestraRenderOutput.png",
+      "MuestraStudioGenerado.png",
+      "MuestraDeVentanaConBotonScript.png",
+      "MeshSoloOutliner.png"
+    ],
+    "imageLabels": [
+      "Render Final",
+      "Entorno Generado",
+      "Script UI",
+      "Outliner"
+    ],
     "snippetCode": {
       "lang": "mel",
       "code": "global proc createLookDevEnv() {\n    // Calcular Bounding Box y generar entorno proporcional\n    float $bbox[] = `xform -q -bb`;\n    float $scale = max($bbox[3]-$bbox[0], $bbox[5]-$bbox[2]);\n    \n    // Setup de luces cinematograficas (Key, Fill, Rim)\n    string $keyLight = `createNode areaLight -n \"LGT_KeyShape\"`;\n    setAttr ($keyLight + \".intensity\") 100;\n    // ... (Automatizacion sin intervencion manual)\n    print(\"LookDev Studio Pro: Entorno generado en < 5 segundos.\");\n}"
     },
     "link": "https://github.com/facu041294/maya-lookdev-studio-pro",
     "category": "pipeline-tools",
-    "tags": ["Autodesk Maya", "MEL", "Pipeline Automation", "Lighting"]
+    "tags": [
+      "Autodesk Maya",
+      "MEL",
+      "Pipeline Automation",
+      "Lighting"
+    ]
   },
   {
     "id": "neo-noir-pipeline",
-    "title": "TAR-021: Neo-Noir Interior Pipeline",
-    "descArtist": "Direcci\u00f3n t\u00e9cnica para una secuencia cinem\u00e1tica fotorrealista estilo Neo-Noir. Establecimiento del est\u00e1ndar de calidad, topolog\u00eda (100% quads) y texturizado PBR 4K.",
-    "descTechnical": "Dise\u00f1o de arquitectura de pipeline inmutable separando directorios Work/Publish. Creaci\u00f3n de una convenci\u00f3n de nomenclatura estricta para Maya y validaci\u00f3n por scripts previa exportaci\u00f3n para garantizar la trazabilidad total de assets.",
-    "timeSaved": "Escalabilidad garantizada y eliminaci\u00f3n de cuellos de botella por assets rotos.",
-    "imageSlider": ["neo_noir_pipeline_mockup.png"],
-    "imageLabels": ["Pipeline Architecture"],
+    "title": "Neo-Noir Interior Pipeline",
+    "descArtist": "Dirección técnica para una secuencia cinemática fotorrealista estilo Neo-Noir. Establecimiento del estándar de calidad, topología (100% quads) y texturizado PBR 4K.",
+    "descTechnical": "Diseño de arquitectura de pipeline inmutable separando directorios Work/Publish. Creación de una convención de nomenclatura estricta para Maya y validación por scripts previa exportación para garantizar la trazabilidad total de assets.",
+    "timeSaved": "Escalabilidad garantizada y eliminación de cuellos de botella por assets rotos.",
+    "imageSlider": [
+      "neo_noir_pipeline_mockup.png"
+    ],
+    "imageLabels": [
+      "Pipeline Architecture"
+    ],
     "snippetImg": "neo_noir_pipeline_mockup.png",
     "link": "",
     "category": "cinematics-fx",
-    "tags": ["Pipeline Architecture", "Python/MEL", "Documentation", "QA"]
+    "tags": [
+      "Pipeline Architecture",
+      "Python/MEL",
+      "Documentation",
+      "QA"
+    ]
   },
   {
     "id": "meshmosh-voxel",
     "title": "MeshMosh: Multi-user 3D Editor",
-    "descArtist": "Aplicaci\u00f3n web interactiva para modelado 3D colaborativo en tiempo real. Todos los usuarios editan la misma escena simult\u00e1neamente desde el navegador.",
-    "descTechnical": "Desarrollado con Vanilla JS y Three.js. Utiliza Yjs (CRDT) y WebRTC para sincronizaci\u00f3n Peer-to-Peer del estado del DOM 3D sin depender de un servidor backend, alojado enteramente en GitHub Pages.",
-    "timeSaved": "Sincronizaci\u00f3n en < 1 segundo sin latencia de backend.",
-    "imageSlider": ["meshmosh_mockup.png"],
-    "imageLabels": ["MeshMosh Editor UI"],
+    "descArtist": "Aplicación web interactiva para modelado 3D colaborativo en tiempo real. Todos los usuarios editan la misma escena simultáneamente desde el navegador.",
+    "descTechnical": "Desarrollado en equipo en un desafio de 30 minutos, con Vanilla JS y Three.js. Utiliza Yjs (CRDT) y WebRTC para sincronización Peer-to-Peer del estado del DOM 3D sin depender de un servidor backend, alojado enteramente en GitHub Pages.",
+    "timeSaved": "Sincronización en < 1 segundo sin latencia de backend.",
+    "imageSlider": [
+      "meshmosh_mockup.png"
+    ],
+    "imageLabels": [
+      "MeshMosh Editor UI"
+    ],
     "snippetCode": {
       "lang": "javascript",
       "code": "import * as Y from 'yjs';\nimport { WebrtcProvider } from 'y-webrtc';\nimport * as THREE from 'three';\n\n// Inicializar Documento Yjs compartido via WebRTC\nconst ydoc = new Y.Doc();\nconst provider = new WebrtcProvider('meshmosh-room', ydoc);\nconst yObjects = ydoc.getMap('objects');\n\n// Sincronizar objetos Three.js a traves del estado P2P\nyObjects.observe(event => {\n    updateSceneFromSharedState();\n});"
     },
     "link": "https://github.com/facu041294/VoxelParty",
     "category": "pipeline-tools",
-    "tags": ["JavaScript", "Three.js", "WebRTC", "Yjs"]
+    "tags": [
+      "JavaScript",
+      "Three.js",
+      "WebRTC",
+      "Yjs"
+    ]
   },
   {
     "id": "render-automotive",
     "title": "Unreal Engine: Cinematics & Optimization",
-    "descArtist": "Creaci\u00f3n de secuencias fotorrealistas con atenci\u00f3n a composici\u00f3n, iluminaci\u00f3n dram\u00e1tica y efectos de part\u00edculas complejos en EmberGen.",
-    "descTechnical": "Optimizaci\u00f3n de entornos y hardware para proyectos como 'Mano a Mano', 'UNINVITED' y 'ETERNAL PENANCE'. Uso de Data Layers, ejecuci\u00f3n automatizada (.bat) y Sequencer automation.",
-    "timeSaved": "10% de reducci\u00f3n de carga hardware y 20% m\u00e1s iteraciones v\u00eda Sequencer automation.",
-    "imageSlider": ["car-render.jpg", "car-wire.jpg", "car-light.jpg"],
-    "imageLabels": ["Render Final", "Wireframe", "Lighting Setup"],
+    "descArtist": "Creación de secuencias fotorrealistas con atención a composición, iluminación dramática y efectos de partículas complejos en EmberGen.",
+    "descTechnical": "Optimización de entornos y hardware para proyectos como 'Mano a Mano', 'UNINVITED' y 'ETERNAL PENANCE'. Uso de Data Layers, ejecución automatizada (.bat) y Sequencer automation.",
+    "timeSaved": "10% de reducción de carga hardware y 20% más iteraciones vía Sequencer automation.",
+    "imageSlider": [
+      "car-render.jpg",
+      "car-wire.jpg",
+      "car-light.jpg"
+    ],
+    "imageLabels": [
+      "Render Final",
+      "Wireframe",
+      "Lighting Setup"
+    ],
     "snippetImg": "car-particleEmbergen.png",
     "link": "",
     "category": "cinematics-fx",
-    "tags": ["Unreal Engine 5", "Sequencer", "Performance Profiling", "EmberGen"]
+    "tags": [
+      "Unreal Engine 5",
+      "Sequencer",
+      "Performance Profiling",
+      "EmberGen"
+    ]
   },
   {
     "id": "shader-terreno",
-    "title": "Shader Terreno de R\u00edo",
-    "descArtist": "Material de paisaje realista con capas adaptables de nieve, roca y musgo. Fusi\u00f3n est\u00e9tica de texturas basada en pendientes y alturas para entornos de gran escala.",
-    "descTechnical": "Desarrollo de Master Material en Unreal Engine con l\u00f3gica de mezcla triplanar y m\u00e1scaras din\u00e1micas de altura. Optimizaci\u00f3n del conteo de instrucciones en pixel shader para evitar cuellos de botella en GPU.",
-    "timeSaved": "Pintado autom\u00e1tico del 95% del terreno por reglas matem\u00e1ticas",
-    "imageSlider": ["nieve-render.jpg", "nieve-graph.jpg", "nieve-mask.jpg"],
-    "imageLabels": ["Render", "Graph", "Mask"],
+    "title": "Shader Terreno de Río",
+    "descArtist": "Material de paisaje realista con capas adaptables de nieve, roca y musgo. Fusión estética de texturas basada en pendientes y alturas para entornos de gran escala.",
+    "descTechnical": "Desarrollo de Master Material en Unreal Engine con lógica de mezcla triplanar y máscaras dinámicas de altura. Optimización del conteo de instrucciones en pixel shader para evitar cuellos de botella en GPU.",
+    "timeSaved": "Pintado automático del 95% del terreno por reglas matemáticas",
+    "imageSlider": [
+      "nieve-render.jpg",
+      "nieve-graph.jpg",
+      "nieve-mask.jpg"
+    ],
+    "imageLabels": [
+      "Render",
+      "Graph",
+      "Mask"
+    ],
     "snippetImg": "nieve-blueprint.png",
     "link": "",
     "category": "3d-art",
-    "tags": ["Unreal Engine", "Shader Graph", "Landscape"]
+    "tags": [
+      "Unreal Engine",
+      "Shader Graph",
+      "Landscape"
+    ]
   },
   {
     "id": "widget-folder-structure-tool",
     "title": "Unreal Folder Structure Tool",
     "descArtist": "Organizador de proyectos de Unreal Engine con reglas de nomenclatura limpia para mantener una estructura visual clara en el navegador de contenido.",
-    "descTechnical": "Script en Python integrado en la API de Unreal Engine (unreal.EditorAssetLibrary) que valida nombres y crea \u00e1rboles de directorios estandarizados de manera autom\u00e1tica.",
-    "timeSaved": "De 15 minutos manuales a 2 segundos mediante automatizaci\u00f3n",
-    "imageSlider": ["tool-result.jpg", "tool-ui.jpg", "tool-heatmap.jpg"],
-    "imageLabels": ["Resultado", "UI", "Reglas"],
+    "descTechnical": "Script en Python integrado en la API de Unreal Engine (unreal.EditorAssetLibrary) que valida nombres y crea árboles de directorios estandarizados de manera automática.",
+    "timeSaved": "De 15 minutos manuales a 2 segundos mediante automatización",
+    "imageSlider": [
+      "tool-result.jpg",
+      "tool-ui.jpg",
+      "tool-heatmap.jpg"
+    ],
+    "imageLabels": [
+      "Resultado",
+      "UI",
+      "Reglas"
+    ],
     "snippetCode": {
       "lang": "python",
-      "code": "import unreal\n\ndef create_structure():\n    # Automatizar la creaci\u00f3n de directorios en Unreal Engine\n    base_path = '/Game'\n    folders = ['Blueprints', 'Materials', 'Textures', 'Meshes', 'Audio', 'Maps']\n    for f in folders:\n        unreal.EditorAssetLibrary.make_directory(f'{base_path}/{f}')\n    print('Estructura de carpetas generada correctamente.')"
+      "code": "import unreal\n\ndef create_structure():\n    # Automatizar la creación de directorios en Unreal Engine\n    base_path = '/Game'\n    folders = ['Blueprints', 'Materials', 'Textures', 'Meshes', 'Audio', 'Maps']\n    for f in folders:\n        unreal.EditorAssetLibrary.make_directory(f'{base_path}/{f}')\n    print('Estructura de carpetas generada correctamente.')"
     },
     "link": "https://github.com/facu041294",
     "category": "pipeline-tools",
-    "tags": ["Python", "Unreal API", "Automation"]
+    "tags": [
+      "Python",
+      "Unreal API",
+      "Automation"
+    ]
   },
   {
     "id": "robot-jade",
     "title": "Robot de Jade: PBR Texturing",
-    "descArtist": "Texturizado realista de un robot ancestral de jade y bronce en Substance 3D Painter. Composici\u00f3n art\u00edstica que explora el contraste entre la piedra esculpida y la oxidaci\u00f3n en un entorno forestal.",
-    "descTechnical": "Modelado y retopolog\u00eda en Autodesk Maya orientados a maximizar la densidad de t\u00e9xeles. Creaci\u00f3n de materiales PBR inteligentes y m\u00e1scaras din\u00e1micas de desgaste en Substance Painter.",
-    "timeSaved": "Reducci\u00f3n del 60% en tiempo de texturizado mediante Smart Materials.",
-    "imageSlider": ["JadeRobot_A_Environment_FacundoVillarreal.png", "Concept_JadeRobot.png", "MoodBoard_JadeRobot.png"],
-    "imageLabels": ["Render Final", "Concept", "Moodboard"],
+    "descArtist": "Texturizado realista de un robot ancestral de jade y bronce en Substance 3D Painter. Composición artística que explora el contraste entre la piedra esculpida y la oxidación en un entorno forestal.",
+    "descTechnical": "Modelado y retopología en Autodesk Maya orientados a maximizar la densidad de téxeles. Creación de materiales PBR inteligentes y máscaras dinámicas de desgaste en Substance Painter.",
+    "timeSaved": "Reducción del 60% en tiempo de texturizado mediante Smart Materials.",
+    "imageSlider": [
+      "JadeRobot_A_Environment_FacundoVillarreal.png",
+      "Concept_JadeRobot.png",
+      "MoodBoard_JadeRobot.png"
+    ],
+    "imageLabels": [
+      "Render Final",
+      "Concept",
+      "Moodboard"
+    ],
     "snippetCode": {
       "lang": "python",
       "code": "import maya.cmds as cmds\n\ndef prepare_for_substance():\n    # Renombrar objetos seleccionados con sufijo _low para horneado en Substance\n    selected = cmds.ls(sl=True, long=True) or []\n    for obj_path in selected:\n        obj = obj_path.split('|')[-1]\n        if not obj.endswith('_low'):\n            cmds.rename(obj_path, f'{obj}_low')\n    print('Mallas preparadas con sufijos _low para Substance Painter.')"
     },
     "link": "",
     "category": "3d-art",
-    "tags": ["Maya", "Substance Painter", "PBR Texturing", "Python"]
+    "tags": [
+      "Maya",
+      "Substance Painter",
+      "PBR Texturing",
+      "Python"
+    ]
+  },
+  {
+    "id": "uninvited-cinematic",
+    "title": "UNINVITED: Cinematic Award Project",
+    "descArtist": "Dirección de arte, iluminación dramática y composición fotorrealista para cortometraje cinemático galardonado.",
+    "descTechnical": "Secuencias generadas en Unreal Engine con optimización de assets pesados y uso intensivo de Sequencer para renderizado offline sin pérdida de frames.",
+    "timeSaved": "Optimizado para render en 4K en tiempo real.",
+    "imageSlider": [
+      "uninvited_cinematic.png"
+    ],
+    "imageLabels": [
+      "UNINVITED Cinematic"
+    ],
+    "link": "",
+    "category": "cinematics-fx",
+    "tags": [
+      "Unreal Engine",
+      "Cinematics",
+      "Lighting",
+      "Art Direction"
+    ]
+  },
+  {
+    "id": "eternal-penance",
+    "title": "ETERNAL PENANCE: Cinematic Final Project",
+    "descArtist": "Desarrollo visual y creación de mundos para proyecto final cinemático. Atmósferas densas y narrativa visual profunda.",
+    "descTechnical": "Manejo de post-procesos avanzados, volumetrías dinámicas y optimización de materiales para mantener consistencia en secuencias de acción rápida.",
+    "timeSaved": "Pipeline de arte 100% integrado en Unreal.",
+    "imageSlider": [
+      "eternal_penance_cinematic.png"
+    ],
+    "imageLabels": [
+      "ETERNAL PENANCE Cinematic"
+    ],
+    "link": "",
+    "category": "cinematics-fx",
+    "tags": [
+      "Unreal Engine",
+      "Cinematics",
+      "Post-Processing"
+    ]
   }
 ]
