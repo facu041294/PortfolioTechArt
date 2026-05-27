@@ -1,23 +1,49 @@
 [
   {
-    "id": "metahumans-awards",
-    "title": "MetaHumans Awards: Creación de Character",
-    "descArtist": "Creación y customización de personajes fotorrealistas con alta fidelidad para secuencias cinemáticas y proyectos galardonados.",
-    "descTechnical": "Integración avanzada de MetaHumans en Unreal Engine 5. Optimización de assets, ajustes de retopología y grooming, y setup de rigs faciales para captura de movimiento en tiempo real.",
-    "timeSaved": "Pipeline de personajes integrado directamente en el motor.",
+    "id": "meshmosh-voxel",
+    "title": "MeshMosh: Multi-user 3D Editor",
+    "descArtist": "Aplicación web interactiva para modelado 3D colaborativo en tiempo real. Todos los usuarios editan la misma escena simultáneamente desde el navegador.",
+    "descTechnical": "Desarrollado en equipo en un desafio de 30 minutos, con Vanilla JS y Three.js. Utiliza Yjs (CRDT) y WebRTC para sincronización Peer-to-Peer del estado del DOM 3D sin depender de un servidor backend, alojado enteramente en GitHub Pages.",
+    "timeSaved": "Sincronización en < 1 segundo sin latencia de backend.",
     "imageSlider": [
-      "HeroMetaHumanAwards.png"
+      "meshmosh_mockup.png"
     ],
     "imageLabels": [
-      "Character Render"
+      "MeshMosh Editor UI"
     ],
-    "link": "",
-    "category": "3d-art",
+    "snippetCode": {
+      "lang": "javascript",
+      "code": "import * as Y from 'yjs';\nimport { WebrtcProvider } from 'y-webrtc';\nimport * as THREE from 'three';\n\n// Inicializar Documento Yjs compartido via WebRTC\nconst ydoc = new Y.Doc();\nconst provider = new WebrtcProvider('meshmosh-room', ydoc);\nconst yObjects = ydoc.getMap('objects');\n\n// Sincronizar objetos Three.js a traves del estado P2P\nyObjects.observe(event => {\n    updateSceneFromSharedState();\n});"
+    },
+    "link": "https://github.com/facu041294/VoxelParty",
+    "category": "pipeline-tools",
     "tags": [
-      "Unreal Engine 5",
-      "MetaHuman",
-      "Character Art",
-      "Grooming"
+      "JavaScript",
+      "Three.js",
+      "WebRTC",
+      "Yjs"
+    ]
+  },
+  {
+    "id": "neo-noir-pipeline",
+    "title": "Neo-Noir Interior Pipeline",
+    "descArtist": "Dirección técnica para una secuencia cinemática fotorrealista estilo Neo-Noir. Establecimiento del estándar de calidad, topología (100% quads) y texturizado PBR 4K.",
+    "descTechnical": "Diseño de arquitectura de pipeline inmutable separando directorios Work/Publish. Creación de una convención de nomenclatura estricta para Maya y validación por scripts previa exportación para garantizar la trazabilidad total de assets.",
+    "timeSaved": "Escalabilidad garantizada y eliminación de cuellos de botella por assets rotos.",
+    "imageSlider": [
+      "neo_noir_pipeline_mockup.png"
+    ],
+    "imageLabels": [
+      "Pipeline Architecture"
+    ],
+    "snippetImg": "neo_noir_pipeline_mockup.png",
+    "link": "",
+    "category": "cinematics-fx",
+    "tags": [
+      "Pipeline Architecture",
+      "Python/MEL",
+      "Documentation",
+      "QA"
     ]
   },
   {
@@ -52,101 +78,94 @@
     ]
   },
   {
-    "id": "neo-noir-pipeline",
-    "title": "Neo-Noir Interior Pipeline",
-    "descArtist": "Dirección técnica para una secuencia cinemática fotorrealista estilo Neo-Noir. Establecimiento del estándar de calidad, topología (100% quads) y texturizado PBR 4K.",
-    "descTechnical": "Diseño de arquitectura de pipeline inmutable separando directorios Work/Publish. Creación de una convención de nomenclatura estricta para Maya y validación por scripts previa exportación para garantizar la trazabilidad total de assets.",
-    "timeSaved": "Escalabilidad garantizada y eliminación de cuellos de botella por assets rotos.",
+    "id": "robot-jade",
+    "title": "Robot de Jade: PBR Texturing",
+    "descArtist": "Texturizado realista de un robot ancestral de jade y bronce en Substance 3D Painter. Composición artística que explora el contraste entre la piedra esculpida y la oxidación en un entorno forestal.",
+    "descTechnical": "Modelado y retopología en Autodesk Maya orientados a maximizar la densidad de téxeles. Creación de materiales PBR inteligentes y máscaras dinámicas de desgaste en Substance Painter.",
+    "timeSaved": "Reducción del 60% en tiempo de texturizado mediante Smart Materials.",
     "imageSlider": [
-      "neo_noir_pipeline_mockup.png"
-    ],
-    "imageLabels": [
-      "Pipeline Architecture"
-    ],
-    "snippetImg": "neo_noir_pipeline_mockup.png",
-    "link": "",
-    "category": "cinematics-fx",
-    "tags": [
-      "Pipeline Architecture",
-      "Python/MEL",
-      "Documentation",
-      "QA"
-    ]
-  },
-  {
-    "id": "meshmosh-voxel",
-    "title": "MeshMosh: Multi-user 3D Editor",
-    "descArtist": "Aplicación web interactiva para modelado 3D colaborativo en tiempo real. Todos los usuarios editan la misma escena simultáneamente desde el navegador.",
-    "descTechnical": "Desarrollado en equipo en un desafio de 30 minutos, con Vanilla JS y Three.js. Utiliza Yjs (CRDT) y WebRTC para sincronización Peer-to-Peer del estado del DOM 3D sin depender de un servidor backend, alojado enteramente en GitHub Pages.",
-    "timeSaved": "Sincronización en < 1 segundo sin latencia de backend.",
-    "imageSlider": [
-      "meshmosh_mockup.png"
-    ],
-    "imageLabels": [
-      "MeshMosh Editor UI"
-    ],
-    "snippetCode": {
-      "lang": "javascript",
-      "code": "import * as Y from 'yjs';\nimport { WebrtcProvider } from 'y-webrtc';\nimport * as THREE from 'three';\n\n// Inicializar Documento Yjs compartido via WebRTC\nconst ydoc = new Y.Doc();\nconst provider = new WebrtcProvider('meshmosh-room', ydoc);\nconst yObjects = ydoc.getMap('objects');\n\n// Sincronizar objetos Three.js a traves del estado P2P\nyObjects.observe(event => {\n    updateSceneFromSharedState();\n});"
-    },
-    "link": "https://github.com/facu041294/VoxelParty",
-    "category": "pipeline-tools",
-    "tags": [
-      "JavaScript",
-      "Three.js",
-      "WebRTC",
-      "Yjs"
-    ]
-  },
-  {
-    "id": "render-automotive",
-    "title": "Unreal Engine: Cinematics & Optimization",
-    "descArtist": "Creación de secuencias fotorrealistas con atención a composición, iluminación dramática y efectos de partículas complejos en EmberGen.",
-    "descTechnical": "Optimización de entornos y hardware para proyectos como 'Mano a Mano', 'UNINVITED' y 'ETERNAL PENANCE'. Uso de Data Layers, ejecución automatizada (.bat) y Sequencer automation.",
-    "timeSaved": "10% de reducción de carga hardware y 20% más iteraciones vía Sequencer automation.",
-    "imageSlider": [
-      "car-render.jpg",
-      "car-wire.jpg",
-      "car-light.jpg"
+      "JadeRobot_A_Environment_FacundoVillarreal.png",
+      "Concept_JadeRobot.png",
+      "MoodBoard_JadeRobot.png"
     ],
     "imageLabels": [
       "Render Final",
-      "Wireframe",
-      "Lighting Setup"
+      "Concept",
+      "Moodboard"
     ],
-    "snippetImg": "car-particleEmbergen.png",
-    "link": "",
-    "category": "cinematics-fx",
-    "tags": [
-      "Unreal Engine 5",
-      "Sequencer",
-      "Performance Profiling",
-      "EmberGen"
-    ]
-  },
-  {
-    "id": "shader-terreno",
-    "title": "Shader Terreno de Río",
-    "descArtist": "Material de paisaje realista con capas adaptables de nieve, roca y musgo. Fusión estética de texturas basada en pendientes y alturas para entornos de gran escala.",
-    "descTechnical": "Desarrollo de Master Material en Unreal Engine con lógica de mezcla triplanar y máscaras dinámicas de altura. Optimización del conteo de instrucciones en pixel shader para evitar cuellos de botella en GPU.",
-    "timeSaved": "Pintado automático del 95% del terreno por reglas matemáticas",
-    "imageSlider": [
-      "nieve-render.jpg",
-      "nieve-graph.jpg",
-      "nieve-mask.jpg"
-    ],
-    "imageLabels": [
-      "Render",
-      "Graph",
-      "Mask"
-    ],
-    "snippetImg": "nieve-blueprint.png",
+    "snippetCode": {
+      "lang": "python",
+      "code": "import maya.cmds as cmds\n\ndef prepare_for_substance():\n    # Renombrar objetos seleccionados con sufijo _low para horneado en Substance\n    selected = cmds.ls(sl=True, long=True) or []\n    for obj_path in selected:\n        obj = obj_path.split('|')[-1]\n        if not obj.endswith('_low'):\n            cmds.rename(obj_path, f'{obj}_low')\n    print('Mallas preparadas con sufijos _low para Substance Painter.')"
+    },
     "link": "",
     "category": "3d-art",
     "tags": [
+      "Maya",
+      "Substance Painter",
+      "PBR Texturing",
+      "Python"
+    ]
+  },
+  {
+    "id": "eternal-penance",
+    "title": "ETERNAL PENANCE: Cinematic Final Project",
+    "descArtist": "Desarrollo visual y creación de mundos para proyecto final cinemático. Atmósferas densas y narrativa visual profunda.",
+    "descTechnical": "Manejo de post-procesos avanzados, volumetrías dinámicas y optimización de materiales para mantener consistencia en secuencias de acción rápida.",
+    "timeSaved": "Pipeline de arte 100% integrado en Unreal.",
+    "imageSlider": [
+      "ETERNAL_PENANCEFirstScene.png"
+    ],
+    "imageLabels": [
+      "ETERNAL PENANCE Cinematic"
+    ],
+    "link": "",
+    "category": "cinematics-fx",
+    "tags": [
       "Unreal Engine",
-      "Shader Graph",
-      "Landscape"
+      "Cinematics",
+      "Post-Processing"
+    ]
+  },
+  {
+    "id": "uninvited-cinematic",
+    "title": "UNINVITED: Cinematic Award Project",
+    "descArtist": "Dirección de arte, iluminación dramática y composición fotorrealista para cortometraje cinemático galardonado.",
+    "descTechnical": "Secuencias generadas en Unreal Engine con optimización de assets pesados y uso intensivo de Sequencer para renderizado offline sin pérdida de frames.",
+    "timeSaved": "Optimizado para render en 4K en tiempo real.",
+    "imageSlider": [
+      "UNINVITEDFirstScene.png"
+    ],
+    "imageLabels": [
+      "UNINVITED Cinematic"
+    ],
+    "link": "https://www.artstation.com/artwork/L4Pwkr",
+    "category": "cinematics-fx",
+    "tags": [
+      "Unreal Engine",
+      "Cinematics",
+      "Lighting",
+      "Art Direction"
+    ]
+  },
+  {
+    "id": "metahumans-awards",
+    "title": "MetaHumans Awards: Creación de Character",
+    "descArtist": "Creación y customización de personajes fotorrealistas con alta fidelidad para secuencias cinemáticas y proyectos galardonados.",
+    "descTechnical": "Integración avanzada de MetaHumans en Unreal Engine 5. Optimización de assets, ajustes de retopología y grooming, y setup de rigs faciales para captura de movimiento en tiempo real.",
+    "timeSaved": "Pipeline de personajes integrado directamente en el motor.",
+    "imageSlider": [
+      "HeroMetaHumanAwards.png"
+    ],
+    "imageLabels": [
+      "Character Render"
+    ],
+    "link": "",
+    "category": "3d-art",
+    "tags": [
+      "Unreal Engine 5",
+      "MetaHuman",
+      "Character Art",
+      "Grooming"
     ]
   },
   {
@@ -178,73 +197,54 @@
     ]
   },
   {
-    "id": "robot-jade",
-    "title": "Robot de Jade: PBR Texturing",
-    "descArtist": "Texturizado realista de un robot ancestral de jade y bronce en Substance 3D Painter. Composición artística que explora el contraste entre la piedra esculpida y la oxidación en un entorno forestal.",
-    "descTechnical": "Modelado y retopología en Autodesk Maya orientados a maximizar la densidad de téxeles. Creación de materiales PBR inteligentes y máscaras dinámicas de desgaste en Substance Painter.",
-    "timeSaved": "Reducción del 60% en tiempo de texturizado mediante Smart Materials.",
+    "id": "shader-terreno",
+    "title": "Shader Terreno de Río",
+    "descArtist": "Material de paisaje realista con capas adaptables de nieve, roca y musgo. Fusión estética de texturas basada en pendientes y alturas para entornos de gran escala.",
+    "descTechnical": "Desarrollo de Master Material en Unreal Engine con lógica de mezcla triplanar y máscaras dinámicas de altura. Optimización del conteo de instrucciones en pixel shader para evitar cuellos de botella en GPU.",
+    "timeSaved": "Pintado automático del 95% del terreno por reglas matemáticas",
     "imageSlider": [
-      "JadeRobot_A_Environment_FacundoVillarreal.png",
-      "Concept_JadeRobot.png",
-      "MoodBoard_JadeRobot.png"
+      "nieve-render.jpg",
+      "nieve-graph.jpg",
+      "nieve-mask.jpg"
     ],
     "imageLabels": [
-      "Render Final",
-      "Concept",
-      "Moodboard"
+      "Render",
+      "Graph",
+      "Mask"
     ],
-    "snippetCode": {
-      "lang": "python",
-      "code": "import maya.cmds as cmds\n\ndef prepare_for_substance():\n    # Renombrar objetos seleccionados con sufijo _low para horneado en Substance\n    selected = cmds.ls(sl=True, long=True) or []\n    for obj_path in selected:\n        obj = obj_path.split('|')[-1]\n        if not obj.endswith('_low'):\n            cmds.rename(obj_path, f'{obj}_low')\n    print('Mallas preparadas con sufijos _low para Substance Painter.')"
-    },
+    "snippetImg": "nieve-blueprint.png",
     "link": "",
     "category": "3d-art",
     "tags": [
-      "Maya",
-      "Substance Painter",
-      "PBR Texturing",
-      "Python"
-    ]
-  },
-  {
-    "id": "uninvited-cinematic",
-    "title": "UNINVITED: Cinematic Award Project",
-    "descArtist": "Dirección de arte, iluminación dramática y composición fotorrealista para cortometraje cinemático galardonado.",
-    "descTechnical": "Secuencias generadas en Unreal Engine con optimización de assets pesados y uso intensivo de Sequencer para renderizado offline sin pérdida de frames.",
-    "timeSaved": "Optimizado para render en 4K en tiempo real.",
-    "imageSlider": [
-      "UNINVITEDFirstScene.png"
-    ],
-    "imageLabels": [
-      "UNINVITED Cinematic"
-    ],
-    "link": "https://www.artstation.com/artwork/L4Pwkr",
-    "category": "cinematics-fx",
-    "tags": [
       "Unreal Engine",
-      "Cinematics",
-      "Lighting",
-      "Art Direction"
+      "Shader Graph",
+      "Landscape"
     ]
   },
   {
-    "id": "eternal-penance",
-    "title": "ETERNAL PENANCE: Cinematic Final Project",
-    "descArtist": "Desarrollo visual y creación de mundos para proyecto final cinemático. Atmósferas densas y narrativa visual profunda.",
-    "descTechnical": "Manejo de post-procesos avanzados, volumetrías dinámicas y optimización de materiales para mantener consistencia en secuencias de acción rápida.",
-    "timeSaved": "Pipeline de arte 100% integrado en Unreal.",
+    "id": "render-automotive",
+    "title": "Unreal Engine: Cinematics & Optimization",
+    "descArtist": "Creación de secuencias fotorrealistas con atención a composición, iluminación dramática y efectos de partículas complejos en EmberGen.",
+    "descTechnical": "Optimización de entornos y hardware para proyectos como 'Mano a Mano', 'UNINVITED' y 'ETERNAL PENANCE'. Uso de Data Layers, ejecución automatizada (.bat) y Sequencer automation.",
+    "timeSaved": "10% de reducción de carga hardware y 20% más iteraciones vía Sequencer automation.",
     "imageSlider": [
-      "ETERNAL_PENANCEFirstScene.png"
+      "car-render.jpg",
+      "car-wire.jpg",
+      "car-light.jpg"
     ],
     "imageLabels": [
-      "ETERNAL PENANCE Cinematic"
+      "Render Final",
+      "Wireframe",
+      "Lighting Setup"
     ],
+    "snippetImg": "car-particleEmbergen.png",
     "link": "",
     "category": "cinematics-fx",
     "tags": [
-      "Unreal Engine",
-      "Cinematics",
-      "Post-Processing"
+      "Unreal Engine 5",
+      "Sequencer",
+      "Performance Profiling",
+      "EmberGen"
     ]
   }
 ]
