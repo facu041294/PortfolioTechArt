@@ -1027,9 +1027,7 @@ body.mode-dark .contact-toggle-button-styled {
   visibility: hidden;
   overflow: hidden; /* Muy importante para que max-height funcione */
 
-  transition: max-height 0.2s var(--transition-ease),
-              opacity 0.2s var(--transition-ease) 0.1s,
-              padding 0.2s var(--transition-ease),
+  transition: opacity 0.2s var(--transition-ease) 0.1s,
               visibility 0s linear 0.2s;
   will-change: max-height, opacity, padding;
 }
@@ -1040,7 +1038,8 @@ body.mode-dark .contact-form-container {
 
 /* --- ESTADO VISIBLE CUANDO EL CHECKBOX ESTÁ MARCADO --- */
 .contact-toggle-checkbox:checked ~ .contact-form-container {
-  max-height: 1000px;
+  /* La altura máxima será controlada por JS. 
+     Se deja opacidad y visibilidad para respaldo. */
   opacity: 1;
   visibility: visible;
   padding: var(--spacing-md);
