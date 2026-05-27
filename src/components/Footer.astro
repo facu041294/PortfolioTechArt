@@ -70,14 +70,15 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
     if (contactCheckbox && contactFormContainer) {
         contactCheckbox.addEventListener('change', (e) => {
             if (e.target.checked) {
-                // Pequeño timeout para permitir que la animación CSS expanda el contenedor
+                // Hacemos el scroll inmediatamente para que fluya junto a la animación CSS de expansión
+                contactFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Esperamos que termine la animación (0.5s) para hacer focus, evitando saltos bruscos
                 setTimeout(() => {
-                    contactFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    // Hacer focus automático para que el usuario pueda empezar a escribir
                     if (firstFormInput) {
-                        firstFormInput.focus();
+                        firstFormInput.focus({ preventScroll: true });
                     }
-                }, 300);
+                }, 500);
             }
         });
     }
