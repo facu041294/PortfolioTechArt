@@ -61,4 +61,24 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
             });
         });
     }
+
+    // Hacer scroll y focus al formulario de contacto cuando se abre
+    const contactCheckbox = document.getElementById('contact-toggle-checkbox');
+    const contactFormContainer = document.getElementById('contact-form-container');
+    const firstFormInput = document.getElementById('form-name');
+
+    if (contactCheckbox && contactFormContainer) {
+        contactCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                // Pequeño timeout para permitir que la animación CSS expanda el contenedor
+                setTimeout(() => {
+                    contactFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Hacer focus automático para que el usuario pueda empezar a escribir
+                    if (firstFormInput) {
+                        firstFormInput.focus();
+                    }
+                }, 300);
+            }
+        });
+    }
 </script>
