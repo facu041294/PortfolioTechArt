@@ -70,14 +70,15 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
     if (contactCheckbox && contactFormContainer) {
         contactCheckbox.addEventListener('change', (e) => {
             if (e.target.checked) {
-                // Al estar animándose la altura, el scroll de destino fijo falla.
-                // En su lugar, forzamos un desplazamiento relativo hacia abajo repetidas veces durante la expansión.
-                let step = 0;
-                const scrollInterval = setInterval(() => {
-                    window.scrollBy(0, 50);
-                    step++;
-                    if (step >= 25) clearInterval(scrollInterval); // 25 * 20ms = 500ms (lo que dura la animación)
-                }, 20);
+                // Un único scroll relativo suave que se activa casi junto con la animación.
+                // Al pedirle bajar 600px (más de lo que mide el form), el navegador deslizará 
+                // la pantalla fluidamente y se detendrá naturalmente al tocar el nuevo fondo de la página.
+                setTimeout(() => {
+                    window.scrollBy({
+                        top: 600,
+                        behavior: 'smooth'
+                    });
+                }, 50);
                 
                 // Esperamos que termine la animación para hacer focus
                 setTimeout(() => {
