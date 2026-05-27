@@ -20,7 +20,8 @@
       </div>
       <div class="form-group">
         <label for="modal-form-message">Mensaje</label>
-        <textarea id="modal-form-message" name="message" rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
+        <textarea id="modal-form-message" name="message" rows="4" placeholder="¿En qué puedo ayudarte?" maxlength="300" required></textarea>
+        <div class="char-counter"><span id="current-chars">0</span> / 300</div>
       </div>
       <button type="submit" class="cta-button primary-cta submit-form-button">Enviar Mensaje</button>
     </form>
@@ -190,6 +191,18 @@
     box-shadow: 0 0 0 3px rgba(var(--color-primary-dark-rgb), 0.15);
   }
 
+  .char-counter {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--color-secondary-light);
+    margin-top: 6px;
+    font-family: monospace; /* Para que los números no bailen horizontalmente */
+  }
+
+  :global(body.mode-dark) .char-counter {
+    color: var(--color-secondary-dark);
+  }
+
   .modal-actual-form .submit-form-button {
     width: 100%;
     margin-top: var(--spacing-sm);
@@ -203,6 +216,8 @@
   const modal = document.getElementById('contact-modal');
   const closeBtn = document.getElementById('close-modal-btn');
   const firstInput = document.getElementById('modal-form-name');
+  const messageInput = document.getElementById('modal-form-message');
+  const charCounter = document.getElementById('current-chars');
 
   if (modalBtn && modal && closeBtn) {
     modalBtn.addEventListener('click', (e) => {
@@ -221,6 +236,13 @@
       if (e.target === modal) {
         modal.classList.remove('active');
       }
+    });
+  }
+
+  if (messageInput && charCounter) {
+    messageInput.addEventListener('input', (e) => {
+      const target = e.target as HTMLTextAreaElement;
+      charCounter.textContent = target.value.length.toString();
     });
   }
 </script>
