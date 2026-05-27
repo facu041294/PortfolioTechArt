@@ -53,10 +53,6 @@
                     <div class="tool-item">
                         <strong>Unity</strong>
                         <span>Implementación base, C#</span>
-                        <!-- Credly Badge Unity -->
-                        <div class="badge-container-small">
-                            <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="024ff9bf-12cb-4554-8d47-de60b0c4a875" data-share-badge-host="https://www.credly.com"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -75,10 +71,24 @@
                     <div class="tool-item">
                         <strong>AWS & WebTech</strong>
                         <span>Cloud foundations, JS, Astro</span>
-                        <!-- Credly Badge AWS -->
-                        <div class="badge-container-small">
-                            <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="f5617a2c-269c-4200-9436-0bdf31720b6c" data-share-badge-host="https://www.credly.com"></div>
-                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Certificaciones (Ocupa todo el ancho) -->
+            <div class="pipeline-stage badges-stage">
+                <div class="stage-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                    <h3>Certificaciones Oficiales Credly</h3>
+                </div>
+                <div class="credly-badges-wrapper">
+                    <!-- Credly Badge Unity -->
+                    <div class="credly-badge">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="024ff9bf-12cb-4554-8d47-de60b0c4a875" data-share-badge-host="https://www.credly.com"></div>
+                    </div>
+                    <!-- Credly Badge AWS -->
+                    <div class="credly-badge">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="f5617a2c-269c-4200-9436-0bdf31720b6c" data-share-badge-host="https://www.credly.com"></div>
                     </div>
                 </div>
             </div>
@@ -141,8 +151,8 @@
 
 </div>
 
-<!-- Script de Credly genérico (Solo se necesita una vez por página) -->
-<script is:inline type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+<!-- Script de Credly genérico con HTTPS explícito (Imprescindible para localhost) -->
+<script is:inline type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 
 <style>
     .technical-toolkit-container {
@@ -207,6 +217,14 @@
     }
     :global(body.mode-dark) .pipeline-stage:hover {
         border-color: var(--color-primary-dark);
+    }
+
+    .badges-stage {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .stage-header {
