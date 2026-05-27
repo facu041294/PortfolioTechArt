@@ -71,34 +71,36 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
     const firstFormInput = document.getElementById('form-name');
 
     if (contactCheckbox && contactFormContainer) {
-        let resizeObserver = null;
-        let lastHeight = contactFormContainer.offsetHeight;
-
         contactCheckbox.addEventListener('change', (e) => {
             if ((e.target as HTMLInputElement).checked) {
-                // Iniciar observador para sincronizar la altura cuadro por cuadro
-                lastHeight = contactFormContainer.offsetHeight;
+                // Scroll personalizado ultra fluido usando requestAnimationFrame
+                // Durará 250ms (el doble de rápido que la animación CSS de 500ms)
+                let startPos = window.scrollY;
+                let scrollDistance = 600; // Suficiente para mostrar todo el formulario y el footer
+                let startTime = performance.now();
                 
-                resizeObserver = new ResizeObserver((entries) => {
-                    for (let entry of entries) {
-                        const newHeight = entry.contentRect.height;
-                        const diff = newHeight - lastHeight;
-                        if (diff > 0) {
-                            window.scrollBy(0, diff); // Scroll síncrono por cada pixel crecido
-                        }
-                        lastHeight = newHeight;
+                function smoothFastScroll(currentTime: number) {
+                    let elapsed = currentTime - startTime;
+                    let progress = Math.min(elapsed / 250, 1); // 250ms de duración
+                    
+                    // Curva ease-out (arranca rápido, frena suave)
+                    let easeOut = progress * (2 - progress);
+                    window.scrollTo(0, startPos + (scrollDistance * easeOut));
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(smoothFastScroll);
                     }
-                });
+                }
                 
-                resizeObserver.observe(contactFormContainer);
-                
-                // Limpiar observador al terminar animación y hacer focus
+                // Le damos 10ms de ventaja al CSS para cambiar el display
                 setTimeout(() => {
-                    if (resizeObserver) resizeObserver.disconnect();
+                    requestAnimationFrame(smoothFastScroll);
+                }, 10);
+                
+                // Focus automático cuando ambas cosas (scroll y CSS) hayan terminado
+                setTimeout(() => {
                     if (firstFormInput) firstFormInput.focus({ preventScroll: true });
-                }, 600);
-            } else {
-                if (resizeObserver) resizeObserver.disconnect();
+                }, 550);
             }
         });
     }
