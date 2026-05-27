@@ -1,6 +1,5 @@
 ---
 import SocialGrid from './SocialGrid.astro';
-import ContactForm from './ContactForm.astro';
 import ContactModal from './ContactModal.astro';
 
 // Normalizamos BASE_URL en caso de que sea undefined
@@ -23,7 +22,6 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
         <div class="footer-right">
             <h3 class="footer-social-title">Conéctate conmigo</h3>
             <SocialGrid />
-            <ContactForm />
         </div>
     </div>
 
@@ -62,64 +60,6 @@ const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL 
                 top: 0,
                 behavior: 'smooth'
             });
-        });
-    }
-
-    // LÓGICA OPCIÓN A: ResizeObserver
-    const contactCheckbox = document.getElementById('contact-toggle-checkbox');
-    const contactFormContainer = document.getElementById('contact-form-container');
-    const firstFormInput = document.getElementById('form-name');
-
-    if (contactCheckbox && contactFormContainer) {
-        contactCheckbox.addEventListener('change', (e) => {
-            const isChecked = (e.target as HTMLInputElement).checked;
-            
-            if (isChecked) {
-                // Obtenemos la altura real que necesita el formulario
-                // Aplicamos visibilidad temporalmente para que el navegador calcule el scrollHeight real
-                contactFormContainer.style.visibility = 'visible';
-                contactFormContainer.style.opacity = '1';
-                contactFormContainer.style.padding = 'var(--spacing-md)';
-                const targetHeight = contactFormContainer.scrollHeight;
-                
-                let startPos = window.scrollY;
-                let startTime = performance.now();
-                const duration = 400; // 400ms para toda la animación unificada
-                
-                function syncAnimate(currentTime: number) {
-                    let elapsed = currentTime - startTime;
-                    let progress = Math.min(elapsed / duration, 1);
-                    
-                    // Curva easeOutCubic para que se vea natural y empiece rápido
-                    let easeOut = 1 - Math.pow(1 - progress, 3);
-                    
-                    // 1. Animamos la altura físicamente
-                    let currentHeight = targetHeight * easeOut;
-                    contactFormContainer.style.maxHeight = currentHeight + 'px';
-                    
-                    // 2. Animamos el scroll sincronizado al pixel con el crecimiento
-                    window.scrollTo(0, startPos + currentHeight);
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(syncAnimate);
-                    } else {
-                        // Terminó la animación
-                        contactFormContainer.style.maxHeight = '1000px'; // Lo liberamos
-                        if (firstFormInput) firstFormInput.focus({ preventScroll: true });
-                    }
-                }
-                
-                requestAnimationFrame(syncAnimate);
-                
-            } else {
-                // Cuando se cierra, quitamos el estilo para que vuelva a cero
-                contactFormContainer.style.maxHeight = '0px';
-                contactFormContainer.style.opacity = '0';
-                contactFormContainer.style.padding = '0';
-                setTimeout(() => {
-                    contactFormContainer.style.visibility = 'hidden';
-                }, 300);
-            }
         });
     }
 </script>

@@ -4,20 +4,23 @@
 
 <div id="contact-modal" class="contact-modal-overlay" aria-hidden="true" role="dialog">
   <div class="contact-modal-content">
+    <div class="modal-glow-effect"></div>
     <button id="close-modal-btn" class="close-modal-btn" aria-label="Cerrar modal">&times;</button>
-    <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form actual-form">
-      <h4>Envíame un mensaje (Modal):</h4>
+    <form action="https://formspree.io/f/xzzgbllz" method="POST" class="contact-form modal-actual-form">
+      <h4>Envíame un mensaje</h4>
+      <p class="modal-subtitle">Cuéntame sobre tu proyecto o idea.</p>
+      
       <div class="form-group">
-        <label for="modal-form-name">Nombre:</label>
-        <input type="text" id="modal-form-name" name="name" required />
+        <label for="modal-form-name">Nombre</label>
+        <input type="text" id="modal-form-name" name="name" placeholder="Tu nombre" required />
       </div>
       <div class="form-group">
-        <label for="modal-form-email">Email:</label>
-        <input type="email" id="modal-form-email" name="email" required />
+        <label for="modal-form-email">Email</label>
+        <input type="email" id="modal-form-email" name="email" placeholder="tu@email.com" required />
       </div>
       <div class="form-group">
-        <label for="modal-form-message">Mensaje:</label>
-        <textarea id="modal-form-message" name="message" rows="5" required></textarea>
+        <label for="modal-form-message">Mensaje</label>
+        <textarea id="modal-form-message" name="message" rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
       </div>
       <button type="submit" class="cta-button primary-cta submit-form-button">Enviar Mensaje</button>
     </form>
@@ -31,15 +34,16 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
   }
   
   .contact-modal-overlay.active {
@@ -48,43 +52,149 @@
   }
 
   .contact-modal-content {
-    background: var(--color-card-bg-light);
-    border: 1px solid var(--color-border-light);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
     padding: var(--spacing-xl);
     width: 90%;
-    max-width: 500px;
+    max-width: 480px;
     position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.05);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+  }
+
+  /* El pseudo-brillo superior para un look premium */
+  .modal-glow-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary-light), #00d2ff);
   }
 
   :global(body.mode-dark) .contact-modal-content {
-    background: var(--color-card-bg-dark);
-    border-color: var(--color-border-dark);
+    background: rgba(15, 15, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  :global(body.mode-dark) .modal-glow-effect {
+    background: linear-gradient(90deg, var(--color-primary-dark), #00d2ff);
   }
 
   .contact-modal-overlay.active .contact-modal-content {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   .close-modal-btn {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 20px;
     background: none;
     border: none;
     font-size: 2rem;
     line-height: 1;
-    color: var(--text-color);
+    color: var(--color-text-light);
     cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  :global(body.mode-dark) .close-modal-btn {
+    color: var(--color-text-dark);
   }
 
   .close-modal-btn:hover {
     opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .modal-actual-form h4 {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-text-light);
+  }
+
+  .modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-secondary-light);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  :global(body.mode-dark) .modal-actual-form h4 {
+    color: var(--color-text-dark);
+  }
+
+  :global(body.mode-dark) .modal-subtitle {
+    color: var(--color-secondary-dark);
+  }
+
+  .modal-actual-form .form-group {
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+  }
+
+  .modal-actual-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  :global(body.mode-dark) .modal-actual-form label {
+    color: var(--color-text-dark);
+  }
+
+  .modal-actual-form input,
+  .modal-actual-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: var(--color-text-light);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+  :global(body.mode-dark) .modal-actual-form input,
+  :global(body.mode-dark) .modal-actual-form textarea {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--color-text-dark);
+  }
+
+  .modal-actual-form input:focus,
+  .modal-actual-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-light-rgb), 0.15);
+  }
+
+  :global(body.mode-dark) .modal-actual-form input:focus,
+  :global(body.mode-dark) .modal-actual-form textarea:focus {
+    border-color: var(--color-primary-dark);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-dark-rgb), 0.15);
+  }
+
+  .modal-actual-form .submit-form-button {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    padding: 14px;
+    font-size: 1.05rem;
   }
 </style>
 

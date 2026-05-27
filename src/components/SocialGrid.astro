@@ -17,13 +17,10 @@ import socialData from '../data/social.json';
     </a>
   ))}
 
-  {/* Botón Opción A: Acordeón */}
-  <label 
-    for="contact-toggle-checkbox" 
+  {/* Botón Disparador del Modal de Contacto */}
+  <button 
+    id="modal-trigger-btn"
     class="connect-button contact-toggle-button-styled" 
-    role="button" 
-    tabindex="0" 
-    aria-expanded="false"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
       viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -32,20 +29,6 @@ import socialData from '../data/social.json';
       <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
       <path d="m21.854 2.147-10.94 10.939"/>
     </svg>
-    Mail (A: Resize Observer)
-  </label>
-
-  {/* Botón Opción B: Modal */}
-  <button 
-    id="modal-trigger-btn"
-    class="connect-button contact-toggle-button-styled" 
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-      viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-      class="lucide lucide-message-square">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
-    Mail (B: Modal Pop-up)
+    Mail Directo
   </button>
 </div>
