@@ -3,8 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
-import SocialGrid from '../components/SocialGrid.astro';
-import ContactForm from '../components/ContactForm.astro';
+
 import TechnicalToolkit from '../components/TechnicalToolkit.astro';
 import projects from '../data/projects.json';
 ---
@@ -84,16 +83,7 @@ import projects from '../data/projects.json';
         <Timeline />
     </section>
 
-    <!-- Sección CTA y Contacto -->
-    <section class="connect-cta-section container section-block">
-        <h2>Contacto</h2>
-        <p class="connect-subtitle">
-            ¿Interesado en trabajar juntos o tienes alguna pregunta? Conéctate conmigo a través de mis redes o envíame un mensaje directo.
-        </p>
 
-        <SocialGrid />
-        <ContactForm />
-    </section>
 
     <!-- Visualizador de Imagen Global (Lightbox) -->
     <div id="lightbox-global" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-label="Visualizador de cerca">

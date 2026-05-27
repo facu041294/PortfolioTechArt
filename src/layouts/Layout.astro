@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import '../styles/style.css';
 import '../styles/prism.css';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -85,15 +86,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <slot />
     </main>
 
-    <!-- Pie de Página -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2023 - <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
-            <a href="https://github.com/facu041294/PortfolioTechArt" target="_blank" rel="noopener noreferrer" class="cta-link">
-                Ver repositorio de este sitio en GitHub
-            </a>
-        </div>
-    </footer>
+    <!-- Pie de Página (Mega-Footer) -->
+    <Footer />
 
     <!-- Carga e hidratación de scripts de interactividad en el cliente -->
     <script>
