@@ -5,8 +5,8 @@
     "descArtist": "Automatizaci\u00f3n integral de entornos de Look Development. Mantiene la consistencia visual del equipo eliminando la variaci\u00f3n en fondos, setups de luces y c\u00e1maras.",
     "descTechnical": "Script MEL puro para Autodesk Maya sin dependencias externas. Calcula din\u00e1micamente el Bounding Box de los assets para generar cicloramas infinitos proporcionales, desplegando 3 luces cinem\u00e1ticas y 3 c\u00e1maras estandarizadas en < 5 segundos.",
     "timeSaved": "99.6% de reducci\u00f3n de tiempo de setup (de 20 min a 5 seg por asset).",
-    "imageSlider": ["lookdev_studio_pro_mockup.png", "tool-ui.jpg"],
-    "imageLabels": ["UI & Environment", "UI Close-up"],
+    "imageSlider": ["MuestraRenderOutput.png", "MuestraStudioGenerado.png", "MuestraDeVentanaConBotonScript.png", "MeshSoloOutliner.png"],
+    "imageLabels": ["Render Final", "Entorno Generado", "Script UI", "Outliner"],
     "snippetCode": {
       "lang": "mel",
       "code": "global proc createLookDevEnv() {\n    // Calcular Bounding Box y generar entorno proporcional\n    float $bbox[] = `xform -q -bb`;\n    float $scale = max($bbox[3]-$bbox[0], $bbox[5]-$bbox[2]);\n    \n    // Setup de luces cinematograficas (Key, Fill, Rim)\n    string $keyLight = `createNode areaLight -n \"LGT_KeyShape\"`;\n    setAttr ($keyLight + \".intensity\") 100;\n    // ... (Automatizacion sin intervencion manual)\n    print(\"LookDev Studio Pro: Entorno generado en < 5 segundos.\");\n}"
