@@ -1027,10 +1027,10 @@ body.mode-dark .contact-toggle-button-styled {
   visibility: hidden;
   overflow: hidden; /* Muy importante para que max-height funcione */
 
-  transition: max-height 0.5s var(--transition-ease),
-              opacity 0.3s var(--transition-ease) 0.1s,
-              padding 0.5s var(--transition-ease),
-              visibility 0s linear 0.5s;
+  transition: max-height 0.2s var(--transition-ease),
+              opacity 0.2s var(--transition-ease) 0.1s,
+              padding 0.2s var(--transition-ease),
+              visibility 0s linear 0.2s;
   will-change: max-height, opacity, padding;
 }
 body.mode-dark .contact-form-container {
@@ -1038,15 +1038,15 @@ body.mode-dark .contact-form-container {
   border-color: var(--color-border-dark);
 }
 
-/* --- ESTADO VISIBLE CUANDO EL CHECKBOX ESTâ”œÃ¼ MARCADO --- */
+/* --- ESTADO VISIBLE CUANDO EL CHECKBOX ESTÁ MARCADO --- */
 .contact-toggle-checkbox:checked ~ .contact-form-container {
-  max-height: 1000px; /* Altura suficiente para el contenido */
+  max-height: 1000px;
   opacity: 1;
   visibility: visible;
-  padding: var(--spacing-md); /* Aplicar padding cuando estâ”œÃ­ visible */
-  transition: max-height 0.5s var(--transition-ease),
-              opacity 0.3s var(--transition-ease),
-              padding 0.5s var(--transition-ease),
+  padding: var(--spacing-md);
+  transition: max-height 0.2s var(--transition-ease),
+              opacity 0.2s var(--transition-ease),
+              padding 0.2s var(--transition-ease),
               visibility 0s linear 0s;
 }
 
