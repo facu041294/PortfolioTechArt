@@ -1,0 +1,64 @@
+---
+import SocialGrid from './SocialGrid.astro';
+import ContactForm from './ContactForm.astro';
+
+// Normalizamos BASE_URL en caso de que sea undefined
+const baseUrl = String(import.meta.env.BASE_URL || '/');
+const cvPath = baseUrl.endsWith('/') ? `${baseUrl}assets/pdf/FACUNDO VILLARREAL CV.pdf` : `${baseUrl}/assets/pdf/FACUNDO VILLARREAL CV.pdf`;
+---
+
+<footer class="mega-footer" id="contacto">
+    <div class="mega-footer-content container">
+        <div class="footer-left">
+            <h2 class="footer-title">Let's build something epic.</h2>
+            <p class="footer-subtitle">
+                ¿Interesado en trabajar juntos o tienes alguna pregunta? Envíame un mensaje directo o revisa mi currículum.
+            </p>
+            <a href={cvPath} target="_blank" rel="noopener noreferrer" class="cta-button primary-cta footer-cv-btn">
+                📄 Descargar CV (PDF)
+            </a>
+            <ContactForm />
+        </div>
+        
+        <div class="footer-right">
+            <h3 class="footer-social-title">Conéctate conmigo</h3>
+            <SocialGrid />
+        </div>
+    </div>
+
+    <div class="footer-bottom container">
+        <div class="footer-copyright">
+            <p>© 2023 - <span id="current-year"></span> Facundo Villarreal. Todos los derechos reservados.</p>
+        </div>
+        <div class="footer-links" style="display: flex; gap: var(--spacing-lg); align-items: center; flex-wrap: wrap; justify-content: center;">
+            <a href="https://github.com/facu041294/PortfolioTechArt" target="_blank" rel="noopener noreferrer" class="cta-link source-code-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                Código en GitHub
+            </a>
+            <button id="back-to-top-btn" class="cta-button secondary-cta back-to-top-small" aria-label="Volver arriba">
+                ↑ Volver Arriba
+            </button>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Configurar año dinámico
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear().toString();
+    }
+
+    // Configurar botón Volver Arriba
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+</script>
