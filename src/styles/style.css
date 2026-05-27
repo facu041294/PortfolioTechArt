@@ -1861,23 +1861,14 @@ body.mode-dark .footer-bottom {
 .back-to-top-small {
   padding: 8px 16px;
   font-size: 0.85rem;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   line-height: 1;
   animation: bounceHover 2s infinite ease-in-out;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .back-to-top-small:hover {
   animation: none;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-body:not(.mode-dark) .back-to-top-small {
-  border-color: rgba(0, 0, 0, 0.2);
-}
-body:not(.mode-dark) .back-to-top-small:hover {
-  background-color: rgba(0, 0, 0, 0.05);
 }
