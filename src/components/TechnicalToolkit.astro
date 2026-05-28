@@ -113,12 +113,38 @@
     <!-- Etapa 4: Certificaciones (Ocupa todo el ancho en la base) -->
     <div class="badges-stage">
         <div class="badges-title">Certificaciones Oficiales</div>
-        <div class="credly-badges-wrapper">
-            <div class="credly-badge">
-                <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="024ff9bf-12cb-4554-8d47-de60b0c4a875" data-share-badge-host="https://www.credly.com"></div>
+        
+        <div class="certifications-nodes-container">
+            <!-- Certificación Unity -->
+            <div class="blueprint-node cert-node glow-node">
+                <div class="node-header color-unity">
+                    <span class="node-title">Unity Essentials</span>
+                    <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                </div>
+                <div class="node-body">
+                    <div class="node-pin"><span class="pin-circle"></span>Issued by Unity Technologies</div>
+                    <div class="node-pin output-pin" style="margin-top: 10px;">
+                        <a href="https://www.credly.com/badges/024ff9bf-12cb-4554-8d47-de60b0c4a875/public_url" target="_blank" class="cert-link-node">
+                            🏅 Verificar en Credly
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="credly-badge">
-                <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="f5617a2c-269c-4200-9436-0bdf31720b6c" data-share-badge-host="https://www.credly.com"></div>
+
+            <!-- Certificación AWS -->
+            <div class="blueprint-node cert-node glow-node-aws">
+                <div class="node-header color-aws">
+                    <span class="node-title">AWS Cloud Foundations</span>
+                    <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                </div>
+                <div class="node-body">
+                    <div class="node-pin"><span class="pin-circle"></span>Issued by Amazon Web Services</div>
+                    <div class="node-pin output-pin" style="margin-top: 10px;">
+                        <a href="https://www.credly.com/badges/f5617a2c-269c-4200-9436-0bdf31720b6c/public_url" target="_blank" class="cert-link-node">
+                            🏅 Verificar en Credly
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -281,6 +307,8 @@
         background: rgba(255, 215, 0, 0.2);
     }
 
+    .color-aws { background: linear-gradient(90deg, #b06500, #d6891a); }
+
     /* Certifications Stage (Full width horizontal bar) */
     .badges-stage {
         grid-column: 1 / -1;
@@ -302,20 +330,20 @@
         color: var(--color-text-dark);
     }
 
-    .credly-badges-wrapper {
+    .certifications-nodes-container {
         display: flex;
+        flex-wrap: wrap;
         gap: var(--spacing-xl);
         justify-content: center;
-        flex-wrap: wrap;
         margin-top: var(--spacing-md);
     }
 
-    /* Aumentando el tamaño de las insignias (Opción A: Más legibles) */
-    .credly-badge {
-        transform: scale(1.25);
-        transform-origin: top center;
-        /* Al escalar un 25%, añadimos un margen inferior sustancial para que no pise contenido debajo */
-        margin-bottom: 50px;
+    .cert-node {
+        min-width: 280px;
+    }
+
+    .glow-node-aws:hover {
+        box-shadow: 0 0 20px rgba(255, 153, 0, 0.4);
     }
 
 </style>
