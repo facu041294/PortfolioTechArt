@@ -3,28 +3,257 @@
 import timelineData from '../data/timeline.json';
 ---
 
-<div class="timeline">
-  {timelineData.map((item) => {
-    if (item.type === 'heading') {
-      return <h3 class="timeline-heading">{item.label}</h3>;
-    } else if (item.type === 'past') {
-      return (
-        <div class="timeline-item past">
-          <span class="timeline-date">{item.year}</span>
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-        </div>
-      );
-    } else if (item.type === 'future') {
-      return (
-        <div class="timeline-item future">
-          <label>
-            <input type="checkbox" checked={item.checked} disabled />
-            <span class="timeline-future-label">{item.label}</span>
-          </label>
-        </div>
-      );
-    }
-    return null;
-  })}
+<div class="cicd-pipeline-container">
+  <div class="cicd-pipeline">
+    {timelineData.map((item) => {
+      if (item.type === 'heading') {
+        return (
+          <div class="pipeline-stage-heading">
+            <div class="stage-heading-line"></div>
+            <h3 class="stage-heading-title">{item.label}</h3>
+          </div>
+        );
+      } else if (item.type === 'past') {
+        return (
+          <div class="cicd-job status-success">
+            <div class="job-connector">
+              <div class="job-node">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="job-line"></div>
+            </div>
+            <div class="job-card">
+              <div class="job-header">
+                <span class="job-title">{item.title}</span>
+                <span class="job-timestamp">{item.year}</span>
+              </div>
+              <div class="job-body">
+                <p class="console-output">> {item.desc}</p>
+              </div>
+            </div>
+          </div>
+        );
+      } else if (item.type === 'future') {
+        return (
+          <div class="cicd-job status-queued">
+            <div class="job-connector">
+              <div class="job-node">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="job-line dashed"></div>
+            </div>
+            <div class="job-card">
+              <div class="job-header">
+                <span class="job-title">{item.label}</span>
+                <span class="job-status-badge">Queued</span>
+              </div>
+            </div>
+          </div>
+        );
+      }
+      return null;
+    })}
+  </div>
 </div>
+
+<style>
+  .cicd-pipeline-container {
+    max-width: 800px;
+    margin: var(--spacing-xl) auto;
+    font-family: 'Consolas', 'Courier New', monospace; /* Console font for CI/CD feel */
+  }
+
+  .cicd-pipeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Stage Headings (e.g. "OBJETIVOS A FUTURO") */
+  .pipeline-stage-heading {
+    display: flex;
+    align-items: center;
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+    opacity: 0.8;
+  }
+  
+  .stage-heading-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    margin-right: 15px;
+  }
+  
+  .stage-heading-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  /* CI/CD Job Container */
+  .cicd-job {
+    display: flex;
+    position: relative;
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* The Line & Node Connector */
+  .job-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: var(--spacing-lg);
+    width: 30px;
+  }
+
+  .job-node {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: var(--color-background-dark);
+    border: 2px solid #555;
+    transition: all 0.3s ease;
+  }
+
+  .job-line {
+    flex-grow: 1;
+    width: 2px;
+    background-color: #555;
+    margin-top: 5px;
+    margin-bottom: -20px; /* Overlaps with the next job's margin */
+  }
+  
+  .job-line.dashed {
+    background-color: transparent;
+    border-left: 2px dashed #555;
+  }
+
+  /* Remove line for the last item */
+  .cicd-job:last-child .job-line {
+    display: none;
+  }
+
+  /* The Card Content */
+  .job-card {
+    flex-grow: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  :global(body.mode-dark) .job-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .job-card:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .job-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+  }
+  :global(body.mode-dark) .job-title {
+    color: var(--color-text-dark);
+  }
+
+  .job-timestamp {
+    font-size: 0.85rem;
+    color: #888;
+    background: rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+
+  .job-body {
+    background: #1e1e1e;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 5px;
+    border-left: 3px solid #555;
+  }
+
+  .console-output {
+    margin: 0;
+    color: #a9b7c6;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* Status Specific Styles: SUCCESS */
+  .status-success .job-node {
+    border-color: #2ea043;
+    color: #2ea043;
+    background-color: rgba(46, 160, 67, 0.1);
+  }
+  .status-success .job-line {
+    background-color: #2ea043;
+  }
+  .status-success .job-card {
+    border-left: 3px solid #2ea043;
+  }
+  .status-success .job-card:hover {
+    box-shadow: -5px 0 15px rgba(46, 160, 67, 0.1);
+  }
+  .status-success .job-body {
+    border-left-color: #2ea043;
+  }
+
+  /* Status Specific Styles: QUEUED */
+  .status-queued {
+    opacity: 0.7;
+  }
+  .status-queued .job-node {
+    border-color: #d29922;
+    color: #d29922;
+    background-color: rgba(210, 153, 34, 0.1);
+  }
+  .status-queued .job-card {
+    border-left: 3px solid #d29922;
+    background: rgba(210, 153, 34, 0.05);
+  }
+  .status-queued .job-title {
+    color: #d29922;
+  }
+  
+  .job-status-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #d29922;
+    border: 1px solid #d29922;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .job-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+  }
+</style>
