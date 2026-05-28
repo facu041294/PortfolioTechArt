@@ -138,14 +138,18 @@
 
     /* === NODE GRAPH MODE (BLUEPRINTS STYLE) === */
     .pipeline-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
         gap: var(--spacing-xl);
         position: relative;
     }
 
     /* Comment Box (Stage Container) */
     .blueprint-comment-box {
+        flex: 1 1 320px;
+        max-width: 450px;
         background: rgba(255, 255, 255, 0.03);
         border: 2px solid rgba(0, 0, 0, 0.1);
         border-radius: 8px;
@@ -284,9 +288,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: var(--spacing-lg);
-        padding-top: var(--spacing-lg);
-        border-top: 1px solid rgba(255,255,255,0.1);
+        margin-top: var(--spacing-xl);
     }
     
     .badges-title {
@@ -300,13 +302,20 @@
         color: var(--color-text-dark);
     }
 
-
     .credly-badges-wrapper {
         display: flex;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-xl);
         justify-content: center;
         flex-wrap: wrap;
         margin-top: var(--spacing-md);
+    }
+
+    /* Aumentando el tamaño de las insignias */
+    .credly-badge {
+        transform: scale(1.15);
+        transform-origin: top center;
+        /* Al escalar, añadimos un margen inferior para que no pise contenido debajo */
+        margin-bottom: 30px;
     }
 
 </style>
