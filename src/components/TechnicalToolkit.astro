@@ -108,9 +108,9 @@
             </div>
         </div>
 
-        <!-- Etapa 4: Certificaciones (Ocupa todo el ancho) -->
-        <div class="blueprint-comment-box badges-stage">
-            <div class="comment-header">Certificaciones Oficiales</div>
+        <!-- Etapa 4: Certificaciones (Ocupa todo el ancho en la base) -->
+        <div class="badges-stage">
+            <div class="badges-title">Certificaciones Oficiales</div>
             <div class="credly-badges-wrapper">
                 <div class="credly-badge">
                     <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="024ff9bf-12cb-4554-8d47-de60b0c4a875" data-share-badge-host="https://www.credly.com"></div>
@@ -277,11 +277,27 @@
         background: rgba(255, 215, 0, 0.2);
     }
 
-    /* Certifications Stage (Full width) */
+    /* Certifications Stage (Full width horizontal bar) */
     .badges-stage {
         grid-column: 1 / -1;
-        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         margin-top: var(--spacing-lg);
+        padding-top: var(--spacing-lg);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .badges-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+    }
+    :global(body.mode-dark) .badges-title {
+        color: var(--color-text-dark);
     }
 
 
