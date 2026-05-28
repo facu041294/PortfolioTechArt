@@ -4,78 +4,117 @@
 
 <div class="technical-toolkit-container">
 
-    <!-- ECOSISTEMA / PIPELINE -->
-    <div class="pipeline-grid">
+    <!-- ECOSISTEMA / PIPELINE NODE GRAPH -->
+    <div class="pipeline-grid node-graph-mode">
         
-        <!-- Etapa 1: DCC -->
-        <div class="pipeline-stage">
-            <div class="stage-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
-                <h3>DCC & Asset Creation</h3>
-            </div>
-            <div class="stage-content">
-                <div class="tool-item">
-                    <strong>Autodesk Maya</strong>
-                    <span>Modelado, Retopología, UVS, LookDev</span>
+        <!-- Etapa 1: DCC (Comment Box) -->
+        <div class="blueprint-comment-box dcc-box">
+            <div class="comment-header">DCC & Asset Creation</div>
+            
+            <div class="nodes-container">
+                <!-- Nodo Maya -->
+                <div class="blueprint-node">
+                    <div class="node-header color-maya">
+                        <span class="node-title">Autodesk Maya</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle"></span>Modelado</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Retopología</div>
+                        <div class="node-pin"><span class="pin-circle"></span>LookDev / UVS</div>
+                    </div>
                 </div>
-                <div class="tool-item">
-                    <strong>Substance Painter</strong>
-                    <span>PBR Texturing, Smart Materials</span>
+
+                <!-- Nodo Substance -->
+                <div class="blueprint-node">
+                    <div class="node-header color-substance">
+                        <span class="node-title">Substance Painter</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle"></span>PBR Texturing</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Smart Materials</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Etapa 2: Engine -->
-        <div class="pipeline-stage">
-            <div class="stage-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-                <h3>Engine & Integration</h3>
-            </div>
-            <div class="stage-content">
-                <div class="tool-item">
-                    <strong>Unreal Engine 5</strong>
-                    <span>Blueprints, Sequencer, Material Graph</span>
-                    <a href="https://credsverse.com/credentials/90ab0332-b868-4ee4-8574-9d6c3e1a704b?preview=1" target="_blank" class="cert-link">
-                        🏅 Avalado por Max Sarlija (Blockchain Cert)
-                    </a>
+        <!-- Etapa 2: Engine (Comment Box) -->
+        <div class="blueprint-comment-box engine-box">
+            <div class="comment-header">Engine & Integration</div>
+            
+            <div class="nodes-container">
+                <!-- Nodo Unreal -->
+                <div class="blueprint-node glow-node">
+                    <div class="node-header color-unreal">
+                        <span class="node-title">Unreal Engine 5</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle exec-pin"></span>Blueprints</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Sequencer</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Material Graph</div>
+                        <div class="node-pin output-pin">
+                            <a href="https://credsverse.com/credentials/90ab0332-b868-4ee4-8574-9d6c3e1a704b?preview=1" target="_blank" class="cert-link-node">
+                                🏅 Max Sarlija Cert
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="tool-item">
-                    <strong>Unity</strong>
-                    <span>Implementación base, C#</span>
+
+                <!-- Nodo Unity -->
+                <div class="blueprint-node">
+                    <div class="node-header color-unity">
+                        <span class="node-title">Unity</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle exec-pin"></span>Implementación base</div>
+                        <div class="node-pin"><span class="pin-circle"></span>C# Scripts</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Etapa 3: Scripting & Cloud -->
-        <div class="pipeline-stage">
-            <div class="stage-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                <h3>Tooling, Scripting & Cloud</h3>
-            </div>
-            <div class="stage-content">
-                <div class="tool-item">
-                    <strong>Python / MEL / C++</strong>
-                    <span>Pipeline Scripts, Automatización, Lógica base</span>
+        <!-- Etapa 3: Scripting & Cloud (Comment Box) -->
+        <div class="blueprint-comment-box script-box">
+            <div class="comment-header">Tooling, Scripting & Cloud</div>
+            
+            <div class="nodes-container">
+                <!-- Nodo Scripts -->
+                <div class="blueprint-node">
+                    <div class="node-header color-script">
+                        <span class="node-title">Python / C++</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle"></span>Pipeline Automation</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Custom Tools (MEL/Py)</div>
+                        <div class="node-pin"><span class="pin-circle exec-pin"></span>Lógica Base / Plugins</div>
+                    </div>
                 </div>
-                <div class="tool-item">
-                    <strong>AWS & WebTech</strong>
-                    <span>Cloud foundations, JS, Astro</span>
+
+                <!-- Nodo Web -->
+                <div class="blueprint-node">
+                    <div class="node-header color-web">
+                        <span class="node-title">AWS & WebTech</span>
+                        <svg class="node-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <div class="node-body">
+                        <div class="node-pin"><span class="pin-circle"></span>Cloud Foundations</div>
+                        <div class="node-pin"><span class="pin-circle"></span>Vanilla JS / Astro</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Etapa 4: Certificaciones (Ocupa todo el ancho) -->
-        <div class="pipeline-stage badges-stage">
-            <div class="stage-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                <h3>Certificaciones Oficiales</h3>
-            </div>
+        <div class="blueprint-comment-box badges-stage">
+            <div class="comment-header">Certificaciones Oficiales</div>
             <div class="credly-badges-wrapper">
-                <!-- Credly Badge Unity -->
                 <div class="credly-badge">
                     <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="024ff9bf-12cb-4554-8d47-de60b0c4a875" data-share-badge-host="https://www.credly.com"></div>
                 </div>
-                <!-- Credly Badge AWS -->
                 <div class="credly-badge">
                     <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="f5617a2c-269c-4200-9436-0bdf31720b6c" data-share-badge-host="https://www.credly.com"></div>
                 </div>
@@ -97,104 +136,152 @@
         gap: var(--spacing-xxl);
     }
 
-    /* === ECOSISTEMA / PIPELINE === */
+    /* === NODE GRAPH MODE (BLUEPRINTS STYLE) === */
     .pipeline-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--spacing-lg);
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--spacing-xl);
+        position: relative;
     }
 
-    .pipeline-stage {
-        background-color: var(--color-card-bg-light);
-        border: 1px solid var(--color-border-light);
-        border-radius: var(--border-radius-md);
-        padding: var(--spacing-lg);
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Comment Box (Stage Container) */
+    .blueprint-comment-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 40px var(--spacing-md) var(--spacing-md);
+        position: relative;
+        backdrop-filter: blur(4px);
     }
-    :global(body.mode-dark) .pipeline-stage {
-        background-color: var(--color-card-bg-dark);
-        border-color: var(--color-border-dark);
-    }
-    
-    .pipeline-stage:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-md);
-        border-color: var(--color-primary-light);
-    }
-    :global(body.mode-dark) .pipeline-stage:hover {
-        border-color: var(--color-primary-dark);
+    :global(body.mode-dark) .blueprint-comment-box {
+        background: rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.05);
     }
 
-    .badges-stage {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .stage-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: var(--spacing-md);
-        padding-bottom: var(--spacing-sm);
-        border-bottom: 1px solid var(--color-border-light);
+    .comment-header {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: var(--color-background-light);
+        padding: 0 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
         color: var(--color-text-light);
-    }
-    :global(body.mode-dark) .stage-header {
-        border-bottom-color: var(--color-border-dark);
-        color: var(--color-text-dark);
-    }
-    .stage-header svg {
-        color: var(--color-primary-light);
-    }
-    :global(body.mode-dark) .stage-header svg {
-        color: var(--color-primary-dark);
-    }
-
-    .tool-item {
-        margin-bottom: var(--spacing-md);
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    .tool-item strong {
-        color: var(--color-text-light);
-        font-size: 1.1rem;
-    }
-    :global(body.mode-dark) .tool-item strong {
-        color: var(--color-text-dark);
-    }
-    .tool-item span {
-        color: var(--color-secondary-light);
-        font-size: 0.9rem;
-    }
-    :global(body.mode-dark) .tool-item span {
-        color: var(--color-secondary-dark);
-    }
-
-    .cert-link {
-        display: inline-flex;
-        align-items: center;
-        margin-top: 8px;
-        font-size: 0.85rem;
-        color: #d4af37; /* Gold color for cert */
-        text-decoration: none;
-        font-weight: 600;
-        transition: opacity 0.2s;
-    }
-    .cert-link:hover {
         opacity: 0.8;
     }
+    :global(body.mode-dark) .comment-header {
+        background: var(--color-background-dark);
+        color: var(--color-text-dark);
+    }
 
-    .badge-container-small {
-        margin-top: 10px;
-        /* Escalar los badges de credly para que entren prolijos en la lista */
-        transform: scale(0.85);
-        transform-origin: left top;
-        height: 230px; /* Compensa la escala para no dejar espacio extra */
+    .nodes-container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    /* Blueprint Node */
+    .blueprint-node {
+        background-color: #242528; /* Dark node background */
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        border: 1px solid #111;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        color: #e0e0e0; /* Node text color is always light */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .blueprint-node:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+        z-index: 10;
+    }
+    .blueprint-node.glow-node:hover {
+        box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+    }
+
+    /* Node Header */
+    .node-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        border-bottom: 2px solid rgba(0,0,0,0.3);
+    }
+    .node-title {
+        color: #ffffff;
+    }
+    .node-icon {
+        color: rgba(255,255,255,0.7);
+    }
+
+    /* Header Colors (Like UE Blueprints) */
+    .color-maya { background: linear-gradient(90deg, #125555, #1d8282); }
+    .color-substance { background: linear-gradient(90deg, #581636, #8b2557); }
+    .color-unreal { background: linear-gradient(90deg, #09375e, #135d9d); }
+    .color-unity { background: linear-gradient(90deg, #303030, #4f4f4f); }
+    .color-script { background: linear-gradient(90deg, #6c4e09, #9c7314); }
+    .color-web { background: linear-gradient(90deg, #115750, #1b857a); }
+
+    /* Node Body */
+    .node-body {
+        padding: 12px 0;
+        background: linear-gradient(180deg, #242528, #1c1d1f);
+    }
+
+    /* Pins */
+    .node-pin {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    .node-pin.output-pin {
+        justify-content: flex-end;
+    }
+    
+    .pin-circle {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background: transparent;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .exec-pin {
+        border-radius: 0;
+        clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%);
+        width: 12px;
+        background: #fff;
+    }
+
+    /* Cert Links inside nodes */
+    .cert-link-node {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.8rem;
+        background: rgba(255, 215, 0, 0.1);
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        transition: background 0.2s;
+    }
+    .cert-link-node:hover {
+        background: rgba(255, 215, 0, 0.2);
+    }
+
+    /* Certifications Stage (Full width) */
+    .badges-stage {
+        grid-column: 1 / -1;
+        padding-top: 30px;
+        margin-top: var(--spacing-lg);
     }
 
 
