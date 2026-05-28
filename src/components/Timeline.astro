@@ -1,74 +1,96 @@
 ---
 // src/components/Timeline.astro
 import timelineData from '../data/timeline.json';
+
+const pastItems = timelineData.filter(item => item.type === 'past');
+const futureItems = timelineData.filter(item => item.type === 'future');
 ---
 
 <div class="cicd-pipeline-container">
-  <div class="cicd-pipeline">
-    {timelineData.map((item) => {
-      if (item.type === 'heading') {
-        return (
-          <div class="pipeline-stage-heading">
-            <div class="stage-heading-line"></div>
-            <h3 class="stage-heading-title">{item.label}</h3>
-          </div>
-        );
-      } else if (item.type === 'past') {
-        return (
-          <div class="cicd-job status-success">
-            <div class="job-connector">
-              <div class="job-node">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </div>
-              <div class="job-line"></div>
+  <div class="pipeline-split-grid">
+    
+    <!-- COLUMNA IZQUIERDA: EJECUTADOS (PAST) -->
+    <div class="pipeline-column">
+      <div class="pipeline-stage-heading">
+        <h3 class="stage-heading-title">Historial de Ejecución</h3>
+        <div class="stage-heading-line"></div>
+      </div>
+      
+      {pastItems.map((item) => (
+        <div class="cicd-job status-success">
+          <div class="job-connector">
+            <div class="job-node">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
-            <div class="job-card">
-              <div class="job-header">
-                <span class="job-title">{item.title}</span>
-                <span class="job-timestamp">{item.year}</span>
-              </div>
-              <div class="job-body">
-                <p class="console-output">> {item.desc}</p>
-              </div>
+            <div class="job-line"></div>
+          </div>
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-title">{item.title}</span>
+              <span class="job-timestamp">{item.year}</span>
+            </div>
+            <div class="job-body">
+              <p class="console-output">> {item.desc}</p>
             </div>
           </div>
-        );
-      } else if (item.type === 'future') {
-        return (
-          <div class="cicd-job status-queued">
-            <div class="job-connector">
-              <div class="job-node">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              </div>
-              <div class="job-line dashed"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- COLUMNA DERECHA: EN COLA (FUTURE) -->
+    <div class="pipeline-column">
+      <div class="pipeline-stage-heading">
+        <h3 class="stage-heading-title" style="color: #d29922;">En Cola (Futuro)</h3>
+        <div class="stage-heading-line" style="background: linear-gradient(90deg, transparent, #d29922, transparent);"></div>
+      </div>
+
+      {futureItems.map((item) => (
+        <div class="cicd-job status-queued">
+          <div class="job-connector">
+            <div class="job-node">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
-            <div class="job-card">
-              <div class="job-header">
-                <span class="job-title">{item.label}</span>
-                <span class="job-status-badge">Queued</span>
-              </div>
+            <div class="job-line dashed"></div>
+          </div>
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-title">{item.label}</span>
+              <span class="job-status-badge">Queued</span>
             </div>
           </div>
-        );
-      }
-      return null;
-    })}
+        </div>
+      ))}
+    </div>
+
   </div>
 </div>
 
 <style>
   .cicd-pipeline-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: var(--spacing-xl) auto;
     font-family: 'Consolas', 'Courier New', monospace; /* Console font for CI/CD feel */
   }
 
-  .cicd-pipeline {
+  .pipeline-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xxl);
+  }
+
+  .pipeline-column {
     display: flex;
     flex-direction: column;
   }
 
-  /* Stage Headings (e.g. "OBJETIVOS A FUTURO") */
+  @media (max-width: 800px) {
+    .pipeline-split-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+  }
+
+  /* Stage Headings (e.g. "Historial de Ejecución") */
   .pipeline-stage-heading {
     display: flex;
     align-items: center;
