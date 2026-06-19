@@ -1,0 +1,304 @@
+/* components.css — Componentes UI Reutilizables */
+
+/*------------------------------------*\
+  #COMPONENTES-REUTILIZABLES
+\*------------------------------------*/
+.cta-button {
+  padding: calc(var(--spacing-sm) * 0.9) var(--spacing-md);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-speed) var(--transition-ease);
+  border: 2px solid transparent;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.primary-cta {
+  background-color: var(--current-primary-color);
+  color: white;
+  border-color: var(--current-primary-color);
+}
+
+.primary-cta:hover {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  transform: translateY(-2px);
+}
+
+.secondary-cta {
+  background-color: transparent;
+  color: var(--current-primary-color);
+  border-color: var(--current-primary-color);
+}
+
+.secondary-cta:hover {
+  background-color: var(--current-primary-color);
+  color: var(--color-card-bg-light);
+}
+
+body.mode-dark .secondary-cta:hover {
+  color: var(--color-card-bg-dark);
+}
+
+/*------------------------------------*\
+  #TOGGLES-ESTILO-SWITCH
+\*------------------------------------*/
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-secondary-light);
+  cursor: pointer;
+  position: relative;
+  border: 1px solid transparent;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+
+body.mode-dark .mode-toggle {
+  color: var(--color-secondary-dark);
+}
+
+.mode-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-toggle:focus-visible {
+  outline: 2px solid var(--current-primary-color);
+  outline-offset: 2px;
+}
+
+.switch-toggle {
+  width: 80px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: var(--color-secondary-light);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.switch-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 34px;
+  height: 34px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition-speed) var(--transition-ease);
+  z-index: 2;
+}
+
+.switch-toggle.is-active {
+  background-color: var(--current-primary-color);
+}
+
+.switch-toggle.is-active::after {
+  transform: translateX(40px);
+}
+
+body.mode-artist .switch-toggle {
+  background-color: var(--color-primary-tech-light);
+}
+
+body.mode-artist.mode-dark .switch-toggle {
+  background-color: var(--color-primary-tech-dark);
+}
+
+body.mode-technical .switch-toggle {
+  background-color: var(--color-primary-artist-light);
+}
+
+body.mode-technical.mode-dark .switch-toggle {
+  background-color: var(--color-primary-artist-dark);
+}
+
+.switch-toggle .icon-artist,
+.switch-toggle .icon-technical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  z-index: 3;
+  transition: opacity var(--transition-speed) var(--transition-ease);
+  pointer-events: none;
+}
+
+.switch-toggle .icon-artist {
+  left: 4px;
+  opacity: 1;
+}
+
+.switch-toggle .icon-technical {
+  right: 4px;
+  opacity: 0.4;
+}
+
+.switch-toggle.is-active .icon-artist {
+  opacity: 0.4;
+}
+
+.switch-toggle.is-active .icon-technical {
+  opacity: 1;
+}
+
+#theme-manager-button {
+  border: 1px solid var(--color-border-light);
+  background-color: var(--color-card-bg-light);
+}
+
+body.mode-dark #theme-manager-button {
+  border-color: var(--color-border-dark);
+  background-color: var(--color-card-bg-dark);
+}
+
+#theme-manager-button .theme-icon-svg {
+  width: 20px;
+  height: 20px;
+}
+
+#process-highlights {
+  scroll-margin-top: 100px;
+}
+
+#habilidades-tecnicas {
+  scroll-margin-top: 100px;
+}
+
+/*------------------------------------*\
+  #SECCION-HERO (componentes)
+\*------------------------------------*/
+.hero-section-fullscreen {
+  min-height: calc(100vh - 65px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-xl);
+  justify-content: space-between;
+  padding-block: var(--spacing-lg);
+}
+
+.hero-content-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+body.mode-technical .hero-content-wrapper {
+  flex-direction: row-reverse;
+}
+
+.hero-text-content {
+  flex: 1 1 35%;
+  min-width: 300px;
+}
+
+.hero-text-content h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--current-primary-color);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+body.mode-dark .hero-text-content h1 {
+  color: var(--color-text-dark);
+  text-shadow: 0 2px 2px rgb(0, 0, 0);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: var(--color-secondary-light);
+  margin-bottom: var(--spacing-lg);
+  max-width: 55ch;
+}
+
+body.mode-dark .hero-subtitle {
+  color: var(--color-secondary-dark);
+}
+
+body.mode-artist .hero-subtitle.technical-desc {
+  display: none !important;
+}
+
+body.mode-artist .hero-subtitle.artist-desc {
+  display: block !important;
+}
+
+body.mode-technical .hero-subtitle.artist-desc {
+  display: none !important;
+}
+
+body.mode-technical .hero-subtitle.technical-desc {
+  display: block !important;
+}
+
+.hero-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.hero-visual-content {
+  flex: 1 1 60%;
+  min-width: 320px;
+}
+
+.vimeo-embed-responsive {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  background-color: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: block;
+}
+
+.vimeo-embed-responsive iframe {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/*------------------------------------*\
+  #SECCION-DE-CONTENIDO (componentes)
+\*------------------------------------*/
+.section-title {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  color: var(--current-primary-color);
+  text-shadow: 0 2px 2px rgb(0, 0, 0, 0.2);
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: var(--color-secondary-light);
+  text-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
+  max-width: 65ch;
+  margin: 0 auto var(--spacing-lg) auto;
+  text-align: center;
+}
+
+/* (Más componentes se agregarán en siguiente iteración) */
