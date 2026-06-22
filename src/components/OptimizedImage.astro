@@ -1,0 +1,37 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  /** Local image metadata (from ESM import or import.meta.glob) */
+  src: ImageMetadata;
+  /** Accessible description of the image */
+  alt: string;
+  /** Formats to generate – avif + webp by default */
+  formats?: ('avif' | 'webp')[];
+  /** Optional render width in pixels */
+  width?: number;
+  /** Lazy (default) or eager loading */
+  loading?: 'lazy' | 'eager';
+  /** Extra CSS classes for the host element */
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  formats = ['avif', 'webp'],
+  width,
+  loading = 'lazy',
+  class: className,
+} = Astro.props;
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  formats={formats}
+  width={width}
+  loading={loading}
+  class={className}
+/>

@@ -1,5 +1,38 @@
 ---
 // src/components/ProjectCard.astro
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Importar todas las imágenes raster de src/assets/img/ para resolución dinámica
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/img/*.{png,jpg,jpeg}'
+);
+
+// Resolver un nombre de archivo a ImageMetadata
+function resolveImage(filename: string): ImageMetadata | undefined {
+  const key = Object.keys(imageModules).find(
+    (k) => k.endsWith(`/${filename}`)
+  );
+  if (!key) return undefined;
+  // import.meta.glob devuelve funciones eager=false por defecto,
+  // pero en frontmatter de Astro las llamamos síncronamente via .then o acceso directo.
+  // Usamos eager: true para obtener los módulos directamente.
+  return undefined; // placeholder — veamos eager glob abajo
+}
+
+// Versión eager para acceso síncrono en frontmatter
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/img/*.{png,jpg,jpeg}',
+  { eager: true }
+);
+
+function getImageMetadata(filename: string): ImageMetadata | undefined {
+  const key = Object.keys(images).find(
+    (k) => k.endsWith(`/${filename}`)
+  );
+  return key ? images[key]?.default : undefined;
+}
+
 interface Props {
   project: {
     id: string;
@@ -27,7 +60,7 @@ const { project, index } = Astro.props;
 const projectCategory = project.category || "pipeline-tools";
 const projectTags = project.tags || [];
 
-// Normalizar la ruta base asegurando que termine con barra inclinada
+// Normalizar la ruta base asegurando que termine con barra inclinada (para SVGs y assets no optimizados)
 const rawBase = String(import.meta.env.BASE_URL || '/');
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 ---
@@ -40,12 +73,22 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
   data-tags={projectTags.join(',')}
 >
   <div class="card-image-wrapper">
-    <img 
-      src={`${base}assets/img/${project.imageSlider[0]}`} 
-      alt={project.title} 
-      class="card-cover-image"
-      loading="lazy"
-    />
+    {getImageMetadata(project.imageSlider[0]) ? (
+      <Picture
+        src={getImageMetadata(project.imageSlider[0])!}
+        alt={project.title}
+        formats={['avif', 'webp']}
+        loading="lazy"
+        class="card-cover-image"
+      />
+    ) : (
+      <img
+        src={`${base}assets/img/${project.imageSlider[0]}`}
+        alt={project.title}
+        class="card-cover-image"
+        loading="lazy"
+      />
+    )}
     <span class="card-category-tag">{projectCategory === 'pipeline-tools' ? 'Pipeline & Tools' : projectCategory === 'ai-devops' ? 'IA & DevOps' : projectCategory === '3d-art' ? 'Art & Texturing' : 'Cinematics & FX'}</span>
   </div>
   <div class="card-content">
@@ -86,15 +129,27 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       <div class="modal-visual-side">
         <div class="image-slider" data-slider-id={project.id}>
           <div class="slider-images">
-            {project.imageSlider.map((img, i) => (
-              <img 
-                src={`${base}assets/img/${img}`} 
-                class={`slider-image ${i === 0 ? 'active' : ''} lightbox-trigger`} 
-                data-layer={project.imageLabels[i]} 
-                loading="lazy" 
-                alt={`${project.title} - ${project.imageLabels[i]}`}
-              />
-            ))}
+            {project.imageSlider.map((img, i) => {
+              const imgMeta = getImageMetadata(img);
+              return imgMeta ? (
+                <Picture
+                  src={imgMeta}
+                  alt={`${project.title} - ${project.imageLabels[i]}`}
+                  formats={['avif', 'webp']}
+                  loading="lazy"
+                  class={`slider-image ${i === 0 ? 'active' : ''} lightbox-trigger`}
+                  data-layer={project.imageLabels[i]}
+                />
+              ) : (
+                <img
+                  src={`${base}assets/img/${img}`}
+                  class={`slider-image ${i === 0 ? 'active' : ''} lightbox-trigger`}
+                  data-layer={project.imageLabels[i]}
+                  loading="lazy"
+                  alt={`${project.title} - ${project.imageLabels[i]}`}
+                />
+              );
+            })}
           </div>
 
           <!-- Flechas de navegación -->
@@ -116,12 +171,25 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       </div>
 
       <!-- Lado Inferior (Full-width): Snippets de Código o de Blueprints -->
-      {project.snippetImg && (
-        <div class="technical-snippet full-width-snippet">
-          <h4>Blueprint Logic Snippet:</h4>
-          <img src={`${base}assets/img/${project.snippetImg}`} alt={`Captura técnica de ${project.title}`} class="lightbox-trigger" />
-        </div>
-      )}
+      {project.snippetImg && (() => {
+        const snippetMeta = getImageMetadata(project.snippetImg);
+        return (
+          <div class="technical-snippet full-width-snippet">
+            <h4>Blueprint Logic Snippet:</h4>
+            {snippetMeta ? (
+              <Picture
+                src={snippetMeta}
+                alt={`Captura técnica de ${project.title}`}
+                formats={['avif', 'webp']}
+                loading="lazy"
+                class="lightbox-trigger"
+              />
+            ) : (
+              <img src={`${base}assets/img/${project.snippetImg}`} alt={`Captura técnica de ${project.title}`} class="lightbox-trigger" />
+            )}
+          </div>
+        );
+      })()}
 
       {project.snippetCode && (
         <div class="technical-snippet full-width-snippet">
