@@ -1,6 +1,6 @@
 # 🌐 PortfolioTechArt - Facundo Villarreal
 
-Este repositorio contiene la primera versión de mi portfolio web personal, desarrollado desde cero utilizando tecnologías base como **HTML**, **CSS**, y **JavaScript**, con un enfoque claro en **UX/UI**, **performance**, y **estructura modular**.
+Portfolio web personal desarrollado con **Astro**, diseñado para representar de forma equilibrada mi perfil como **Technical Artist**. El proyecto combina **arte visual** (cinemáticas, shaders, composiciones) con **fundamentos técnicos** (automatización, lógica, herramientas).
 
 ![Vista Previa del Portfolio](assets/img/screenshot-portfolio.jpg)
 ---
@@ -18,52 +18,67 @@ Para ello, implementé un sistema de **switch de perfil (Artístico / Técnico)*
 
 ## 🚀 Características Clave
 
-- ✨ **Modularización de código**: Cada funcionalidad está dividida en módulos `JS` independientes bajo `/modules`, anticipando una futura migración a **React**.
-- 🌒 **Switch de tema claro/oscuro/sistema** con SVGs dinámicos accesibles y persistencia en `localStorage`.
-- 🎭 **Switch de perfil Técnico/Artístico**, que modifica tanto estilos como contenido mostrado (`snippets`, layout, color, tono).
-- 🎞️ **Slider de imágenes interactivo** en cada proyecto.
-- 🧠 **Timeline** dinámico renderizado desde JSON, dividido en:
-  - `Eventos pasados` (educación, experiencias)
-  - `Objetivos futuros` (con checkboxes visuales no interactivos)
-- 📹 **Video de cabecera embebido desde Vimeo**, con reproducción automática.
-- 🌐 **Botones sociales** inyectados desde JSON con SVGs en línea, accesibles, escalables y responsive.
-- 💬 **Formulario de contacto desplegable**, 100% funcional via Formspree.
-- 📱 **Diseño responsive** para todas las relaciones de aspecto: mobile, tablets, monitores 16:9, y 2K/4K.
-- ⚙️ **Performance optimizada** con Lighthouse:  
+- ✨ **Perfil Técnico/Artístico**: Switch que modifica contenido y estilo según el enfoque seleccionado
+- 🌒 **Tema claro/oscuro/sistema** con SVGs dinámicos, accesibilidad y persistencia en `localStorage`
+- 🎞️ **Slider de imágenes interactivo** por proyecto
+- 🧠 **Timeline dinámico** renderizado desde JSON (educación, experiencia, objetivos)
+- 📹 **Video de cabecera embebido desde Vimeo** con reproducción automática
+- 🌐 **Botones sociales** inyectados desde JSON con SVGs accesibles y responsive
+- 💬 **Formulario de contacto** funcional via Formspree
+- 📱 **Diseño responsive** para mobile, tablet, 16:9, y 2K/4K
+- ⚙️ **Performance optimizada** con Astro y pipeline de imágenes:
   - Desktop: `Performance 100`, `SEO 100`, `Accesibilidad >95`
-  - Mobile: `Performance >73`, con mejoras en curso
+  - Mobile: `Performance >73`
 
 ---
 
-## 🧩 Arquitectura y Proyección
+## 🏗️ Arquitectura (Architecture Audit — 2026)
 
-Aunque el sitio está desarrollado con tecnologías "vanilla", todo fue diseñado con una **mentalidad escalable**:
+El proyecto fue auditado y refactorizado en **4 dominios técnicos**:
 
-- El código CSS sigue una estructura mantenible y comentada por secciones.
-- Los archivos JSON (`projects.json`, `timeline.json`, `social.json`) desacoplan la lógica de contenido.
-- Se favorece la legibilidad, la accesibilidad y el mantenimiento en cada sección.
+### 1. CSS Variable Integrity
+- **Problema**: 9 variables CSS referenciadas pero no definidas en `:root`
+- **Solución**: Alineación de nombres y definición explícita en `base.css`
+- **Estado**: ✅ Completado
 
-🛠️ El próximo paso será refactorizar el proyecto usando **React + TailwindCSS**, aprovechando:
+### 2. CSS Split (Modularización)
+- **Problema**: `style.css` monolítico difícil de mantener
+- **Solución**: Split en 3 archivos especializados:
+  - `base.css` — Variables CSS y reset
+  - `layout.css` — Estructuras padre, header, hero, grid
+  - `components.css` — Botones, cards, modales, timeline, utilitarios
+- **Estado**: ✅ Completado (style.css eliminado)
 
-- Componentes reutilizables
-- Hooks de estado para gestión de modo tema/perfil
-- `Context API` o Zustand para persistencia de estado global
-- `Framer Motion` para animaciones más fluidas
-- `Astro` o `Next.js` si se requiere SSR o rendimiento extremo
+### 3. Image Pipeline
+- **Problema**: 34 imágenes en `public/assets/` sin optimización (45.36 MB total)
+- **Solución**: Migración a `astro:assets` con:
+  - Componente `OptimizedImage.astro` reutilizable
+  - Generación automática de AVIF + WebP + fallback
+  - Reducción de peso ~80% con lazy loading
+- **Estado**: ✅ Completado (PR #8)
+
+### 4. Dead Code Removal
+- **Problema**: Módulos JS sin usar o con lógica duplicada
+- **Solución**: 
+  - Eliminación de `updateFooterYear.js` (año del footer ahora en Astro)
+  - Eliminación de `contactForm.js` (formulario migrado a Formspree)
+  - Consolidación de lógica en `main.js`
+- **Estado**: ✅ Completado
 
 ---
 
 ## 🧠 Metodología de Aprendizaje
 
-Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestión del conocimiento en el que documento cada decisión, problema y solución aplicada.
+Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestión del conocimiento donde documento cada decisión, problema y solución aplicada.
 
 ### Log de aprendizaje:
 
-- `18/04/2025`: Comienzo de la cursada en la materia de Front End de la Tecnicatura en Desarrollo de Software dictada por Javier Rodriguez Gallardo.
-- `28/05/2025`: Primer prototipo con HTML y CSS. Estructura semántica. Implementación de sliders con ayuda de LLMs.
-- `31/05/2025`: Primeros toggles de tema. Experimentación con SVGs. UX/UI para modos.
-- `06/07/2025`: Sistema modular completo. Carga dinámica de proyectos y timeline. Refactorización de CSS.
-- `09/07/2025`: Optimización con PageSpeed, revisión de contraste, accesibilidad y performance móvil.
+- `18/04/2025`: Comienzo de la cursada en Front End (Tecnicatura en Desarrollo de Software)
+- `28/05/2025`: Primer prototipo HTML/CSS. Estructura semántica. Sliders con LLMs.
+- `31/05/2025`: Toggles de tema. Experimentación con SVGs. UX/UI para modos.
+- `06/07/2025`: Sistema modular completo. Carga dinámica de proyectos y timeline.
+- `09/07/2025`: Optimización PageSpeed, contraste, accesibilidad, performance móvil.
+- `18-22/06/2026`: **Architecture Audit** con SDD — Migración a Astro, CSS split, image pipeline, dead code removal.
 
 ---
 
@@ -71,12 +86,29 @@ Este proyecto forma parte de mi **Zettelkasten personal**, un sistema de gestió
 
 | Tecnología | Uso |
 |------------|-----|
-| HTML5 / CSS3 / JS | Base del sitio |
-| JSON | Contenido externo desacoplado |
-| Formspree | Envío de formularios |
-| Vimeo | Hosting de video |
-| Lighthouse | Medición de performance |
-| GitHub Pages | Hosting gratuito |
+| **Astro** | Framework principal, SSR, optimización de assets |
+| HTML5 / CSS3 / JS | Base semántica y lógica del sitio |
+| JSON | Contenido externo desacoplado (proyectos, timeline, social) |
+| Formspree | Envío de formularios sin backend |
+| Vimeo | Hosting de video embebido |
+| Lighthouse | Medición de performance y accesibilidad |
+| GitHub Pages | Hosting gratuito con CI/CD |
+
+---
+
+## 📂 Estructura del Proyecto
+
+```
+src/
+├── assets/           # Imágenes optimizadas con astro:assets
+├── components/       # Componentes Astro (OptimizedImage, Footer, etc.)
+├── layouts/          # Layouts base
+├── styles/           # CSS modular (base, layout, components)
+└── js/               # Lógica JavaScript (main.js, módulos)
+public/
+├── assets/           # Assets estáticos (favicon, etc.)
+└── data/             # JSON de contenido (projects, timeline, social)
+```
 
 ---
 
